@@ -2,6 +2,8 @@
   "expo": {
     "name": "GeniusMinds_AI",
     "slug": "GeniusMinds_AI",
+    "scheme": "geniusmindsscheme",
+
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,7 +26,16 @@
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
-    }
+      "favicon": "./assets/favicon.png",
+        "bundler": "metro"
+    },
+    "plugins": [
+      [
+      "expo-router",
+      {
+        "origin": "https://n"
+      }
+    ]
+    ]
   }
 }
