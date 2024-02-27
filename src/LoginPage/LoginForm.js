@@ -1,4 +1,4 @@
-import { Image, KeyboardAvoidingView, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, KeyboardAvoidingView, Linking, Modal, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { useForm, Controller } from 'react-hook-form';
 import * as Animatable from 'react-native-animatable';
@@ -6,10 +6,11 @@ import * as Font from 'expo-font';
 import { useEffect, useState } from "react";
 import InputTextType from "../components/InputTextType";
 import APICall from "../utils/APICall";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation ,CommonActions} from '@react-navigation/native';
 import { ActivityIndicator } from "react-native";
 import { useDispatch } from 'react-redux';
 import { loginSuccess } from '../redux/actions/userActions';
+import { Link,router } from "expo-router";
 
 
 export default LoginForm = () => {
@@ -46,9 +47,12 @@ export default LoginForm = () => {
             setAuthenticationMessage("Authentication Successful");
             APICall(apiForUserInfo, formData, getUserInfo, "getUserInformation");
             setTimeout(() => {
-                navigation.navigate('BottomTabNavigatorMain');
-                navigation.reset({ index: 0, routes: [{ name: 'BottomTabNavigatorMain' }] });
-                setAuthenticationLoader(false);
+                router.push({ pathname: '/(tabs)/', params: { user: 'jane' } });
+
+                navigation.dispatch(CommonActions.reset({
+                    routes: [{key: "(tabs)", name: "(tabs)"}]
+                  })      )     
+                       setAuthenticationLoader(false);
                 setAuthenticationMessage("Authenticating ......");
             }, 2 * 1000);
         } else {

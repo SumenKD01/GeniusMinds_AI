@@ -1,18 +1,31 @@
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { View,Text, Pressable } from 'react-native';
+import { View,Text, Pressable,StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Login from './login';
+import { Provider } from 'react-redux';
+import Login from '../LoginPage/Login';
+import { store } from '../redux/store';
 
 
 export default function Root() {
   return (
+    <Provider store={store}>
+
     <SafeAreaView style={{backgroundColor:'blue', flex:1}}  >
-      <Text style={{color:'red'}} className='bg-gray-600'>Home</Text>
-      <Login/>
-      <StatusBar style='auto' backgroundColor='red'/>
+    
+      <View style={styles.container}>
+        <Login />
+      </View>
 
       </SafeAreaView>
+      </Provider>
+
 
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
