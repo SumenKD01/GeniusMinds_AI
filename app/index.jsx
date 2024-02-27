@@ -4,13 +4,14 @@ import { StatusBar } from 'expo-status-bar';
 import Login from '../src/LoginPage/Login';
 import { Provider } from 'react-redux';
 import { store } from '../src/redux/store';
+import Homepage from '../src/Homepage/Homepage';
 
 export default Home = () => {
 
   return (
     <Provider store={store}>
       <View style={styles.container}>
-        <Login />
+        <Homepage />
       </View>
     </Provider>
   );
