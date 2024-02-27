@@ -3,15 +3,14 @@
     "name": "GeniusMinds_AI",
     "slug": "GeniusMinds_AI",
     "scheme": "geniusmindsscheme",
-
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/Images/Bacuza.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#CFEBFF"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -27,15 +26,16 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-        "bundler": "metro"
+      "bundler": "metro"
     },
     "plugins": [
       [
-      "expo-router",
-      {
-        "origin": "https://n"
-      }
-    ]
+        "expo-router",
+        {
+          "origin": "https://n"
+        }
+      ],
+      "expo-font"
     ]
   }
 }
