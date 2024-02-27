@@ -1,13 +1,24 @@
+import React, { useEffect, useRef } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Stack } from "expo-router";
+import Login from '../src/LoginPage/Login';
+import { Provider } from 'react-redux';
+import { store } from '../src/redux/store';
 
-export default function Home() {
+export default Home = () => {
+
   return (
-    <View   className='flex-1 bg-red-500 pt-10' >
-      <Text className='bg-fuchsia-800'>Hi hell hor nvjfnvjdfnkjvno, Main Hu Jian, Main hu bada Takatwar!</Text>
-      <StatusBar style='auto' backgroundColor='red'/>
-    </View>
+    <Provider store={store}>
+      <View style={styles.container}>
+        <Login />
+      </View>
+    </Provider>
   );
+};
 
-}
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
+
