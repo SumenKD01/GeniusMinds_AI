@@ -9,7 +9,7 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
     providedTo = providedTo.toUpperCase();
     const [downloadProcessModal, setDownloadProcessModal] = useState(false);
 
-    const pathImages = "../../../assets/icons/StockManagement/Icons/";
+    const pathImages = '../../../assets/icons/StockManagement/Icons/';
 
     const makeDateReadable = (date) => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -103,7 +103,7 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                         <Animatable.View animation="bounceIn" duration={1000}>
                             <TouchableOpacity style={styles.previewButton} onPress={toggleDownloadProcessModal} >
                                 <Text style={{ color: 'white', fontSize: 12, justifyContent: 'center' }}>Preview</Text>
-                                <Image source={require(pathImages+"contract.png")} style={styles.paperIcon} />
+                                <Image source={require('../../../assets/icons/StockManagement/Icons/contract.png')} style={styles.paperIcon} />
                             </TouchableOpacity>
                         </Animatable.View>
                     </View>
