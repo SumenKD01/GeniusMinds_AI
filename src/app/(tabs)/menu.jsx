@@ -1,12 +1,9 @@
 import { View, Text } from 'react-native'
 import React from 'react'
-import { StatusBar } from 'expo-status-bar'
+import SideMenu from '../../navigation/SideMenu'
 
 export default function Menu() {
   return (
-    <View className='flex-1'>
-      <Text>menurrrrlknklvnlfvkln</Text>
-      <StatusBar style='auto'/>
-    </View>
+   <SideMenu/>
   )
 }

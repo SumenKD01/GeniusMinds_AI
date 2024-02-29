@@ -1,0 +1,93 @@
+[
+    {
+        "name": "Vest",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 100,
+        "used": 120
+    },
+    {
+        "name": "Shoes",
+        "manufacturer": "Kolkata Jute Mills",
+        "supplier": "Shalimar Suppliers Ahmedabad",
+        "available": 105,
+        "used": 40
+    },
+    {
+        "name": "Goggles",
+        "manufacturer": "Neelam Factories, Kanpur",
+        "supplier": "Shreeram Mechanical Workshop, Calicut",
+        "available": 70,
+        "used": 10
+    },
+    {
+        "name": "Mask",
+        "manufacturer": "Mahindra Delux Industies, New Delhi",
+        "supplier": "Gokulesh Textiles, Chennai",
+        "available": 87,
+        "used": 6
+    },
+    {
+        "name": "Gloves",
+        "manufacturer": "Modi Udyog Pvt. Ltd.",
+        "supplier": "Karnataka Plastic Works, Bengaluru",
+        "available": 200,
+        "used": 115
+    },
+    {
+        "name": "Cap",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 100,
+        "used": 15
+    },
+    {
+        "name": "Helmet",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 50,
+        "used": 30
+    },
+    {
+        "name": "Vest",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 100,
+        "used": 120
+    },
+    {
+        "name": "Goggles",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 70,
+        "used": 10
+    },
+    {
+        "name": "Mask",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 87,
+        "used": 6
+    },
+    {
+        "name": "Gloves",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 200,
+        "used": 115
+    },
+    {
+        "name": "Cap",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 100,
+        "used": 15
+    },
+    {
+        "name": "Helmet",
+        "manufacturer": "Haldia Tata Chemicals",
+        "supplier": "Nalanda Ceramics Enterprises",
+        "available": 50,
+        "used": 30
+    }
+]

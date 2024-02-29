@@ -35,37 +35,39 @@ export default function AppLayout() {
         }}
       />
 
-      <Tabs.Screen
-        name="profile"
-        options={{
-          tabBarIcon: ({ color, size }) => 
-          <>
-          <View style={{width: '50%', backgroundColor: color, height: 1, top: -10}}></View>
-          <Image source={require('../../../assets/icons/business-report.png')} style={{ width: '60%', height: '60%', objectFit: 'contain' }} />
-          </>
-        }}
-      />
-      <Tabs.Screen
-        name="messages"
-        options={{
-          tabBarIcon: ({ color, size }) => 
-          <>
-          <View style={{width: '50%', backgroundColor: color, height: 1, top: -10}}></View>
-          <Image source={require('../../../assets/icons/User.png')} style={{ width: '60%', height: '60%', objectFit: 'contain' }} />
-          </>
-        }}
-      />
-      <Tabs.Screen
-        name="menu"
-        options={{
-          tabBarIcon: ({ color, size }) => 
-          <>
-          <View style={{width: '50%', backgroundColor: color, height: 1, top: -10}}></View>
-          <Image source={require('../../../assets/icons/main-menu.png')} style={{ width: '60%', height: '60%', objectFit: 'contain' }} />
-          </>
-        }}
 
-      />
-    </Tabs>
-  );
-}
+        <Tabs.Screen
+          // Name of the dynamic route.
+          name="messages"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name='book' color={color} size={size} />
+            ),
+          }}
+         
+        />
+                <Tabs.Screen
+          // Name of the dynamic route.
+          name="profile"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name='book' color={color} size={size} />
+            ),
+          }}
+
+          
+       
+        />
+        <Tabs.Screen
+          // Name of the dynamic route.
+          name="menu"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name='book' color={color} size={size} />
+            ),
+          }}
+         
+        />
+      </Tabs>
+    );
+  }

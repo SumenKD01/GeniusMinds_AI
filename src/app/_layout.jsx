@@ -9,7 +9,13 @@ import {AmaticSC_400Regular,AmaticSC_700Bold,} from 'expo-font'
 import "../../global.css";
 import { Stack } from 'expo-router';
 
+
 import * as SplashScreen from 'expo-splash-screen'
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
+
+
 
 SplashScreen.preventAutoHideAsync();
 
@@ -32,9 +38,16 @@ export default function RootLayout(){
   }
 
   return(
+    <Provider store={store}>
+
+    <GestureHandlerRootView style={{flex:1}}>
+      <StatusBar style='auto' />
     <Stack screenOptions={{headerShown:false}}>
       <Stack.Screen name='index' options={{title:"Home"}}/>
     </Stack>
+    </GestureHandlerRootView>
+    </Provider>
+
 
   )
 }

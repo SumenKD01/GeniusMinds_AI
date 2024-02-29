@@ -1,14 +1,13 @@
-
-import { View, Text } from 'react-native';
-import { StatusBar } from 'expo-status-bar'
-
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { View, Text,st } from 'react-native';
+import StockManagement from '../../StockManagement/StockManagement';
 
 export default function Messages() {
   return (
-    <View>
-      <Text>Messages screen</Text>
-      <StatusBar style='auto'/>
+<SafeAreaView style={{ flex:1}}  >
+    
+    <StockManagement/>
 
-    </View>
+    </SafeAreaView>
   );
 }
