@@ -17,6 +17,7 @@ export default function Root() {
       </View>
 
       </SafeAreaView>
+      </Provider>
 
 
   )
