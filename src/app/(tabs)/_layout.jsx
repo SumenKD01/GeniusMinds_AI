@@ -35,7 +35,18 @@ export default function AppLayout() {
           }}
           />
 
+
         <Tabs.Screen
+          // Name of the dynamic route.
+          name="messages"
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name='book' color={color} size={size} />
+            ),
+          }}
+         
+        />
+                <Tabs.Screen
           // Name of the dynamic route.
           name="profile"
           options={{
@@ -46,16 +57,6 @@ export default function AppLayout() {
 
           
        
-        />
-        <Tabs.Screen
-          // Name of the dynamic route.
-          name="messages"
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name='book' color={color} size={size} />
-            ),
-          }}
-         
         />
         <Tabs.Screen
           // Name of the dynamic route.
