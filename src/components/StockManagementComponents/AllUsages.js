@@ -15,6 +15,7 @@ import { Colors } from '../../utils/Colors1';
 import APICall from '../../utils/APICall';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../utils/CustomButton';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 export default AllUsages = () => {
@@ -38,7 +39,7 @@ export default AllUsages = () => {
 	const todate = getDateForAPI(currentDate, 'to');
 	const fromdate = getDateForAPI(currentDate, 'from');
 	const apiGot =
-		'https://androidapi220230605081325.azurewebsites.net/api/approval/GetUsageModuleList';
+		'https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR';
 	const jsonDataToPassInApi = {
 		PlantName: 'SEIPL,BLR',
 		FromDate: fromdate,
@@ -118,16 +119,7 @@ export default AllUsages = () => {
 
 	return (
 		<View>
-			
-			{/* <View style={styles.buttonContainer}>
-                <Heading textPassed={"Transaction History"} />
-                <TouchableOpacity style={styles.UsageButtons} onPress={usageFormOpen}>
-                    <Text style={styles.buttonText}>Add Stock / </Text>
-                    <Text style={styles.buttonText}>Consumptions</Text>
-                    <Image source={require('../assets/Icons/add.png')} style={styles.plusIcon} />
-                </TouchableOpacity>
-            </View> */}
-			<View style={styles.UsageBody}>
+			<LinearGradient colors={['#000C18', '#001E3E']} style={styles.UsageBody}>
 				{isLoading ? (
 					<View style={styles.errorPage}>
 						<ActivityIndicator size='large' color={Colors.darkBlue} />
@@ -148,20 +140,16 @@ export default AllUsages = () => {
 							contentContainerStyle={styles.UsageDisplayBody}
 							renderItem={({ item }) => (
 								<EachUsageCard
-									productName={item.productName}
-									quantity={item.quantity}
-									operation={item.operation}
-									timing={item.usageTiming}
-									reason={item.reason}
-									providedTo={item.providedTo}
-									downloadSignLink={item.fileName1}
+									productName={item.fileName}
+									timing={item.creation_Datetime}
+									reason={item.violations}
+									providedTo={item.cam_Serialno}
 								/>
 							)}
 							refreshControl={
 								<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 							}
 							ListFooterComponent={
-								// <CustomButton textPassed={"Show more data"} functionPassed={settingNextRecordsFunc} />
 								<View
 									style={{
 										flexDirection: 'row',
@@ -217,17 +205,7 @@ export default AllUsages = () => {
 					isVisible={usageFormModalView}
 					onClose={usageFormClose}
 				/>
-			</View>
-			<View style={styles.UsageButtons}>
-				<TouchableOpacity onPress={usageFormOpen}>
-					<Text style={styles.buttonText}>Add Stock / </Text>
-					<Text style={styles.buttonText}>Consumptions</Text>
-					<Image
-						source={require(pathImages + 'add.png')}
-						style={styles.plusIcon}
-					/>
-				</TouchableOpacity>
-			</View>
+			</LinearGradient>
 		</View>
 	);
 };
@@ -235,9 +213,12 @@ export default AllUsages = () => {
 const styles = StyleSheet.create({
 	UsageBody: {
 		gap: 10,
+		paddingHorizontal: 10,
+		paddingTop: 10
 	},
 	UsageDisplayBody: {
 		paddingBottom: 380,
+		gap: 10
 	},
 	UsageButtons: {
 		backgroundColor: Colors.redHeaderButton,

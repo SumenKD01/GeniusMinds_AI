@@ -77,7 +77,7 @@ export default Homepage = () => {
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Video Conference.png')} style={[styles.backIcons, { right: -12, bottom: '20%' }]} />
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Bar Chart.png')} style={[styles.backIcons, { right: -12, top: '20%' }]} />
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Slice.png')} style={[styles.backIcons, { left: -20, top: '20%' }]} /> */}
-                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/ellipseBack.png')} style={[styles.backIcons, { right: 0, top: '20%' }]} />
+                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/ellipseBack.png')} style={{ right: -150, top: '20%', width: 400, height: 400, position: 'absolute', objectFit: 'contain' }} />
                     <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center' }}>
                         <View style={{ flex: 5, gap: -10 }}>
                             <Image source={require('../../assets/icons/frame4.png')} style={{ position: 'absolute', width: '100%', height: 150, borderRadius: 20 }} />
@@ -107,7 +107,7 @@ export default Homepage = () => {
                                 <Text style={{ color: 'white', fontSize: 12, opacity: 0.5, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
                             </View>
                             <View>
-                                <Image source={require('../../assets/icons/list.png')} style={{ width: 40, height: 40 }} />
+                                <Image source={require('../../assets/icons/Report-button.png')} style={{ width: 35, height: 35 }} />
                             </View>
                         </LinearGradient>
                     </TouchableOpacity>

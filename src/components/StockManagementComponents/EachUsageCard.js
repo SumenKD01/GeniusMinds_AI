@@ -36,22 +36,22 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
     }
 
     if (operation === 'Added') {
-        cardIcon = require(pathImages+'added.png');
+        cardIcon = require(pathImages + 'added.png');
     } else {
         reason = reason.slice(0, 1).toUpperCase() + reason.slice(1,);
         switch (reason) {
             case 'Lost':
-                cardIcon = require(pathImages+'lost.png');
+                cardIcon = require(pathImages + 'lost.png');
                 break;
             case 'Damaged':
-                cardIcon = require(pathImages+'damaged.png');
+                cardIcon = require(pathImages + 'damaged.png');
                 break;
             case 'InternalUsage':
                 reason = "Used"
-                cardIcon = require(pathImages+'used.png');
+                cardIcon = require(pathImages + 'used.png');
                 break;
             default:
-                cardIcon = require(pathImages+'taken.png');
+                cardIcon = require(pathImages + 'taken.png');
                 break;
         }
     }
@@ -76,40 +76,29 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
 
     return (
         <Animatable.View style={styles.card} animation="slideInLeft">
-            <TouchableOpacity onPress={toggleDownloadProcessModal}>
+            <TouchableOpacity style={{ zIndex: 2 }} onPress={toggleDownloadProcessModal}>
                 <View style={styles.firstRow}>
-                    <View style={[styles.firstRow, { flex: 2 }]}>
-                        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 2 }}>
-                            <View>
-                                <Image source={cardIcon} style={styles.cardIconStyle} />
-                            </View>
-                            <Text style={operation === "Added" ? addedStyle : takenStyle}>{operation}</Text>
-                            {
-                                operation === "Taken" && reason.length <= 10 &&
-                                <Text style={styles.reasonTag}>{reason}</Text>
-                            }
+                    <View style={{ flex: 5 }}>
+                        <Text style={styles.cardHeading}>Camera Serial No. - {providedTo}</Text>
+                        <View style={{ justifyContent: 'center' }}>
+                            <Text style={{ color: 'white' }}>{makeDateReadable(timing)}</Text>
+                            <Text style={{ color: 'white' }}>{makeTimeReadable(timing)}</Text>
                         </View>
-                        <View style={{ flex: 5}}>
-                            <Text style={styles.cardHeading}>{productName}</Text>
-                            <View style={{justifyContent: 'center'}}>
-                                <Text>{makeDateReadable(timing)}</Text>
-                                <Text>{makeTimeReadable(timing)}</Text>
-                            </View>
-                            <Text style={{ lineHeight: 20 }}>{providedTo}</Text>
-                        </View>
+                        {/* <Text style={{ lineHeight: 20, color: 'white' }}>{productName}</Text> */}
                     </View>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ borderLeftWidth: 0.2, fontSize: 20, marginBottom: 5, padding: 5, paddingHorizontal: 10 }}>{quantity}</Text>
+                    <View style={{ flex: 1, height: '100%' }}>
                         <Animatable.View animation="bounceIn" duration={1000}>
                             <TouchableOpacity style={styles.previewButton} onPress={toggleDownloadProcessModal} >
-                                <Text style={{ color: 'white', fontSize: 12, justifyContent: 'center' }}>Preview</Text>
-                                <Image source={require('../../../assets/icons/StockManagement/Icons/contract.png')} style={styles.paperIcon} />
+                                <Image source={require('../../../assets/icons/externalLink.png')} style={styles.paperIcon} />
                             </TouchableOpacity>
                         </Animatable.View>
                     </View>
                 </View>
                 {reason.length >= 10 &&
-                    <Text style={{ textAlign: 'center', marginTop: 10 }}><Text style={{ fontWeight: 'bold' }}>Reason - </Text> {reason}</Text>
+                    <View style={{ borderTopWidth: 1, borderColor: 'white', borderStyle: 'dashed', padding: 10, paddingTop: 0, flexDirection: 'row' }}>
+                        <Text style={{ fontWeight: 'bold', marginTop: 10, color: 'white' }}>Violations - </Text>
+                        <Text style={{ marginTop: 10, color: 'white' }}> {reason}</Text>
+                    </View>
                 }
                 <Modal
                     visible={downloadProcessModal}
@@ -118,47 +107,32 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                 >
                     <Pressable style={styles.modalBackground} onPress={toggleDownloadProcessModal}>
                         <TouchableOpacity style={styles.modalContent} activeOpacity={1} >
-                            <Text style={{ fontWeight: 'bold', fontSize: 16, backgroundColor: Colors.darkBlue, padding: 9, margin: -20, color: Colors.white }}>Signature Preview </Text>
-                            <View style={[styles.card, { borderWidth: 0.2, marginTop: 10, marginHorizontal: -10, marginBottom: -30 }]}>
-                                <View style={styles.firstRow}>
-                                    <View style={[styles.firstRow, { flex: 2 }]}>
-                                        <View style={{ justifyContent: 'center', alignItems: 'center', flex: 3 }}>
-                                            <Text style={operation === "Added" ? addedStyle : takenStyle}>{operation}</Text>
-                                        </View>
-                                        <View style={{ flex: 5, gap: 4 }}>
-                                            <Text style={styles.cardHeading}>{productName}</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={{ borderLeftWidth: 0.2, fontSize: 20, marginBottom: 5, padding: 5, paddingHorizontal: 10 }}>{quantity}</Text>
-                                    </View>
-                                </View>
-                                <View style={{ borderTopWidth: 0.2, marginTop: 10 }}>
-                                    {downloadSignLink &&
-                                        <Image source={{
-                                            uri:
-                                                'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=' + downloadSignLink
-                                        }} style={styles.signatureImage} />
-                                    }
-                                </View>
+                            <Text style={{ fontWeight: 'bold', fontSize: 16, backgroundColor: Colors.darkBlue, padding: 9, margin: -20, color: Colors.white }}>Image Preview </Text>
+                            <View>
+                                {productName &&
+                                    <Image source={{
+                                        uri:
+                                            'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=' + productName
+                                    }} style={styles.signatureImage} />
+                                }
                             </View>
                             <TouchableHighlight onPress={toggleDownloadProcessModal} style={styles.closeCrossbutton} underlayColor={Colors.redHeaderButton}  >
-                                <Image source={require(pathImages+'cross.png')} style={styles.closeIconStyle} />
+                                <Image source={require(pathImages + 'cross.png')} style={styles.closeIconStyle} />
                             </TouchableHighlight>
                         </TouchableOpacity>
                     </Pressable>
                 </Modal>
             </TouchableOpacity>
+            <Image source={require('../../../assets/icons/report-card.png')} style={{ position: 'absolute', height: '100%', zIndex: -1, width: '100%' }} />
         </Animatable.View>
     );
 }
 
 const styles = StyleSheet.create({
     card: {
-        padding: 10,
-        borderBottomWidth: 1,
-        backgroundColor: Colors.white,
-        borderColor: Colors.silverBorder,
+        backgroundColor: 'transparent',
+        overflow: 'hidden',
+        borderRadius: 10
     },
     cardIconStyle: {
         width: 54,
@@ -177,30 +151,29 @@ const styles = StyleSheet.create({
     firstRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 10
+        gap: 10,
+        padding: 10
     },
     cardHeading: {
-        fontSize: 20,
-        fontWeight: 'bold'
+        fontSize: 15,
+        fontWeight: 'bold',
+        color: 'white',
     },
     paperIcon: {
-        width: 14,
-        height: 14
+        width: 22,
+        height: 22,
+        top: -10,
+        right: -10
     },
     previewButton: {
         flexDirection: 'row',
         gap: 5,
-        backgroundColor: Colors.stockCardColor,
         padding: 7,
         alignSelf: 'center',
         alignItems: 'center',
         paddingLeft: 15,
         justifyContent: 'center',
-        shadowColor: Colors.shadowColor,
-        shadowOffset: { width: 10, height: 10 },
-        shadowOpacity: 50,
         borderRadius: 40,
-        elevation: 10
     },
     reasonTag: {
         backgroundColor: 'white',
@@ -209,6 +182,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         fontWeight: 'bold',
         fontSize: 10,
+        color: 'white',
         borderStyle: "dashed",
         padding: 1,
         top: 28,
@@ -223,7 +197,7 @@ const styles = StyleSheet.create({
     },
     modalContent: {
         padding: 20,
-        backgroundColor: Colors.white,
+        backgroundColor: 'black',
         elevation: 5,
         width: 330,
         gap: 20
@@ -237,8 +211,8 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     signatureImage: {
-        width: '100%',
-        height: 200,
+        height: 400,
+        marginHorizontal: -20,
         objectFit: 'contain'
     }
 });
