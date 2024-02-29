@@ -1,39 +1,8 @@
-export default {
-    backGroundColor:'#CFEBFF',
-    primary: '#facd94',
-
-    black: '#000000',
-    white: '#FFFFFF',
-    yellow: '#EED552',
-    green: '#60c5a8',
-    red: '#E66155',
-    purple: '#8f06e4',
-    skyBlue: 'skyblue',
-    pink: '#ff4c98',
-    gold: '#f8c907',
-    gray: '#444',
-
-    menu1: '#f9a3b3',
-    menu2: '#81c3eb',
-    menu3: '#facd94',
-    dark: '#010101',
-    light: '#ccc',
-
-    redHeaderButton: "#CE5A67",
-    darkBlue: "#00293A",
-    lightBlue: "#0C445C",
-    stockCardColor: "#3E6B7F",
-    appDarkBlue: "#00293A",
-    white: "white",
-    gray: "#7D7C7C",
-    backGroundGray: "#006699",
-    black: "black",
-    bibhuBlue: "#4093CE",
-    manufactureLabels: '#F6C23E',
-    transparency: 'rgba(0, 0, 0, 0.5)',
-    greenTag: '#5D9C59',
-    redTag: '#DF2E38',
-    silverBorder: '#D0D4CA',
-    shadowColor: '#52006A',
-    modalGrayBackground: '#EEEDED'
-}
+export const Colors = {
+    red: '#EA5455',
+    white: '#E5E5E5',
+    sky: '#7BD3EA',
+    blue: '#2B3467',
+    green: '#A1EEBD',
+    lightSky: '#BAD7E9'
+};

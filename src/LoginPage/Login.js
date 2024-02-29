@@ -56,7 +56,12 @@ export default Login = () => {
                 Poppins_LightItalic: require('../../assets/fonts/Poppins/Poppins-LightItalic.ttf'),
                 Poppins_SemiBoldItalic: require('../../assets/fonts/Poppins/Poppins-SemiBoldItalic.ttf'),
                 Poppins_MediumItalic: require('../../assets/fonts/Poppins/Poppins-MediumItalic.ttf'),
-                Poppins_SemiBold: require('../../assets/fonts/Poppins/Poppins-SemiBold.ttf')
+                Poppins_SemiBold: require('../../assets/fonts/Poppins/Poppins-SemiBold.ttf'),
+                'SignikaNegative-Light': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Light.ttf'),
+                'SignikaNegative-Bold': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Bold.ttf'),
+                'SignikaNegative-Medium': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Medium.ttf'),
+                'SignikaNegative-Regular': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Regular.ttf'),
+                'SignikaNegative-SemiBold': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-SemiBold.ttf')
             });
             setFontLoaded(true);
         }
@@ -92,9 +97,9 @@ export default Login = () => {
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Bar Chart.png')} style={[styles.backIcons, { right: -12, top: '20%' }]} />
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Slice.png')} style={[styles.backIcons, { left: -20, top: '20%' }]} />
                     <Image source={require('../../assets/icons/gAI.png')} style={{ width: 80, height: 80 }} />
-                    <View style={{flexDirection: 'row'}}>
-                    <Text style={{color: 'white', fontSize: 28, fontFamily: 'Poppins_Regular', top: 2}}>genius</Text>
-                    <GradientText style={{ fontSize: 28, fontFamily: 'Poppins' }}>minds.ai</GradientText>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text style={{ color: 'white', fontSize: 28, fontFamily: 'Poppins_Regular', top: 2 }}>genius</Text>
+                        <GradientText style={{ fontSize: 28, fontFamily: 'Poppins' }}>minds.ai</GradientText>
                     </View>
                     <View style={{ marginBottom: 40 }}>
                         <Text style={{ fontFamily: 'Poppins_LightItalic', fontSize: (width / 60), left: (width / 7), bottom: (width / 60), color: 'white' }}>We don't use Technology, Technology uses us</Text>

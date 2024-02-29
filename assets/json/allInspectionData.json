@@ -1,0 +1,30 @@
+[
+    {
+        "Inspection_No": "AZX21345",
+        "Result": "Passed",
+        "Stage":"1st Stage",
+        "Supervisor": "Sumen Kumar",
+        "Summary": "This is just a summary",
+        "Tools_Required": "Screw Driver, Hammer, Mask, Helmet",
+        "Tools_Available": "Yes",
+        "Time_&_Date": "10:00 AM 19/02/2024",
+        "In_Time": "Yes",
+        "Health": "Good",
+        "Photo": "https://media.photographycourse.net/wp-content/uploads/2022/04/08155510/how-to-use-a-viewfinder.jpg",
+        "Signature": "https://www.jsign.com/wp-content/uploads/2022/06/graphic-signature-angle.png"
+    },
+    {
+        "Inspection_No": "AZX21346",
+        "Result": "Failed",
+        "Stage":"2nd Stage",
+        "Supervisor": "Bibhu Prasad Patra",
+        "Summary": "This is just a summary, Don't take it seriously",
+        "Tools_Required": "Mask, Helmet, Goggles",
+        "Tools_Available": "No",
+        "Time_&_Date": "2:00 PM 19/02/2024",
+        "In_Time": "Yes",
+        "Health": "Bad",
+        "Photo": "https://media.istockphoto.com/id/664304668/photo/portrait-of-a-photographer-covering-her-face-with-camera.webp?b=1&s=170667a&w=0&k=20&c=6bq8oYpVgp0cO2CZ8GgayLn9wwRkkJigGEL9-LWkCgE=",
+        "Signature": "https://www.jsign.com/wp-content/uploads/2022/06/graphic-signature-completeness.png"
+    }
+]
