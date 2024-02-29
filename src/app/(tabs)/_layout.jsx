@@ -38,7 +38,7 @@ export default function AppLayout() {
 
       <Tabs.Screen
         // Name of the dynamic route.
-        name="messages"
+        name="report"
         options={{
           tabBarIcon: ({ color, size }) => (
             <>

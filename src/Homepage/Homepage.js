@@ -10,7 +10,7 @@ import { Fonts } from '../utils/Fonts';
 const width = Dimensions.get('window').width;
 
 export default Homepage = () => {
-    const recentInspectionData = require('../../assets/json/recentInspections.json');
+    const recentInspectionData = require('../../assets/JSON/recentInspections.json');
     const [fontLoaded, setFontLoaded] = useState(false);
     const [showImageView, setShowImageView] = useState(false);
     const [imageToShow, setImageToShow] = useState();
