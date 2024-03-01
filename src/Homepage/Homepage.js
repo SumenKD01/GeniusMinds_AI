@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient'; 7
 import * as Animatable from 'react-native-animatable';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { Fonts } from '../utils/Fonts';
+import { Link,router } from "expo-router";
 
 const width = Dimensions.get('window').width;
 
@@ -100,7 +101,7 @@ export default Homepage = () => {
                             </View>
                         </View>
                     </View>
-                    <TouchableOpacity style={{ width: '100%', marginTop: 180 }} >
+                    <TouchableOpacity  onPress={()=>router.push({ pathname: '/(tabs)/report' })} style={{ width: '100%', marginTop: 180 }} >
                         <LinearGradient colors={['#30D2F6', 'rgb(52, 170, 113)']} start={{ x: 1, y: 1 }} end={{ x: 0, y: 0 }} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 12, paddingHorizontal: 20, borderRadius: 10, marginHorizontal: 10, marginVertical: 20 }}>
                             <View>
                                 <Text style={{ color: 'white', fontSize: 16, fontFamily: Fonts.SignikaNegative_SemiBold }}>Violation Report</Text>
