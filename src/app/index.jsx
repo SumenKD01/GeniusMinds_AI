@@ -13,7 +13,8 @@ export default function Root() {
       <View style={styles.container}>
         <Login />
       </View>
-    </SafeAreaView>
+
+      </SafeAreaView>
 
 
   )

@@ -8,9 +8,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/Images/Bacuza.png",
+      "image": "./assets/icons/LogoIcon/splashscreen.png",
       "resizeMode": "contain",
-      "backgroundColor": "#CFEBFF"
+      "backgroundColor": "#000"
     },
     "assetBundlePatterns": [
       "**/*"
