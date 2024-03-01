@@ -1,4 +1,4 @@
-import { Dimensions, Image, StyleSheet, Text, View, Animated, FlatList, Modal, TouchableOpacity } from 'react-native';
+import { Dimensions, Image, StyleSheet, Text, View, Animated, FlatList, Modal, TouchableOpacity, Linking } from 'react-native';
 import * as Font from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useRef, useState } from 'react';

@@ -102,7 +102,7 @@ export default Login = () => {
                         <GradientText style={{ fontSize: 28, fontFamily: 'Poppins' }}>minds.ai</GradientText>
                     </View>
                     <View style={{ marginBottom: 40 }}>
-                        <Text style={{ fontFamily: 'Poppins_LightItalic', fontSize: (width / 60), left: (width / 7), bottom: (width / 60), color: 'white' }}>We don't use Technology, Technology uses us</Text>
+                        <Text style={{ fontFamily: 'Poppins_LightItalic', fontSize: (width / 60), left: (width / 7), bottom: (width / 60), color: 'white' }}>Re-Defining Innovation...</Text>
                     </View>
                     <View style={{ position: 'absolute', zIndex: 1, width: '100%', marginTop: '60%' }}>
                         <LoginForm />

@@ -40,7 +40,7 @@ export default function RootLayout() {
   return (
     <Provider store={store}>
       <GestureHandlerRootView style={{ flex: 1 }}>
-        <StatusBar style='auto' />
+        <StatusBar style='dark' translucent />
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name='index' options={{ title: "Home" }} />
         </Stack>

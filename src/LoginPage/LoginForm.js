@@ -101,10 +101,10 @@ export default LoginForm = () => {
                         <View>
                             <View style={[styles.inputFieldContainer, { borderColor: errors.UserName ? 'red' : 'white' }]}>
                                 <View style={{ flex: 1 }}>
-                                    <Image source={require('../../assets/icons/User.png')} style={{ width: 25, height: 25 }} />
+                                    <Image source={require('../../assets/icons/UserForLogin.png')} style={{ width: 25, height: 25 }} />
                                 </View>
                                 <View style={{ flex: 11 }}>
-                                    <InputTextType inputName={"Email Address"} changeValue={onChange} value={value} type={"email"} />
+                                    <InputTextType inputName={"Username"} changeValue={onChange} value={value} type={"email"} />
                                 </View>
                             </View>
                             {

@@ -61,7 +61,6 @@ export default function AppLayout() {
         }}
       />
       <Tabs.Screen
-        // Name of the dynamic route.
         name="menu"
         options={{
           tabBarIcon: ({ color, size }) => (
