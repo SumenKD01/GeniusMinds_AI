@@ -1,153 +1,103 @@
 import { TouchableOpacity, StyleSheet, Image, Text, View, TextInput, Button, Alert, Modal } from "react-native";
 import { Avatar } from "react-native-paper";
 import { useSelector } from 'react-redux';
-// import * as Notifications from 'expo-notifications';
 import { useEffect, useState } from "react";
 import * as Animatable from 'react-native-animatable';
-
-// Notifications.setNotificationHandler({
-//     handleNotification: async () => ({
-//         shouldShowAlert: true,
-//         shouldPlaySound: true,
-//         shouldSetBadge: true
-//     }),
-// });
+import { LinearGradient } from "expo-linear-gradient";
 
 export default Profile = () => {
     const userInfo = useSelector((state) => state.user.userProfile);
-    const [showNotification, setShowNotification] = useState(false);
-    const [showNotificationData, setShowNotificationData] = useState();
-
-    // function toggleNotification(notificationData) {
-    //     console.log("Notification Data inside the Toggle Function - ", notificationData);
-    //     setShowNotificationData(notificationData);
-    //     setShowNotification(showNotification ? false : true);
-    // }
-
-    // useEffect(() => {
-    //     registerForPushNotificationsAsync();
-    //     Notifications.addNotificationReceivedListener(handleNotification);
-    // }, []);
-
-    // const registerForPushNotificationsAsync = async () => {
-    //     if (Platform.OS === 'android') {
-    //         try {
-    //             let token;
-    //             const { status: existingStatus } = await Notifications.getPermissionsAsync();
-    //             let finalStatus = existingStatus;
-    //             if (existingStatus !== 'granted') {
-    //                 const { status } = await Notifications.requestPermissionsAsync();
-    //                 finalStatus = status;
-    //             }
-    //             if (finalStatus !== 'granted') {
-    //                 throw new Error('Permission to receive push notifications denied');
-    //             }
-    //             console.log(finalStatus);
-    //             token = (await Notifications.getExpoPushTokenAsync()).data;
-    //             console.log(token);
-    //         } catch (error) {
-    //             console.log('Error getting Expo push token:', error);
-    //         }
-    //     }
-    // };
-
-    // const NotificationGot = (notificationData) => {
-    //     console.log("Notification Data - ", notificationData);
-    //     return (
-    //         <Modal visible={showNotification} transparent>
-    //             <TouchableOpacity style={styles.modalBackground} onPress={toggleNotification} activeOpacity={1}>
-    //                 <TouchableOpacity activeOpacity={1} style={styles.modalContent}>
-    //                     <Image source={require('../../../assets/icons/alert.gif')} style={{width: 40, height: 40}} />
-    //                     <Text style={styles.notificationHeading}>{showNotificationData?.request?.content.title}</Text>
-    //                     <Text style={styles.notificationBody}>{showNotificationData?.request?.content.body}</Text>
-    //                     <View style={{flexDirection: 'row', gap: 20}}>
-    //                         <TouchableOpacity onPress={toggleNotification} style={styles.notificationButtons}>
-    //                             <Text style={styles.notificationButtonText}>Reject</Text>
-    //                         </TouchableOpacity>
-    //                         <TouchableOpacity onPress={toggleNotification} style={styles.notificationButtons}>
-    //                             <Text style={styles.notificationButtonText}>Accept</Text>
-    //                         </TouchableOpacity>
-    //                         <TouchableOpacity onPress={toggleNotification} style={styles.notificationButtons}>
-    //                             <Text style={styles.notificationButtonText}>Ignore</Text>
-    //                         </TouchableOpacity>
-    //                     </View>
-    //                 </TouchableOpacity>
-    //             </TouchableOpacity>
-    //         </Modal>
-    //     );
-    // }
-
-    // const handleNotification = (notificationData) => {
-    //     toggleNotification(notificationData);
-    // };
 
     return (
-        <View style={styles.container}>
-            <Text style={{ fontSize: 20, fontFamily: 'Poppins' }}>Profile</Text>
-            <TouchableOpacity >
-                <Animatable.View animation={'slideInDown'}>
-                    <Avatar.Image
-                        source={require('../../assets/icons/Profile/userProfile.gif')
-                        }
-                        size={120}
-                    />
+        <LinearGradient colors={['#000C18', '#001E3E']} style={styles.container}>
+            <View style={{ flexDirection: 'row', gap: 5, marginTop: 20, alignSelf: 'flex-start', marginLeft: 20 }}>
+                <Image source={require('../../assets/icons/goBack.png')} style={{ width: 30, height: 30 }} />
+                <Text style={{ fontSize: 20, fontFamily: 'Poppins', color: 'white' }}>My Account</Text>
+            </View>
+            <View style={{ flexDirection: 'row', gap: 15, marginTop: 20, alignSelf: 'flex-start', marginLeft: 20, justifyContent: 'center', alignItems: 'center', }}>
+                <TouchableOpacity >
+                    <Animatable.View animation={'slideInDown'}>
+                        <Avatar.Image
+                            source={require('../../assets/icons/Profile/userProfile.gif')
+                            }
+                            size={70}
+                        />
+                    </Animatable.View>
+                </TouchableOpacity>
+                <View>
+                    <Text style={{ fontSize: 16, fontFamily: 'Poppins_SemiBold', color: 'white' }}>{userInfo.fullName}</Text>
+                    <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white' }}>{userInfo.empId}</Text>
+                </View>
+            </View>
+            <View style={{ position: 'absolute', top: 0, right: 0 }}>
+                <Animatable.View animation="bounceIn" duration={1000}>
+                    <Image source={require('../../assets/backgrounds/ProfileBackgroundDown.png')} style={{ width: 400, height: 400 }} />
                 </Animatable.View>
-                {/* <View style={{ padding: 5, backgroundColor: 'white', borderRadius: 30, position: 'absolute', top: 0, right: 0 }} >
-                    <Image source={require('../../../assets/icons/photoPenIcon.png')} style={styles.photoPenIcon} />
-                </View> */}
-            </TouchableOpacity>
+            </View>
+            <View style={{ position: 'absolute', bottom: 0, left: 0 }}>
+                <Animatable.View animation="bounceIn" duration={1000}>
+                    <Image source={require('../../assets/backgrounds/ProfileBackgroundUp.png')} style={{ width: 400, height: 400, opacity: 0.5 }} />
+                </Animatable.View>
+            </View>
             <Animatable.View style={styles.detailContainer} animation={'slideInLeft'}>
                 <View style={styles.eachField}>
                     <Text style={styles.profiledataheaders}>Name</Text>
-                    <Text style={styles.inputField}>{userInfo.fullName}</Text>
-
-                    {/* <TextInput style={styles.inputField} value={userInfo.fullName} /> */}
+                    <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
+                        <Text style={styles.inputField}>{userInfo.fullName}</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2, borderRadius: 10 }}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.eachField}>
                     <Text style={styles.profiledataheaders}>Phone</Text>
-                    <Text style={styles.inputField}>{userInfo.phone}</Text>
+                    <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
+                        <Text style={styles.inputField}>{userInfo.phone}</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        </TouchableOpacity>
+                    </View>
 
                 </View>
                 <View style={styles.eachField}>
                     <Text style={styles.profiledataheaders}>Email</Text>
-                    <Text style={styles.inputField}>{userInfo.email}</Text>
+                    <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
+                        <Text style={styles.inputField}>{userInfo.email}</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.eachField}>
                     <Text style={styles.profiledataheaders}>Username</Text>
-                    <Text style={styles.inputField}>{userInfo.empId}</Text>
-
+                    <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
+                        <Text style={styles.inputField}>{userInfo.empId}</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
                 <View style={styles.eachField}>
                     <Text style={styles.profiledataheaders}>Department</Text>
                     <Text style={styles.inputField}>{userInfo.dept}</Text>
                 </View>
-                {/* <TouchableOpacity underlayColor={'#FFF78A'} activeOpacity={1} onPress={() => alert('Pressed!')}>
-                    <Text style={{ fontFamily: 'Poppins', textDecorationLine: 'underline', textAlign: 'right', color: 'white' }}>Change Password</Text>
-                </TouchableOpacity> */}
-                {/* <Button
-                    title="Notification"
-                    onPress={async () => {
-                        await schedulePushNotification(userInfo);
-                    }}
-                /> */}
             </Animatable.View>
-        </View>
+            <Animatable.View style={styles.detailContainer} animation={'slideInLeft'}>
+                <View style={styles.eachField}>
+                    <Text style={styles.profiledataheaders}>Password</Text>
+                    <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
+                        <Text style={styles.inputField}>*********</Text>
+                        <TouchableOpacity>
+                            <LinearGradient colors={['#FF487F', '#862C8E']} style={{ paddingHorizontal: 5, paddingTop: 2 , borderRadius: 10}} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}>
+                                <Text style={{ color: 'white', fontFamily: 'Poppins_Regular', fontSize: 11 }}>Change</Text>
+                            </LinearGradient>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Animatable.View>
+        </LinearGradient>
     )
 }
-
-// async function schedulePushNotification(details) {
-//     await Notifications.scheduleNotificationAsync({
-//         content: {
-//             title: "Welcome to Efficio, " + details.fullName,
-//             body: 'We hope you have the best experience using this app. Your employee Id is ' + details.empId,
-//             data: { data: 'goes here' }
-//         },
-//         trigger: {
-//             seconds: 2,
-//             repeats: false
-//         },
-//     });
-// }
 
 const styles = StyleSheet.create({
 
@@ -167,7 +117,7 @@ const styles = StyleSheet.create({
         gap: 20,
         padding: 20,
         borderRadius: 15,
-        backgroundColor: 'rgba(0, 0, 0, 0.6)'
+        backgroundColor: 'rgba(9,42,73, 0.5)'
     },
     eachField: {
         borderBottomWidth: 0.2,
@@ -185,7 +135,7 @@ const styles = StyleSheet.create({
     profiledataheaders: {
         fontSize: 11,
         fontFamily: 'Poppins_Regular',
-        color: 'cyan'
+        color: '#FFEF9C'
     },
     buttonIcons: {
         height: 30,
@@ -210,10 +160,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     modalBackground: {
-        backgroundColor: 'rgba(52, 52, 52, 0.8)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
+        backgroundColor: 'rgba(52, 52 ,52, 0.5)'
     },
     notificationButtons: {
         backgroundColor: '#4C6078',

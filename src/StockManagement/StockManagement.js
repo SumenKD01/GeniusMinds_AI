@@ -49,8 +49,6 @@ const StockManagement = ({ res }) => {
   return (
     <View style={styles.container}>
       <View>
-       
-         
           <AllUsages  res={res}/>
       </View>
     </View>
