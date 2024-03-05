@@ -9,10 +9,7 @@ import { store } from '../redux/store';
 
 export default function Root() {
   return (
-   
-        <Login />
-
-
+    <Login />
   )
 }
 
