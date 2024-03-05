@@ -1,13 +1,12 @@
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { View, Text,st } from 'react-native';
+import { View, Text, ScrollView} from 'react-native';
 import StockManagement from '../../StockManagement/StockManagement';
 
 export default function Messages() {
   return (
-<SafeAreaView style={{ flex:1}}  >
-    
-    <StockManagement/>
+    <ScrollView style={{ flex: 1 }}  >
 
-    </SafeAreaView>
+      <StockManagement />
+    </ScrollView>
   );
 }

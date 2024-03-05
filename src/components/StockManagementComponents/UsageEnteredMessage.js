@@ -25,8 +25,6 @@ export default UsageEnteredMessage = ({ isVisible, onClose, message, continuing 
                             <CustomButton functionPassed={onClose} colorPassed={Colors.darkBlue} textPassed={"OK"} />
                         </View>
                     }
-
-
                 </View>
             </View>
         </Modal>

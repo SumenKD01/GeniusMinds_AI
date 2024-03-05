@@ -47,7 +47,7 @@ export default LoginForm = () => {
             setAuthenticationMessage("Authentication Successful");
             APICall(apiForUserInfo, formData, getUserInfo, "getUserInformation");
             setTimeout(() => {
-                router.push({ pathname: '/(tabs)/', params: { user: 'jane' } });
+                router.push({ pathname: '/(tabs)/home', params: { user: 'jane' } });
 
                 navigation.dispatch(CommonActions.reset({
                     routes: [{key: "(tabs)", name: "(tabs)"}]
