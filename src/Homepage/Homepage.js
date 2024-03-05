@@ -288,7 +288,10 @@ export default Homepage = () => {
 							<View>
 								<Image
 									source={require('../../assets/icons/Report-button.png')}
-									style={{ width: 35, height: 35 }}
+									style={{
+										width: 35,
+										height: 35
+									}}
 								/>
 							</View>
 						</LinearGradient>
@@ -520,8 +523,8 @@ export default Homepage = () => {
 };
 
 const styles = StyleSheet.create({
-	mainContainer:{
-		flex:1,
+	mainContainer: {
+		flex: 1,
 		paddingBottom: 20
 	},
 
