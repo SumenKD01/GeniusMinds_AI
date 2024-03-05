@@ -233,9 +233,9 @@ export default UsageFormModal = ({ onClose, isVisible }) => {
                                 </View>
                             </View> :
                             <CustomButton textPassed={"Select Product"} functionPassed={toggleSelectProduct} colorPassed={Colors.darkBlue} />
-
                         }
                         {errors.ProductName && <Text style={styles.errorMessages}>You must select a product!</Text>}
+
                         <Controller
                             control={control}
                             name="Operation"

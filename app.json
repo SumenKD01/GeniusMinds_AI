@@ -22,7 +22,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.softdesigners.geniusminds_ai"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -36,6 +37,14 @@
         }
       ],
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": "https://n"
+      },
+      "eas": {
+        "projectId": "19739e7b-ed90-4703-9b11-e3015de4c5f0"
+      }
+    }
   }
 }
