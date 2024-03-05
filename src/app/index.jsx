@@ -10,14 +10,10 @@ import { store } from '../redux/store';
 export default function Root() {
   return (
     <SafeAreaView style={{ flex: 1 }}  >
-
       <View style={styles.container}>
         <Login />
       </View>
-
-      </SafeAreaView>
-
-
+    </SafeAreaView>
   )
 }
 
