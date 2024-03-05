@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 export default AllStocks = () => {
     const allStocksData = require('../../../assets/JSON/StockManagementData/stocks.json');
 
-    const [productFormModalView, setProductFormModalView] = useState(false);AAAAAAAAAAAAAAAAA
+    const [productFormModalView, setProductFormModalView] = useState(false);
     const pathImages = "../../../assets/icons/StockManagement/Icons/";
     const navigation=useNavigation();
 
