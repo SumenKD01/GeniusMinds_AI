@@ -100,7 +100,7 @@ export default SideMenu = () => {
                 <TouchableOpacity style={styles.menuButtons} onPress={() =>  router.push({ pathname: '/MoreInfoPage/AboutUs' })}>
                     <Text style={styles.menuButtonText}>About Us</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/AboutUs' })}>
+                <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/Contacts' })}>
                     <Text style={styles.menuButtonText}>Contact Us</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.menuButtons} onPress={toggleLogoutConfirmation}>
