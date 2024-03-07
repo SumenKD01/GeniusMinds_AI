@@ -97,10 +97,10 @@ export default SideMenu = () => {
                 <TouchableOpacity style={styles.menuButtons} onPress={() => goToPage('ChatBotHead')} >
                     <Text style={styles.menuButtonText}>Chat Bot Main</Text>
                 </TouchableOpacity> */}
-                <TouchableOpacity style={styles.menuButtons} onPress={() =>  router.push({ pathname: '/MoreInfoPage/AboutUs' })}>
+                <TouchableOpacity style={styles.menuButtons} onPress={() =>  router.push({ pathname: '/MoreInfoPage/AboutUsPage' })}>
                     <Text style={styles.menuButtonText}>About Us</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/AboutUs' })}>
+                <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })}>
                     <Text style={styles.menuButtonText}>Contact Us</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.menuButtons} onPress={toggleLogoutConfirmation}>
