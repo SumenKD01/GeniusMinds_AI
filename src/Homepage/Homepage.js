@@ -114,7 +114,9 @@ export default Homepage = () => {
                                 <Text style={{ color: 'white', fontSize: 12, opacity: 0.5, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
                             </View>
                             <View>
-                                <Image source={require('../../assets/icons/Report-button.png')} style={{ width: 35, height: 35 }} />
+                                <Image  source={{
+          uri:  'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=AutoLine.png',
+        }} style={{ width: 35, height: 35 }} />
                             </View>
                         </LinearGradient>
                     </TouchableOpacity>
