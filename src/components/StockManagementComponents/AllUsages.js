@@ -152,13 +152,9 @@ export default AllUsages = () => {
 							ListFooterComponent={
 								<View
 									style={{
-										flexDirection: 'row',
-										flexWrap: 'wrap',
-										justifyContent: 'center',
-										gap: 10,
+										flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10,
 										padding: 10,
-										width: '100%',
-										zIndex: 2,
+										width: '100', zIndex: 2,
 									}}
 								>
 									{firstDataToDisplay !== '0' && (
@@ -223,8 +219,8 @@ const styles = StyleSheet.create({
 	UsageButtons: {
 		backgroundColor: Colors.redHeaderButton,
 		position: 'absolute',
-        bottom: 200,
-        right: 30,
+		bottom: 200,
+		right: 30,
 		padding: 10,
 		width: 110,
 		height: 50,

@@ -1,28 +1,52 @@
 import { Dimensions, StyleSheet, Text, View } from 'react-native'
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { LineGraph } from 'react-native-graph';
 import { BarChart,PieChart } from 'react-native-gifted-charts';
 
 const ProgressGraph = () => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+	const [apiError, setAPIError] = useState(false);
+	const [refreshing, setRefreshing] = useState(false);
+
+    const apiGot =
+		'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetMonthlyViolation';
+	const jsonDataToPassInApi = {
+		PlantName: 'SEIPL,BLR',
+		Year:'2024'
+	};
+    function resultReport(dataGot, apiError) {
+		if (apiError) {
+			setIsLoading(false);
+			setAPIError(true);
+		} else {
+			
+				setData(dataGot);
+				setIsLoading(false);
+		}
+	}
+    useEffect(() => {
+		APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
+	}, [refreshing]);
+    console.log('StackData',data)
+
     const barData = [{value: 15}, {value: 30}, {value: 26}, {value: 40}];
     const pieData = [
         {value: 54, color: '#177AD5', text: '54%'},
         {value: 40, color: '#79D2DE', text: '30%'},
         {value: 20, color: '#ED6665', text: '26%'},
     ];
-    const stackData = [
+    const stackData1 = [
         {
           stacks: [
-            {value: 10, color: 'orange'},
-            {value: 20, color: '#4ABFF4', marginBottom: 2},
+            {value: 2, color: 'orange'},
           ],
           label: 'Jan',
         },
         {
           stacks: [
             {value: 10, color: '#4ABFF4'},
-            {value: 11, color: 'orange', marginBottom: 2},
-            {value: 15, color: '#28B2B3', marginBottom: 2},
+          
           ],
           label: 'Feb',
         },
@@ -39,8 +63,72 @@ const ProgressGraph = () => {
             {value: 11, color: 'orange', marginBottom: 2},
             {value: 10, color: '#28B2B3', marginBottom: 2},
           ],
-          label: 'April',
+          label: 'Apr',
         },
+        {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'May',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'Jun',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'July',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'August',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'September',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'October',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'November',
+          },
+          {
+            stacks: [
+              {value: 7, color: '#4ABFF4'},
+              {value: 11, color: 'orange', marginBottom: 2},
+              {value: 10, color: '#28B2B3', marginBottom: 2},
+            ],
+            label: 'December',
+          },
       ];
 
 
@@ -109,10 +197,8 @@ const ProgressGraph = () => {
             date: new Date('2024-01-17'),
             value: 25,
         },
-
-
-
     ]
+
     return (
         <View style={styles.container}>
             <Text>ProgressGraph</Text>
@@ -123,9 +209,17 @@ const ProgressGraph = () => {
         data={barData}
         /> */}
       <BarChart
-            width={340}
+            width={282}
+            barWidth={25}
+
             noOfSections={4}
-            stackData={stackData}
+            stackData={stackData1}
+            // backgroundColor={'white'}
+            dashWidth={'25'}
+
+            xAxisLabelTexts={'hello'}
+            xa
+
             />
          
             <PieChart
@@ -148,6 +242,7 @@ export default ProgressGraph
 
 const styles = StyleSheet.create({
     container: {
+        backgroundColor:'cyan',
         padding: 10,
         top:15,
         borderRadius: 5,
