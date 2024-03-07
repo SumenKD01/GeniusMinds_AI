@@ -4,15 +4,13 @@ import { LinearGradient } from "expo-linear-gradient";
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
-export const Component = () => {
+export default Contacts = () => {
     return (
         <LinearGradient colors={['#000C18', '#001E3E']}
             style={{ flex: 1, alignItems: 'center' }}>
             <View style={{ display: 'flex', alignItems: 'center' }}>
                 <Image style={{ position: "absolute", top: -210, width: deviceWidth, objectFit: "contain" }} source={require('../../assets/icons/topbg.png')} />
                 <Text style={{ color: 'white', fontSize: 24, marginTop: 50, marginBottom: 20 }}>Contact us</Text>  
-
-
                 <Image style={styles.mailimg} source={require('../../assets/icons/emailIcon.png')} />
             </View>
 

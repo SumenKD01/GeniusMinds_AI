@@ -17,6 +17,10 @@ export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
                     const resp = await api.json();
                     const ans = resp['members'];
                     result(ans, null);
+                } else  if (action === 'getReportForChart') {
+                    const resp = await api.json();
+                    const ans = resp;
+                    result(ans, null);
                 } else if (action === "checkAuthentication") {
                     const resp = await api.json();
                     const ans = resp['members'];
