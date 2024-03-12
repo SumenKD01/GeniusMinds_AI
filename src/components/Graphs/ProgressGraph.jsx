@@ -1,6 +1,5 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { LineGraph } from 'react-native-graph';
 import { BarChart, PieChart,LineChart } from 'react-native-gifted-charts';
 
 const ProgressGraph = () => {
@@ -15,14 +14,26 @@ const ProgressGraph = () => {
     PlantName: 'SEIPL,BLR',
     Year: '2024'
   };
+
   function resultReport(dataGot, apiError) {
     if (apiError) {
       setIsLoading(false);
       setAPIError(true);
     } else {
       console.log('StackData', dataGot);
-      setData(dataGot);
+      let i = 1;
+      let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      let newDataMap = Object.keys(dataGot).map((eachItem) => {
+        return {
+          stacks: [
+            { value: dataGot[i + ""], color: 'red' },
+          ],
+          label: months[(i++) - 1] + ""
+        }
+      });
       setIsLoading(false);
+      console.log("Data Made", newDataMap);
+      setData(newDataMap);
     }
   }
   useEffect(() => {
@@ -38,87 +49,73 @@ const ProgressGraph = () => {
   const stackData1 = [
     {
       stacks: [
-        { value: 0, color: 'orange' },
+        { value: 8, color: 'orange' },
       ],
       label: 'Jan',
     },
     {
       stacks: [
-        { value: 7, color: '#4ABFF4' },
-
+        { value: 7, color: 'orange' },
       ],
       label: 'Feb',
     },
     {
       stacks: [
-        { value: 0, color: 'orange' },
-  
+        { value: 14, color: 'orange' },
       ],
       label: 'Mar',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-     
+        { value: 7, color: 'orange' },
       ],
       label: 'Apr',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-        // { value: 11, color: 'orange', marginBottom: 2 },
-        // { value: 10, color: '#28B2B3', marginBottom: 2 },
+        { value: 7, color: 'orange' }
       ],
       label: 'May',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-        // { value: 11, color: 'orange', marginBottom: 2 },
-        // { value: 10, color: '#28B2B3', marginBottom: 2 },
+        { value: 7, color: 'orange' }
       ],
       label: 'Jun',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-        // { value: 11, color: 'orange', marginBottom: 2 },
-        // { value: 10, color: '#28B2B3', marginBottom: 2 },
+        { value: 7, color: 'orange' }
       ],
       label: 'July',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-       
+        { value: 7, color: 'orange' }
       ],
       label: 'August',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-      
+        { value: 7, color: 'orange' }
       ],
       label: 'September',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-
+        { value: 7, color: 'orange' }
       ],
       label: 'October',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-    
+        { value: 7, color: 'orange' }
       ],
       label: 'November',
     },
     {
       stacks: [
-        { value: 0, color: '#4ABFF4' },
-
+        { value: 7, color: 'orange' }
       ],
       label: 'December',
     },
@@ -249,20 +246,19 @@ const ProgressGraph = () => {
   ]
 
   return (
-    <View style={{gap: 20}}>
+    <View style={{ gap: 20 }}>
       <View style={styles.container}>
         <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violation</Text>
         <BarChart
-          width={282}
-          barWidth={30}
+          width={240}
+          barWidth={25}
           noOfSections={6}
-          stackData={stackData1}
+          stackData={data}
           dashWidth={'0.5'}
         />
       </View>
       <View style={styles.container}>
         <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violation</Text>
-
         <PieChart
           showText
           textColor="black"
@@ -348,6 +344,9 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(108,255,220,0.5)',
     borderRadius: 5,
+    paddingVertical: 10,
+    paddingBottom: 20,
+    paddingLeft: 10
   },
 
 })
