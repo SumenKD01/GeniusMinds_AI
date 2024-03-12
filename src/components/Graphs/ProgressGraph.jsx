@@ -1,21 +1,31 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { BarChart, PieChart } from 'react-native-gifted-charts';
+import { BarChart, LineChartBicolor, PieChart } from 'react-native-gifted-charts';
 
 const ProgressGraph = () => {
   const [data, setData] = useState([]);
+  const [dataDaily, setDataDaily] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setAPIError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   const apiGot =
     'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetMonthlyViolation';
+  const apiDaily =
+    'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetDailyViolation';
+
   const jsonDataToPassInApi = {
     PlantName: 'SEIPL,BLR',
     Year: '2024'
   };
 
-  function resultReport(dataGot, apiError) {
+  const jsonDataToPassInDaily = {
+    "PlantName": "SEIPL,BLR",
+    "Year": "2024",
+    "Month": "03"
+  };
+
+  function resultReportMonthly(dataGot, apiError) {
     if (apiError) {
       setIsLoading(false);
       setAPIError(true);
@@ -36,8 +46,27 @@ const ProgressGraph = () => {
       setData(newDataMap);
     }
   }
+
+  function resultReportDaily(dataGot, apiError) {
+    if (apiError) {
+      setIsLoading(false);
+      setAPIError(true);
+    } else {
+      console.log('StackData Daily', dataGot);
+      let i = 1;
+      let newDataMap = Object.keys(dataGot).map((eachItem) => {
+        return
+        { value: dataGot[i + ""] }
+      });
+      setIsLoading(false);
+      console.log("Data Made", newDataMap);
+      // setData(newDataMap);
+    }
+  }
+
   useEffect(() => {
-    APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReportForChart');
+    APICall(apiGot, jsonDataToPassInApi, resultReportMonthly, 'getReportForChart');
+    APICall(apiDaily, jsonDataToPassInDaily, resultReportDaily, 'getReportForChart');
   }, [refreshing]);
 
   const barData = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
@@ -55,7 +84,7 @@ const ProgressGraph = () => {
     },
     {
       stacks: [
-        { value: 7, color: 'orange' },
+        { value: 100, color: 'orange' },
       ],
       label: 'Feb',
     },
@@ -192,17 +221,17 @@ const ProgressGraph = () => {
   return (
     <View style={{ gap: 20 }}>
       <View style={styles.container}>
-        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Progress Graph</Text>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violations</Text>
         <BarChart
           width={282}
           barWidth={30}
-          noOfSections={6}
+          noOfSections={10}
           stackData={data}
           dashWidth={'0.5'}
         />
       </View>
       <View style={styles.container}>
-        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Progress Graph</Text>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Top 3 Violations</Text>
         <PieChart
           showText
           textColor="black"
@@ -212,6 +241,17 @@ const ProgressGraph = () => {
           showTextBackground
           textBackgroundRadius={20}
           data={pieData}
+        />
+      </View>
+      <View style={styles.container}>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Daily Violations</Text>
+        <LineChartBicolor
+          data={barData}
+          areaChart
+          color="green"
+          colorNegative="red"
+          startFillColor="green"
+          startFillColorNegative="red"
         />
       </View>
     </View>

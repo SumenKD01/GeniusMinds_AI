@@ -1,11 +1,12 @@
 import { Dimensions, Image, ScrollView, StyleSheet } from "react-native";
-import { Text, View, Modal, TouchableOpacity,Linking } from "react-native";
+import { Text, View, Modal, TouchableOpacity, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Avatar } from "react-native-paper";
 import * as Animatable from 'react-native-animatable';
-import { Link,router } from "expo-router";
+import { Link, router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -41,106 +42,53 @@ export default SideMenu = () => {
         <Animatable.View animation={'slideInUp'}>
             {console.log(menuItemSideIcon1, menuItemSideIcon2)}
             <ScrollView style={styles.container}>
-                {userInfo.plantName.includes('Grundfos') &&
-                    <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
-                        <Image source={{ uri: 'https://coltarapumpsandseals.com.au/wp-content/uploads/2017/12/grundfos-logo.png' }} style={{ height: 50, width: 200 }} />
-                    </View>
-                }
-                {userInfo.plantName.includes('Soft Designers1') &&
-                    <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
-                        <Image source={{ uri: 'https://www.softdesigners.co.in/wp-content/uploads/2022/05/Softdesigners-logo.png' }} style={{ height: 80, width: 240, objectFit: 'contain' }} />
-                    </View>
-                }
-                <TouchableOpacity style={styles.userInfoSection} onPress={() => goToPage('Profile')}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ flex: 1, padding: 10 }}>
-                            <Avatar.Image
-                                source={require('../../assets/icons/userProfile.gif')
-                                }
-                                size={70}
-                            />
+                <LinearGradient colors={['#000C18', '#001E3E']}
+                    style={styles.container}>
+                    {userInfo.plantName.includes('Grundfos') &&
+                        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
+                            <Image source={{ uri: 'https://coltarapumpsandseals.com.au/wp-content/uploads/2017/12/grundfos-logo.png' }} style={{ height: 50, width: 200 }} />
                         </View>
-                        <View style={{ flex: 4, padding: 10 }}>
-                            <Text style={styles.title}>{userInfo.fullName}</Text>
-                            <Text style={styles.caption}>{userInfo.email}</Text>
+                    }
+                    {userInfo.plantName.includes('Soft Designers1') &&
+                        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
+                            <Image source={{ uri: 'https://www.softdesigners.co.in/wp-content/uploads/2022/05/Softdesigners-logo.png' }} style={{ height: 80, width: 240, objectFit: 'contain' }} />
                         </View>
-                    </View>
-                </TouchableOpacity>
-                {/* <TouchableOpacity style={[styles.menuButtons, { backgroundColor: (menuItemSideIcon1 === arrDown) ? '#489CFF' : 'rgba(141, 194, 255, 0.30)' }]} onPress={expandAndon}>
-                    <Text style={[styles.menuButtonText]}>Andon</Text>
-                    <Image source={menuItemSideIcon1} style={{ width: 20, height: 20, right: 20 }} />
-                </TouchableOpacity>
-                {(menuItemSideIcon1 === arrDown) &&
-                    <View>
-                        <TouchableOpacity style={styles.subMenuButtons} onPress={() => goToPage('AcknowledgeIssue')}>
-                            <Text style={styles.subMenuButtonText}>Acknowledge Issue</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.subMenuButtons} onPress={() => goToPage('CloseIssue')}>
-                            <Text style={styles.subMenuButtonText}>Close Issue</Text>
-                        </TouchableOpacity>
-                    </View>
-                }
-                <TouchableOpacity style={[styles.menuButtons, { backgroundColor: (menuItemSideIcon2 === arrDown) ? '#489CFF' : 'rgba(141, 194, 255, 0.30)' }]} onPress={expandReport}>
-                    <Text style={[styles.menuButtonText]}>Reports</Text>
-                    <Image source={menuItemSideIcon2} style={{ width: 20, height: 20, right: 20 }} />
-                </TouchableOpacity>
-                {(menuItemSideIcon2 === arrDown) &&
-                    <View>
-                        <TouchableOpacity style={styles.subMenuButtons} onPress={() => goToPage('Issues')}>
-                            <Text style={styles.subMenuButtonText}>Issue Report</Text>
-                        </TouchableOpacity>
-                    </View>
-                }
-                  <TouchableOpacity style={styles.menuButtons} onPress={() => goToPage('ChatBot')} >
-                    <Text style={styles.menuButtonText}>Chat Bot</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButtons} onPress={() => goToPage('ChatBotHead')} >
-                    <Text style={styles.menuButtonText}>Chat Bot Main</Text>
-                </TouchableOpacity> */}
-                <TouchableOpacity style={styles.menuButtons} onPress={() =>  router.push({ pathname: '/MoreInfoPage/AboutUsPage' })}>
-                    <Text style={styles.menuButtonText}>About Us</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })}>
-                    <Text style={styles.menuButtonText}>Contact Us</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.menuButtons} onPress={toggleLogoutConfirmation}>
-                    <Text style={styles.menuButtonText}>Logout</Text>
-                </TouchableOpacity>
-                <View style={styles.footer}>
-                    <View style={{ alignItems: 'center', marginTop: '10%', marginBottom: 50, gap: 20 }}>
-                        <View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: '#003571' }}>geniusminds.ai</Text>
-                                <Text style={{ fontSize: 10, fontFamily: 'Poppins_SemiBold', alignSelf: 'flex-end', bottom: 13, marginLeft: 5, color: '#003571' }}>v1.0.0</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 7, fontFamily: 'Poppins_Regular' }}>Developed by  </Text>
-                                <Image
-                                    source={{ uri: 'https://cdn-hipjp.nitrocdn.com/UVqClfNzszdreQcdMkVmNGxHoABDKrFo/assets/static/optimized/wp-content/uploads/2022/05/f283e8cf3d1b2793cdcdf6b4f2102c76.Softdesigners-logo.png' }}
-                                    style={{
-                                        height: 30,
-                                        width: 80,
-                                        objectFit: 'contain'
-                                    }}
-                                />
-                            </View>
-                        </View>
-                    </View>
-                    <TouchableOpacity onPress={() => {
-                                Linking.openURL('https://www.privacypolicies.com/live/5a4ffcb1-ca15-4be1-bd6e-882f412f6967');
-                            }}>                                
-                        <Text style={{ color: 'blue', fontSize: 10 }}>Terms & Privacy</Text>
-                
+                    }
+                    <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/AboutUsPage' })}>
+                        <Text style={styles.menuButtonText}>About Us</Text>
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 10 }}>Efficio 2023 from ©www.softdesigners.co.in</Text>
-                </View>
+                    <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })}>
+                        <Text style={styles.menuButtonText}>Contact Us</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.menuButtons} onPress={toggleLogoutConfirmation}>
+                        <Text style={styles.menuButtonText}>Logout</Text>
+                    </TouchableOpacity>
+                    <View style={styles.footer}>
+                        <View style={{ alignItems: 'center', marginTop: '10%', marginBottom: 50, gap: 20 }}>
+                            <View style={{ gap:  0 }}>
+                                <Image source={require('../../assets/icons/menuLogo.png')} style={{ height: 50, width: 200, objectFit: 'contain' }} />
+                                <View style={{ flexDirection: 'row', bottom: 0, width: '100%', alignItems: 'center', gap: 5, justifyContent: 'center', opacity: 0.7 }}>
+                                    <Text style={{ fontFamily: 'Poppins_Regular', fontSize: (width / 40), color: 'white' }}>Developed by</Text>
+                                    <Image source={require('../../assets/icons/SoftDesigners.png')} style={{ height: 15, width: 70, objectFit: 'contain' }} />
+                                </View>
+                            </View>
+                        </View>
+                        <TouchableOpacity onPress={() => {
+                            Linking.openURL('https://www.privacypolicies.com/live/5a4ffcb1-ca15-4be1-bd6e-882f412f6967');
+                        }}>
+                            <Text style={{ color: 'white', fontSize: 10 }}>Terms & Privacy</Text>
+
+                        </TouchableOpacity>
+                        <Text style={{ fontSize: 7, color: 'white', marginTop: 5 }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text>
+                    </View>
+                </LinearGradient>
             </ScrollView>
             <Modal visible={logoutConfirmationMessage} transparent>
                 <TouchableOpacity style={{ flex: 1, backgroundColor: 'rgba(52, 52, 52, 0.8)', alignItems: 'center' }} activeOpacity={1} onPress={toggleLogoutConfirmation}>
                     <TouchableOpacity style={{ top: '40%', backgroundColor: 'white', padding: 20, gap: 20, borderRadius: 10 }} activeOpacity={1}>
                         <Text style={{ fontSize: 14, fontFamily: 'Poppins_Regular' }}>Are you sure want to logout?</Text>
                         <View style={{ flexDirection: 'row', gap: 20, alignItems: 'center', alignSelf: 'center' }}>
-                            <TouchableOpacity style={{ backgroundColor: 'rgba(85, 144, 215, 1)', paddingVertical: 5, paddingHorizontal: 10 }} onPress={() =>   router.push({ pathname: '/' })}>
+                            <TouchableOpacity style={{ backgroundColor: 'rgba(85, 144, 215, 1)', paddingVertical: 5, paddingHorizontal: 10 }} onPress={() => router.push({ pathname: '/' })}>
                                 <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Yes</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={{ backgroundColor: 'rgba(85, 144, 215, 1)', paddingVertical: 5, paddingHorizontal: 10 }} onPress={toggleLogoutConfirmation}>
@@ -192,10 +140,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         height: 50,
-        borderBottomWidth: 0.2
+        borderBottomWidth: 0.2,
+        borderTopWidth: 0.2
     },
     menuButtonText: {
-        color: 'black',
+        color: 'white',
         fontSize: 16,
         fontFamily: 'Poppins_SemiBold',
         left: 25

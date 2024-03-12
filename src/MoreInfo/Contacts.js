@@ -1,16 +1,19 @@
-import { Text, View, Image, StyleSheet, Dimensions } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
+const pathName = '../../assets/icons/';
+
 export default Contacts = () => {
     return (
         <LinearGradient colors={['#000C18', '#001E3E']}
             style={{ flex: 1, alignItems: 'center' }}>
+            <Image style={{ position: "absolute", top: -deviceHeight * 0.75 , width: deviceWidth * 0.90, left: 0, objectFit: "contain" }} source={require('../../assets/icons/ContactbackImage.png')} />
+            <Image style={{ position: "absolute", bottom: -deviceHeight * 0.60, right: 0 , width: deviceWidth*0.90, objectFit: "contain" }} source={require('../../assets/icons/ContactUsBackImage.png')} />
             <View style={{ display: 'flex', alignItems: 'center' }}>
-                <Image style={{ position: "absolute", top: -210, width: deviceWidth, objectFit: "contain" }} source={require('../../assets/icons/topbg.png')} />
-                <Text style={{ color: 'white', fontSize: 24, marginTop: 50, marginBottom: 20 }}>Contact us</Text>  
+                <Text style={{ color: 'white', fontSize: 30, marginTop: 50, marginBottom: 20, fontFamily: 'SignikaNegative-Bold' }}>Contact us</Text>
                 <Image style={styles.mailimg} source={require('../../assets/icons/emailIcon.png')} />
             </View>
 
@@ -56,6 +59,59 @@ export default Contacts = () => {
                     </View>
                 </LinearGradient>
             </View>
+            <View style={{ marginTop: 50 }}>
+                <Text style={{ fontFamily: 'Poppins_Regular', left: 45, padding: 10, color: 'white' }}>Follow us on:</Text>
+                <View style={styles.icons}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Linking.openURL('https://www.softdesigners.co.in/');
+                        }}
+                        style={styles.icon}
+                    >
+                        <Image
+                            style={styles.socialIcons}
+                            source={require(pathName + 'webCircle.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Linking.openURL(
+                                'https://www.linkedin.com/company/soft-designers/'
+                            );
+                        }}
+                        style={styles.icon}
+                    >
+                        <Image
+                            style={styles.socialIcons}
+                            source={require(pathName + 'linkedinCircle.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Linking.openURL('https://twitter.com/Soft_Designers');
+                        }}
+                        style={styles.icon}
+                    >
+                        <Image
+                            style={styles.socialIcons}
+                            source={require(pathName + 'twitterCircle.png')}
+                        />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={styles.icon}
+                        onPress={() => {
+                            Linking.openURL(
+                                'https://www.facebook.com/profile.php?id=100070417177410'
+                            );
+                        }}
+                    >
+                        <Image
+                            style={styles.socialIcons}
+                            source={require(pathName + 'facebookCircle.png')}
+                        />
+                    </TouchableOpacity>
+                </View>
+            </View>
         </LinearGradient>
     )
 }
@@ -87,5 +143,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'rgba(108, 153, 134, 1)',
         borderRadius: 10,
-    }
+    },
+    socialIcons: {
+        width: 30,
+        height: 30
+    },
+    icons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: 25
+    },
 });
