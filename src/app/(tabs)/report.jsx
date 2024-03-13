@@ -4,8 +4,7 @@ import StockManagement from '../../StockManagement/StockManagement';
 
 export default function Messages() {
   return (
-    <ScrollView style={{ flex: 1 }}  >
-
+    <ScrollView style={{ flex: 1 }} >
       <StockManagement />
     </ScrollView>
   );
