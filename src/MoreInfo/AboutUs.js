@@ -1,101 +1,80 @@
-import {
-    View,
-    Text,
-    TouchableOpacity,
-    Image,
-    StyleSheet,
-    Linking,
-    ScrollView,
-} from 'react-native';
-import React from 'react';
+import { Text, View, Image, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
+
+
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 export default AboutUs = () => {
+    const [fontsLoaded] = useFonts({
+        'Righteous-Regular': require('../../assets/fonts/Righteous/Righteous-Regular.ttf'),
+        'Prompt-Regular': require('../../assets/fonts/Prompt/Prompt-Regular.ttf')
+    });
     return (
-        <View style={Styles.container}>
-            <ScrollView>
-                <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                    <Text style={Styles.HeaderText}>About Us</Text>
+        <ScrollView>
+            <LinearGradient colors={['#000C18', '#001E3E']}
+                style={{ flex: 1, alignItems: 'center' }}>
+                <Text style={{ color: 'white', fontSize: 24, marginTop: 50, marginBottom: 20 }}>About Us</Text>
+                <View style={{ marginTop: 80 }}>
+                    <LinearGradient colors={['rgba(184, 184, 184, 0.2)', 'rgba(38, 38, 38, 0.3)']}
+                        start={{ x: 0.0, y: 0.25 }}
+                        end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
+                        style={styles.aboutBox1}>
+                        <Image style={{ width: 140, height: 140, marginBottom: 10, top: -70, position: "absolute" }} source={require('../../assets/icons/about1img.png')} />
+                        <Text style={{ color: '#E1E79A', fontFamily: 'Righteous-Regular', fontSize: 20, marginBottom: 10, marginTop: 80 }}>
+                            What we are?
+                        </Text>
+                        <Text style={{ color: 'white', fontFamily: 'Prompt-Regular', fontSize: 14 }}>
+                            SoftDesigners are the leaders in Lean Manufacturing & Industry 4.0 Solutions in India and we had done projects across different parts of the world.
+                        </Text>
+                    </LinearGradient>
                 </View>
-                <View style={{ marginTop: 30 }}>
-                    <Text style={Styles.text}>
-                        Soft Designers are the leaders in Environmental, Health and Safety
-                        Solutions, Artificial Intelligence, Industry 4.0 and Lean
-                        Manufacturing Solutions in pan India and US. We had started our
-                        wonderful journey from 2014 in Bangalore (Bengaluru, Karnataka, India). The Team’s expertise in
-                        Electrical, Electronics & Software programming helps the customers
-                        to make us the No.1 choice for all the Projects.
-                    </Text>
+                <View style={{ marginTop: 80, marginBottom: 100 }}>
+                    <LinearGradient colors={['rgba(184, 184, 184, 0.2)', 'rgba(38, 38, 38, 0.3)']}
+                        start={{ x: 0.0, y: 0.25 }}
+                        end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
+                        style={styles.aboutBox2}>
+                        <Image style={{ width: 140, height: 140, marginBottom: 10, top: -70, position: "absolute" }} source={require('../../assets/icons/about2img.png')} />
+                        <Text style={{ color: '#E1E79A', fontFamily: 'Righteous-Regular', fontSize: 20, marginBottom: 10, marginTop: 80 }}>
+                            Why Soft Designer?
+                        </Text>
+                        <Text style={{ color: 'white', fontFamily: 'Prompt-Regular', fontSize: 14 }}>
+                            <Text style={{ marginBottom: 20 }}>
+                                We offer end-to-end Turn Key solutions to Manufacturing companies to improve their manufacturing productivity in real time.
+                            </Text>
+                            <Text>
+                                We specialize in Lean manufacturing solutions, IOT (internet of things), AI (Artificial intelligence), Industry 4.0 and employees health and safety solutions.
+                            </Text>
+                        </Text>
+                    </LinearGradient>
+                </View>
+            </LinearGradient>
+        </ScrollView>
+    )
+}
 
-                    <Text style={[Styles.text, { marginTop: 15 }]}>
-                        We offer end-to-end Turn Key solutions to Manufacturing companies to
-                        improve their manufacturing productivity in real time.
-                    </Text>
-                </View>
-                <View style={{ alignItems: 'center', marginTop: '15%', marginBottom: 20, gap: 20 }}>
-                    <View>
-                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: "#003571" }}>geniusminds.ai</Text>
-                            <Text style={{ fontSize: 10, fontFamily: 'Poppins_SemiBold', alignSelf: 'flex-end', bottom: 13, marginLeft: 5, color: "#003571" }}>v1.0.1</Text>
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 7, fontFamily: 'Poppins_Regular' }}>Developed by  </Text>
-                            <Image
-                                source={{ uri: 'https://cdn-hipjp.nitrocdn.com/UVqClfNzszdreQcdMkVmNGxHoABDKrFo/assets/static/optimized/wp-content/uploads/2022/05/f283e8cf3d1b2793cdcdf6b4f2102c76.Softdesigners-logo.png' }}
-                                style={{
-                                    height: 30,
-                                    width: 80,
-                                    objectFit: 'contain'
-                                }}
-                            />
-                        </View>
-                    </View>
-                </View>
-                <View style={Styles.footer}>
-                    <Text style={{ fontSize: 10 }}>Genius Minds 2024 from © www.softdesigners.co.in</Text>
-                </View>
-            </ScrollView>
-        </View>
-    );
-};
-
-const Styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#CFEBFF',
-    },
-    text: {
-        fontSize: 14,
-        fontFamily: 'Poppins_Regular',
-        color: '#000',
-        fontWeight: '600',
-        marginHorizontal: 30,
-        textAlign: 'justify'
-    },
-    HeaderText: {
-        fontSize: 30,
-        fontFamily: 'Poppins',
-        color: '#000',
+const styles = StyleSheet.create({
+    aboutBox1: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: deviceWidth - 20,
+        padding: 10,
+        color: 'white',
+        borderWidth: 2,
+        borderColor: 'rgba(145, 186, 235, 0.9)',
+        borderRadius: 10,
         marginBottom: 10,
-        marginHorizontal: 15,
-        textAlign: 'center',
     },
-    icons: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    aboutBox2: {
         justifyContent: 'center',
-        gap: 25
-    },
-    icon: {
-    },
-    versionStyle: {
         alignItems: 'center',
-        justifyContent: 'center',
-        marginTop: 10
-
-    },
-    footer: {
-        flexDirection: 'row',
-        gap: 10,
-        justifyContent: 'center'
-    },
+        width: deviceWidth - 20,
+        padding: 10,
+        color: 'white',
+        borderWidth: 2,
+        borderColor: 'rgba(67, 166, 125, 0.9)',
+        borderRadius: 10,
+        marginBottom: 10,
+    }
 });

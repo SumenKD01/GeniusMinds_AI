@@ -61,7 +61,9 @@ export default Login = () => {
                 'SignikaNegative-Bold': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Bold.ttf'),
                 'SignikaNegative-Medium': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Medium.ttf'),
                 'SignikaNegative-Regular': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-Regular.ttf'),
-                'SignikaNegative-SemiBold': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-SemiBold.ttf')
+                'SignikaNegative-SemiBold': require('../../assets/fonts/Signika_Negative/static/SignikaNegative-SemiBold.ttf'),
+                'Righteous-Regular': require('../../assets/fonts/Righteous/Righteous-Regular.ttf'),
+                'Prompt-Regular': require('../../assets/fonts/Prompt/Prompt-Regular.ttf')
             });
             setFontLoaded(true);
         }

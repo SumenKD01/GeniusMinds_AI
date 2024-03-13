@@ -12,24 +12,66 @@ import ProgressGraph from '../components/Graphs/ProgressGraph';
 const width = Dimensions.get('window').width;
 
 export default Homepage = () => {
-    const apiGot = ""
-    // const [recentInspectionData, setRecentInspectionData] = useState([]);
+    const apiGot = "https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR";
+    const downloadLink = "https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=";
+    const [recentInspectionDataFromAPI, setRecentInspectionDataFromAPI] = useState([]);
     const recentInspectionData = require('../../assets/JSON/recentInspections.json');
     const [fontLoaded, setFontLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [showImageView, setShowImageView] = useState(false);
     const [imageToShow, setImageToShow] = useState();
     const [imageIndex, setImageIndex] = useState(0);
+    const jsonDataToPassInApi = {
+        PlantName: 'SEIPL,BLR',
+        FromDate: fromdate,
+        ToDate: todate,
+        OffsetRecords: '0',
+        NextRecords: '1000',
+    };
 
-    console.log("Data from JSON", recentInspectionData);
+    const currentDate = new Date();
+    const todate = getDateForAPI(currentDate, 'to');
+    const fromdate = getDateForAPI(currentDate, 'from');
+
+
+    function getDateForAPI(date, opt) {
+        if (opt === 'from') {
+            date.setFullYear(date.getFullYear() - 3);
+        }
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
+    }
+
+    function resultReport(dataGot, apiError) {
+        if (apiError) {
+            setIsLoading(false);
+            // setAPIError(true);
+            console.log("We have error guys!");
+        } else {
+            if (dataGot.length) {
+                dataGot = dataGot.reverse();
+                // setTotalRecords(dataGot.length);
+                console.log("From ApI", dataGot);
+                setRecentInspectionDataFromAPI(dataGot.slice(0, 20));
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+        }
+    }
+
+    // console.log("Data from JSON", recentInspectionData);
 
     const showImage = (data) => {
         setShowImageView(true);
-        console.log("data Got", data.Inspection_No);
-        let imageFoundAtIndex = recentInspectionData.findIndex(
-            (eachData, index) => (eachData.Inspection_No === data.Inspection_No)
+        console.log("data Got", data.fileName);
+        let imageFoundAtIndex = recentInspectionDataFromAPI.findIndex(
+            (eachData, index) => (eachData.fileName === data.fileName)
         );
         setImageIndex(imageFoundAtIndex);
-        setImageToShow(recentInspectionData[imageFoundAtIndex].Photo);
+        setImageToShow(recentInspectionDataFromAPI[imageFoundAtIndex].fileName);
     }
 
     let count = 1;
@@ -47,6 +89,7 @@ export default Homepage = () => {
             setFontLoaded(true);
         }
         loadFonts();
+        APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
     }, []);
 
     const GradientText = (props) => {
@@ -67,7 +110,6 @@ export default Homepage = () => {
             await SplashScreen.preventAutoHideAsync();
         }
         prepare();
-        APICall()
     }, []);
 
     return (
@@ -79,11 +121,6 @@ export default Homepage = () => {
                 end={{ x: -1, y: 0.5 }}
             >
                 <ScrollView contentContainerStyle={styles.HomeContent}>
-                    {/* <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Graph.png')} style={[styles.backIcons, { top: '40%', right: '20%' }]} />
-                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Day View.png')} style={[styles.backIcons, { left: '10%', bottom: '30%' }]} />
-                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Video Conference.png')} style={[styles.backIcons, { right: -12, bottom: '20%' }]} />
-                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Bar Chart.png')} style={[styles.backIcons, { right: -12, top: '20%' }]} />
-                    <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/Slice.png')} style={[styles.backIcons, { left: -20, top: '20%' }]} /> */}
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/ellipseBack.png')} style={{ right: -150, top: '20%', width: 400, height: 400, position: 'absolute', objectFit: 'contain' }} />
                     <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center' }}>
                         <View style={{ flex: 5, gap: -10 }}>
@@ -123,56 +160,56 @@ export default Homepage = () => {
                         <Text style={{ color: 'white', fontFamily: 'Poppins', fontSize: 20 }}>Recent Violations</Text>
                         <Image source={require('../../assets/icons/rightArrow.png')} style={{ width: 40, height: 40, borderRadius: 10 }} />
                     </View>
-                    <FlatList
-                        contentContainerStyle={styles.WorkPermitList}
-                        data={recentInspectionData}
-                        horizontal
-                        renderItem={(item, index = count) => {
-                            console.log(item.item.Photo, count++);
-                            return <TouchableOpacity onPress={() => showImage(item.item)}>
-                                <Image source={{ uri: item.item.Photo }} style={{ width: 125, height: 200, borderRadius: 10 }} />
-                                <Text style={{ color: 'white', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '100%', backgroundColor: 'rgba(52, 52, 52, 0.8)', textAlign: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>{item.item.Inspection_No}</Text>
-                            </TouchableOpacity>
-                        }
-                        }
-                    />
+                    {recentInspectionDataFromAPI.length ?
+                        <FlatList
+                            contentContainerStyle={styles.WorkPermitList}
+                            data={recentInspectionDataFromAPI}
+                            horizontal
+                            renderItem={(item, index = count) => {
+                                return <TouchableOpacity onPress={() => showImage(item.item)}>
+                                    <Image source={{
+                                        uri: downloadLink + item.item.fileName
+                                    }} style={{ width: 125, height: 200, borderRadius: 10 }} />
+                                    <Text style={{ color: 'white', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '100%', backgroundColor: 'rgba(52, 52, 52, 0.8)', textAlign: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>{item.item.cam_Serialno}</Text>
+                                </TouchableOpacity>
+                            }
+                            }
+                        /> :
+                        <Text>This is the Recent Inspection Data.</Text>
+                    }
                     <Modal style={{ flex: 1, width: '100%' }} visible={showImageView} onRequestClose={() => setShowImageView(false)}>
-                        {console.log("In Modal", recentInspectionData[imageIndex])}
-                        <Image source={{ uri: recentInspectionData[imageIndex].Photo ? recentInspectionData[imageIndex].Photo : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png' }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute' }} />
-                        <View style={{ zIndex: 4, flexDirection: 'row', justifyContent: 'space-between', gap: 5, padding: 5, bottom: 20 }}>
-                            {recentInspectionData.map((eachItem, index) => {
-                                if (index === imageIndex) {
-                                    return <Text style={{ borderBottomWidth: 2, borderColor: 'white', flex: 1 }}> </Text>
-                                } else {
-                                    return <Text style={{ borderBottomWidth: 2, borderColor: 'white', flex: 1, opacity: 0.2 }}> </Text>
-                                }
-                            })}
-                        </View>
-                        <View style={{ position: 'absolute', padding: 15, bottom: 0, backgroundColor: 'rgba(52, 52, 52, 0.5)', width: '100%' }}>
-                            <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionData[imageIndex].Inspection_No}</Text>
-                            <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionData[imageIndex].Result}</Text>
-                            <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionData[imageIndex].Stage}</Text>
-                            <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionData[imageIndex].Supervisor}</Text>
-                            <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionData[imageIndex]["Time_&_Date"]}</Text>
-                        </View>
-                        <View>
-                            <View style={{ flexDirection: 'row' }}>
-                                <TouchableOpacity style={{ width: '50%', height: 800, flex: 1, justifyContent: 'center', alignItems: 'flex-start' }} onPress={() => { imageIndex > 0 ? setImageIndex(imageIndex - 1) : console.log('no element') }}>
-                                    {imageIndex > 0 &&
-                                        <TouchableOpacity onPress={() => { setImageIndex(imageIndex - 1) }} style={{ padding: 10, bottom: 75 }}>
-                                            <Image source={require('../../assets/icons/BackTo.png')} style={{ width: 50, height: 50 }} />
-                                        </TouchableOpacity>
-                                    }
-                                </TouchableOpacity>
-                                <TouchableOpacity style={{ width: '50%', height: '100%', justifyContent: 'center', alignItems: 'flex-end' }} onPress={() => { imageIndex < (recentInspectionData.length - 1) ? setImageIndex(imageIndex + 1) : console.log('no element') }}>
-                                    {imageIndex < (recentInspectionData.length - 1) &&
-                                        <TouchableOpacity onPress={() => { setImageIndex(imageIndex + 1) }} style={{ padding: 10, bottom: 75 }}>
-                                            <Image source={require('../../assets/icons/NextPage.png')} style={{ width: 50, height: 50 }} />
-                                        </TouchableOpacity>
-                                    }
-                                </TouchableOpacity>
+                        {console.log("In Modal", recentInspectionDataFromAPI, imageIndex)}
+                        {recentInspectionDataFromAPI[imageIndex] ?
+                            <View>
+                                {console.log("Image Viewer - Image Selected")}
+                                <Image source={{ uri: (recentInspectionDataFromAPI[imageIndex].fileName) ? (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png' }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute' }} />
+                                <View style={{ position: 'absolute', padding: 15, bottom: 0, backgroundColor: 'rgba(52, 52, 52, 0.5)', width: '100%' }}>
+                                    <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].cam_Serialno}</Text>
+                                    <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].fileName}</Text>
+                                    <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].violations}</Text>
+                                    <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].serial_no}</Text>
+                                    <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex]["creation_Datetime"]}</Text>
+                                </View>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <TouchableOpacity style={{ width: '50%', height: 800, flex: 1, justifyContent: 'center', alignItems: 'flex-start' }} onPress={() => { imageIndex > 0 ? setImageIndex(imageIndex - 1) : console.log('no element') }}>
+                                        {imageIndex > 0 &&
+                                            <TouchableOpacity onPress={() => { setImageIndex(imageIndex - 1) }} style={{ padding: 10, bottom: 75 }}>
+                                                <Image source={require('../../assets/icons/BackTo.png')} style={{ width: 50, height: 50 }} />
+                                            </TouchableOpacity>
+                                        }
+                                    </TouchableOpacity>
+                                    <TouchableOpacity style={{ width: '50%', height: '100%', justifyContent: 'center', alignItems: 'flex-end' }} onPress={() => { imageIndex < (recentInspectionData.length - 1) ? setImageIndex(imageIndex + 1) : console.log('no element') }}>
+                                        {imageIndex < (recentInspectionData.length - 1) &&
+                                            <TouchableOpacity onPress={() => { setImageIndex(imageIndex + 1) }} style={{ padding: 10, bottom: 75 }}>
+                                                <Image source={require('../../assets/icons/NextPage.png')} style={{ width: 50, height: 50 }} />
+                                            </TouchableOpacity>
+                                        }
+                                    </TouchableOpacity>
+                                </View>
                             </View>
-                        </View>
+                            :
+                            <Text>This is the Recent Inspection Data.</Text>
+                        }
                     </Modal>
                 </ScrollView>
             </LinearGradient>

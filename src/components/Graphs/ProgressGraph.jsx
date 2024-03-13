@@ -30,7 +30,7 @@ const ProgressGraph = () => {
       setIsLoading(false);
       setAPIError(true);
     } else {
-      console.log('StackData', dataGot);
+      // console.log('StackData', dataGot);
       let i = 1;
       let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
       let newDataMap = Object.keys(dataGot).map((eachItem) => {
@@ -42,7 +42,7 @@ const ProgressGraph = () => {
         }
       });
       setIsLoading(false);
-      console.log("Data Made", newDataMap);
+      // console.log("Data Made", newDataMap);
       setData(newDataMap);
     }
   }
@@ -52,15 +52,14 @@ const ProgressGraph = () => {
       setIsLoading(false);
       setAPIError(true);
     } else {
-      console.log('StackData Daily', dataGot);
+      // console.log('StackData Daily', dataGot);
       let i = 1;
       let newDataMap = Object.keys(dataGot).map((eachItem) => {
         return
         { value: dataGot[i + ""] }
       });
       setIsLoading(false);
-      console.log("Data Made", newDataMap);
-      // setData(newDataMap);
+      // console.log("Data Made", newDataMap);
     }
   }
 
