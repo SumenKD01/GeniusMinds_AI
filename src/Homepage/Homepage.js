@@ -15,6 +15,8 @@ export default Homepage = () => {
     const apiGot = ""
     // const [recentInspectionData, setRecentInspectionData] = useState([]);
     const recentInspectionData = require('../../assets/JSON/recentInspections.json');
+    const [dashBoardData,setDashBoardData]=useState([]);
+    const [apiError, setAPIError] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
     const [showImageView, setShowImageView] = useState(false);
     const [imageToShow, setImageToShow] = useState();
@@ -70,6 +72,29 @@ export default Homepage = () => {
         APICall()
     }, []);
 
+    const dashBoardApi = "https://androidapi220230605081325.azurewebsites.net/api/approval/GetViolationCnt?PlantName=SEIPL,BLR"
+	const dashBoardJsonDataToPassInApi = {
+    PlantName: 'SEIPL,BLR',
+	};
+
+	function dashBoardApiResultReport(dataGot, apiError) {
+		if (apiError) {
+			setIsLoading(false);
+			setAPIError(true);
+		} else {
+			if (dataGot) {
+				setDashBoardData(dataGot);
+				setIsLoading(false);
+			} else {
+				setIsLoading(false);
+			}
+		}
+	}
+	useEffect(() => {
+		APICall(dashBoardApi, dashBoardJsonDataToPassInApi, dashBoardApiResultReport, 'getReportForChart');
+	}, []);
+    console.log('DasHknnkc cns c sn',dashBoardData);
+
     return (
         <View style={styles.container}>
             <LinearGradient
@@ -88,20 +113,20 @@ export default Homepage = () => {
                     <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center' }}>
                         <View style={{ flex: 5, gap: -10 }}>
                             <Image source={require('../../assets/icons/frame4.png')} style={{ position: 'absolute', width: '100%', height: 150, borderRadius: 20 }} />
-                            <Text style={{ color: '#0E6578', fontSize: 50, fontFamily: 'Poppins_SemiBold', paddingLeft: 10, top: 20 }}>45</Text>
+                            <Text style={{ color: '#0E6578', fontSize: 50, fontFamily: 'Poppins_SemiBold', paddingLeft: 10, top: 20 }}>{dashBoardData.dailyCnt}</Text>
                             <Text style={{ color: '#0A3944', fontSize: 15, fontFamily: 'Poppins_Regular', paddingLeft: 10, top: 20 }}>Today's Violations</Text>
                             <Image source={require('../../assets/icons/frame7.png')} style={{ position: 'absolute', height: 35, width: '100%', borderRadius: 20, right: -40, top: 10, objectFit: 'contain' }} />
                         </View>
                         <View style={{ flex: 6, gap: 16 }}>
                             <View style={{ gap: -10, paddingTop: 10 }}>
                                 <Image source={require('../../assets/icons/frame5.png')} style={{ position: 'absolute', flex: 1, height: 70, width: '100%', borderRadius: 20 }} />
-                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>115</Text>
+                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.monthCnt}</Text>
                                 <Text style={{ color: '#0A3944', fontSize: 12.5, fontFamily: 'Poppins_Regular', paddingLeft: 15 }}>This Month Violations</Text>
                                 <Image source={require('../../assets/icons/frame8.png')} style={{ position: 'absolute', height: 30, borderRadius: 20, width: '100%', right: -55, top: 5, objectFit: 'contain' }} />
                             </View>
                             <View style={{ gap: -10, paddingTop: 10 }}>
                                 <Image source={require('../../assets/icons/frame5.png')} style={{ position: 'absolute', flex: 1, height: 70, width: '100%', borderRadius: 20 }} />
-                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>245</Text>
+                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.dailyCnt}</Text>
                                 <Text style={{ color: '#0A3944', fontSize: 12.5, fontFamily: 'Poppins_Regular', paddingLeft: 15 }}>Total Violations</Text>
                                 <Image source={require('../../assets/icons/frame9.png')} style={{ position: 'absolute', height: 30, width: '100%', borderRadius: 20, right: -55, top: 5, objectFit: 'contain' }} />
                             </View>

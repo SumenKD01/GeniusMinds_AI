@@ -1,21 +1,36 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
-import { BarChart, PieChart,LineChart } from 'react-native-gifted-charts';
+import { BarChart, LineChartBicolor, PieChart, LineChart } from 'react-native-gifted-charts';
 
 const ProgressGraph = () => {
   const [data, setData] = useState([]);
+  const [dataDaily, setDataDaily] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [apiError, setAPIError] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
+  const currentDate=new Date();
+  
+  console.log(currentDate.getMonth()+1,'hdvhidfsjlbvkjofhsklvj');
 
   const apiGot =
     'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetMonthlyViolation';
+  const apiDaily =
+    'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetDailyViolation';
+
+
+
   const jsonDataToPassInApi = {
     PlantName: 'SEIPL,BLR',
     Year: '2024'
   };
 
-  function resultReport(dataGot, apiError) {
+  const jsonDataToPassInDaily = {
+    "PlantName": "SEIPL,BLR",
+    "Year": "2024",
+    "Month": currentDate.getMonth()+1+""
+  };
+
+  function resultReportMonthly(dataGot, apiError) {
     if (apiError) {
       setIsLoading(false);
       setAPIError(true);
@@ -36,229 +51,123 @@ const ProgressGraph = () => {
       setData(newDataMap);
     }
   }
+
+  function resultReportDaily(dataGot, apiError) {
+    if (apiError) {
+      setIsLoading(false);
+      setAPIError(true);
+    } else {
+      console.log('StackData Daily', dataGot);
+  
+
+      let i = 1;
+     
+      let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      let newDataMap = Object.keys(dataGot).map((eachItem) => {
+        return {
+           value: dataGot[eachItem],
+           date: `${eachItem} ${months[currentDate.getMonth()]}`
+      
+      }
+      });
+      setIsLoading(false);
+      console.log("Data Made In Monthly", newDataMap);
+      setDataDaily(newDataMap);
+    }
+  }
+
   useEffect(() => {
-    APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReportForChart');
+    APICall(apiGot, jsonDataToPassInApi, resultReportMonthly, 'getReportForChart');
+    APICall(apiDaily, jsonDataToPassInDaily, resultReportDaily, 'getReportForChart');
+
   }, [refreshing]);
 
   const barData = [{ value: 15 }, { value: 30 }, { value: 26 }, { value: 40 }];
-  const pieData = [
+  const pieData  = [
     { value: 54, color: '#177AD5', text: '54%' },
     { value: 40, color: '#79D2DE', text: '30%' },
     { value: 20, color: '#ED6665', text: '26%' },
   ];
-  const stackData1 = [
-    {
-      stacks: [
-        { value: 8, color: 'orange' },
-      ],
-      label: 'Jan',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' },
-      ],
-      label: 'Feb',
-    },
-    {
-      stacks: [
-        { value: 14, color: 'orange' },
-      ],
-      label: 'Mar',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' },
-      ],
-      label: 'Apr',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'May',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'Jun',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'July',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'August',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'September',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'October',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'November',
-    },
-    {
-      stacks: [
-        { value: 7, color: 'orange' }
-      ],
-      label: 'December',
-    },
-  ];
 
-  const ptData = [
-    {value: 160, date: '1 Apr 2022'},
-    {value: 180, date: '2 Apr 2022'},
-    {value: 190, date: '3 Apr 2022'},
-    {value: 180, date: '4 Apr 2022'},
-    {value: 140, date: '5 Apr 2022'},
-    {value: 145, date: '6 Apr 2022'},
-    {value: 160, date: '7 Apr 2022'},
-    {value: 200, date: '8 Apr 2022'},
-  
-    {value: 220, date: '9 Apr 2022'},
+  const dailyDataTest = [
+    { value: 160, date: '1 Mar 2024' },
+    { value: 180, date: '2 Mar 2024' },
+    { value: 190, date: '3 Mar 2024' },
+    { value: 180, date: '4 Mar 2024' },
+    { value: 140, date: '5 Mar 2024',    label: '05 Mar',
+    labelTextStyle: { color: '#000', width: 60 }, },
+    { value: 145, date: '6 Mar 2024' },
+    { value: 160, date: '7 Mar 2024' },
+    { value: 200, date: '8 Mar 2024' },
+
+    { value: 220, date: '9 Mar 2024' },
     {
       value: 240,
-      date: '10 Apr 2022',
-      label: '10 Apr',
-      labelTextStyle: {color: 'lightgray', width: 60},
+      date: '10 Mar 2024',
+      labelTextStyle: { color: '#000', width: 60 },
+      label: '10 Mar',
+      
     },
-    {value: 280, date: '11 Apr 2022'},
-    {value: 260, date: '12 Apr 2022'},
-    {value: 340, date: '13 Apr 2022'},
-    {value: 385, date: '14 Apr 2022'},
-    {value: 280, date: '15 Apr 2022'},
-    {value: 390, date: '16 Apr 2022'},
-  
-    {value: 370, date: '17 Apr 2022'},
-    {value: 285, date: '18 Apr 2022'},
-    {value: 295, date: '19 Apr 2022'},
+    { value: 280, date: '11 Mar 2024' },
+    { value: 340, date: '13 Mar 2024' },
+    { value: 260, date: '12 Mar 2024' },
+    { value: 385, date: '14 Mar 2024' },
+    { value: 280, date: '15 Mar 2024',    label: '15 Mar',
+    labelTextStyle: { color: '#000', width: 60 }, },
+    { value: 390, date: '16 Mar 2024' },
+
+    { value: 370, date: '17 Mar 2024' },
+    { value: 285, date: '18 Mar 2024' },
+    { value: 295, date: '19 Mar 2024' },
     {
       value: 300,
-      date: '20 Apr 2022',
-      label: '20 Apr',
-      labelTextStyle: {color: 'lightgray', width: 60},
+      date: '20 Mar 2024',
+      label: '20 Mar',
+      labelTextStyle: { color: '#000', width: 60 },
     },
-    {value: 280, date: '21 Apr 2022'},
-    {value: 295, date: '22 Apr 2022'},
-    {value: 260, date: '23 Apr 2022'},
-    {value: 255, date: '24 Apr 2022'},
-  
-    {value: 190, date: '25 Apr 2022'},
-    {value: 220, date: '26 Apr 2022'},
-    {value: 205, date: '27 Apr 2022'},
-    {value: 230, date: '28 Apr 2022'},
-    {value: 210, date: '29 Apr 2022'},
+    { value: 280, date: '21 Mar 2024' },
+    { value: 295, date: '22 Mar 2024' },
+    { value: 260, date: '23 Mar 2024' },
+    { value: 255, date: '24 Mar 2024' },
+
+    { value: 190, date: '25 Mar 2024',    label: '25 Mar',
+    labelTextStyle: { color: '#000', width: 60 }, },
+    { value: 220, date: '26 Mar 2024' },
+    { value: 205, date: '27 Mar 2024' },
+    { value: 230, date: '28Mar 2024' },
+    { value: 210, date: '29Marr 2024' },
     {
       value: 200,
-      date: '30 Apr 2022',
-      label: '30 Apr',
-      labelTextStyle: {color: 'lightgray', width: 60},
+      date: '30 Mar 2024',
+      label: '30 Mar',
+      labelTextStyle: { color: '#000', width: 60 },
     },
-    {value: 240, date: '1 May 2022'},
-    {value: 250, date: '2 May 2022'},
-    {value: 280, date: '3 May 2022'},
-    {value: 250, date: '4 May 2022'},
-    {value: 210, date: '5 May 2022'},
+    { value: 240, date: '1 Apr 2024' },
+    { value: 250, date: '2 Apr 2024' },
+    { value: 280, date: '3 Apr 2024' },
+    { value: 250, date: '4 Apr 2024' },
+    { value: 210, date: '5 Apr 2024' },
   ];
 
 
-  const points = [
-    {
-      date: new Date('2024-01-01'),
-      value: 100,
-    },
-    {
-      date: new Date('2024-01-03'),
-      value: 150,
-    },
-    {
-      date: new Date('2024-02-04'),
-      value: 10,
-    },
-    {
-      date: new Date('204-01-05'),
-      value: 5,
-    },
-    {
-      date: new Date('2024-01-06'),
-      value: 50,
-    },
-    {
-      date: new Date('2024-01-07'),
-      value: 70,
-    },
-    {
-      date: new Date('2024-01-08'),
-      value: 10,
-    },
-    {
-      date: new Date('2024-01-09'),
-      value: 25,
-    },
-    {
-      date: new Date('2024-01-10'),
-      value: 100,
-    },
-    {
-      date: new Date('2024-01-11'),
-      value: 150,
-    },
-    {
-      date: new Date('2024-02-12'),
-      value: 10,
-    },
-    {
-      date: new Date('204-01-13'),
-      value: 5,
-    },
-    {
-      date: new Date('2024-01-14'),
-      value: 50,
-    },
-    {
-      date: new Date('2024-01-15'),
-      value: 70,
-    },
-    {
-      date: new Date('2024-01-16'),
-      value: 10,
-    },
-    {
-      date: new Date('2024-01-17'),
-      value: 25,
-    },
-  ]
+
+
 
   return (
     <View style={{ gap: 20 }}>
       <View style={styles.container}>
-        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violation</Text>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violations</Text>
         <BarChart
-          width={240}
+          width={282}
           barWidth={25}
-          noOfSections={6}
+          noOfSections={10}
           stackData={data}
           dashWidth={'0.5'}
+      
         />
       </View>
-      <View style={styles.container}>
-        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violation</Text>
+      {/* <View style={styles.container}>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Top 3 Violations</Text>
         <PieChart
           showText
           textColor="black"
@@ -269,45 +178,42 @@ const ProgressGraph = () => {
           textBackgroundRadius={20}
           data={pieData}
         />
-      </View>
-      <View
-      style={{
-        paddingVertical: 100,
-        paddingLeft: 20,
-        backgroundColor: '#1C1C1C',
-      }}>
-          <LineChart
+      </View> */}
+      <View style={styles.container}>
+        <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Daily Violations</Text>
+        <LineChart
           areaChart
-          data={ptData}
+          data={dataDaily}
           rotateLabel
-          width={260}
-          hideDataPoints
+          width={300}
+          height={270}
           spacing={10}
-          color="#00ff83"
+          color="#00ff83ff"
           thickness={2}
-          startFillColor="rgba(20,105,81,0.3)"
+          hideDataPoints
+          startFillColor="rgba(20,95,81,0.3)"
           endFillColor="rgba(20,85,81,0.01)"
           startOpacity={0.9}
           endOpacity={0.2}
           initialSpacing={0}
           noOfSections={6}
-          maxValue={600}
-          yAxisColor="white"
-          yAxisThickness={0}
+          maxValue={10}
+          yAxisColor="#000"
+          yAxisThickness={2}
           rulesType="solid"
           rulesColor="gray"
-          yAxisTextStyle={{color: 'gray'}}
+          yAxisTextStyle={{color: '#000'}}
           yAxisSide='right'
-          xAxisColor="lightgray"
+          xAxisColor='#000'
           pointerConfig={{
             pointerStripHeight: 160,
             pointerStripColor: 'lightgray',
             pointerStripWidth: 2,
-            pointerColor: 'lightgray',
-            radius: 6,
+            pointerColor: '#000',
+            radius: 2,
             pointerLabelWidth: 100,
             pointerLabelHeight: 90,
-            activatePointersOnLongPress: true,
+            activatePointersOnLongPress: false,
             autoAdjustPointerLabelPosition: false,
             pointerLabelComponent: items => {
               return (
@@ -325,7 +231,7 @@ const ProgressGraph = () => {
   
                   <View style={{paddingHorizontal:14,paddingVertical:6, borderRadius:16, backgroundColor:'white'}}>
                     <Text style={{fontWeight: 'bold',textAlign:'center'}}>
-                      {'$' + items[0].value + '.0'}
+                      {items[0].value}
                     </Text>
                   </View>
                 </View>
@@ -333,8 +239,11 @@ const ProgressGraph = () => {
             },
           }}
         />
- </View>
+      </View>
+
     </View>
+
+
   )
 }
 
@@ -345,8 +254,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(108,255,220,0.5)',
     borderRadius: 5,
     paddingVertical: 10,
-    paddingBottom: 20,
-    paddingLeft: 10
+    paddingBottom: 40,
+    paddingLeft:5,
+    paddingRight: 30
   },
 
 })

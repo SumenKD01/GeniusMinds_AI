@@ -9,8 +9,6 @@ import {
 } from 'react-native';
 import React from 'react';
 
-const pathName = '../../assets/icons/';
-
 export default AboutUs = () => {
     return (
         <View style={Styles.container}>
@@ -33,92 +31,27 @@ export default AboutUs = () => {
                         improve their manufacturing productivity in real time.
                     </Text>
                 </View>
-                <View style={{ marginTop: 50 }}>
-                    <Text style={{ fontFamily: 'Poppins_Regular', left: 45, padding: 10 }}>Follow us:</Text>
-                    <View style={Styles.icons}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                Linking.openURL('https://www.softdesigners.co.in/');
-                            }}
-                            style={Styles.icon}
-                        >
+                <View style={{ alignItems: 'center', marginTop: '15%', marginBottom: 20, gap: 20 }}>
+                    <View>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: "#003571" }}>geniusminds.ai</Text>
+                            <Text style={{ fontSize: 10, fontFamily: 'Poppins_SemiBold', alignSelf: 'flex-end', bottom: 13, marginLeft: 5, color: "#003571" }}>v1.0.1</Text>
+                        </View>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 7, fontFamily: 'Poppins_Regular' }}>Developed by  </Text>
                             <Image
-                                style={Styles.socialIcons}
-                                source={require(pathName + 'web.png')}
+                                source={{ uri: 'https://cdn-hipjp.nitrocdn.com/UVqClfNzszdreQcdMkVmNGxHoABDKrFo/assets/static/optimized/wp-content/uploads/2022/05/f283e8cf3d1b2793cdcdf6b4f2102c76.Softdesigners-logo.png' }}
+                                style={{
+                                    height: 30,
+                                    width: 80,
+                                    objectFit: 'contain'
+                                }}
                             />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                Linking.openURL(
-                                    'https://www.linkedin.com/company/soft-designers/'
-                                );
-                            }}
-                            style={Styles.icon}
-                        >
-                            <Image
-                                style={Styles.socialIcons}
-                                source={require(pathName + 'linkedin.png')}
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                Linking.openURL('https://twitter.com/Soft_Designers');
-                            }}
-                            style={Styles.icon}
-                        >
-                            <Image
-                                style={Styles.socialIcons}
-                                source={require(pathName + 'twitter.png')}
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            style={Styles.icon}
-                            onPress={() => {
-                                Linking.openURL(
-                                    'https://www.facebook.com/profile.php?id=100070417177410'
-                                );
-                            }}
-                        >
-                            <Image
-                                style={Styles.socialIcons}
-                                source={require(pathName + 'facebook.png')}
-                            />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => {
-                                Linking.openURL(
-                                    'https://www.youtube.com/channel/UClMeyBKaflniVzbXL-wnV3g'
-                                );
-                            }}
-                        >
-                            <Image
-                                style={Styles.socialIcons}
-                                source={require(pathName + 'youtube.png')}
-                            />
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ alignItems: 'center', marginTop: '15%', marginBottom: 20, gap: 20 }}>
-                        <View>
-                            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 30, fontFamily: 'Poppins', color: "#003571" }}>EFFICIO</Text>
-                                <Text style={{ fontSize: 10, fontFamily: 'Poppins_SemiBold', alignSelf: 'flex-end', bottom: 13, marginLeft: 5, color: "#003571" }}>v1.0.1</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontSize: 7, fontFamily: 'Poppins_Regular' }}>Developed by  </Text>
-                                <Image
-                                    source={{ uri: 'https://cdn-hipjp.nitrocdn.com/UVqClfNzszdreQcdMkVmNGxHoABDKrFo/assets/static/optimized/wp-content/uploads/2022/05/f283e8cf3d1b2793cdcdf6b4f2102c76.Softdesigners-logo.png' }}
-                                    style={{
-                                        height: 30,
-                                        width: 80,
-                                        objectFit: 'contain'
-                                    }}
-                                />
-                            </View>
                         </View>
                     </View>
-                    <View style={Styles.footer}>
-                        <Text style={{ fontSize: 10 }}>Efficio 2023 from © www.softdesigners.co.in</Text>
-                    </View>
+                </View>
+                <View style={Styles.footer}>
+                    <Text style={{ fontSize: 10 }}>Genius Minds 2024 from © www.softdesigners.co.in</Text>
                 </View>
             </ScrollView>
         </View>
@@ -160,13 +93,9 @@ const Styles = StyleSheet.create({
         marginTop: 10
 
     },
-    socialIcons: {
-        width: 30,
-        height: 30
-    },
     footer: {
         flexDirection: 'row',
         gap: 10,
         justifyContent: 'center'
-    }
+    },
 });
