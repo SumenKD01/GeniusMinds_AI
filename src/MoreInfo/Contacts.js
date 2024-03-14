@@ -10,8 +10,8 @@ export default Contacts = () => {
     return (
         <LinearGradient colors={['#000C18', '#001E3E']}
             style={{ flex: 1, alignItems: 'center' }}>
-            <Image style={{ position: "absolute", top: -deviceHeight * 0.75 , width: deviceWidth * 0.90, left: 0, objectFit: "contain" }} source={require('../../assets/icons/ContactbackImage.png')} />
-            <Image style={{ position: "absolute", bottom: -deviceHeight * 0.60, right: 0 , width: deviceWidth*0.90, objectFit: "contain" }} source={require('../../assets/icons/ContactUsBackImage.png')} />
+            <Image style={{ position: "absolute", top: -deviceHeight * 0.75, width: deviceWidth * 0.90, left: 0, objectFit: "contain" }} source={require('../../assets/icons/ContactbackImage.png')} />
+            <Image style={{ position: "absolute", bottom: -deviceHeight * 0.60, right: 0, width: deviceWidth * 0.90, objectFit: "contain" }} source={require('../../assets/icons/ContactUsBackImage.png')} />
             <View style={{ display: 'flex', alignItems: 'center' }}>
                 <Text style={{ color: 'white', fontSize: 30, marginTop: 50, marginBottom: 20, fontFamily: 'SignikaNegative-Bold' }}>Contact us</Text>
                 <Image style={styles.mailimg} source={require('../../assets/icons/emailIcon.png')} />

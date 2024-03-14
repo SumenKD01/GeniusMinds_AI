@@ -26,7 +26,7 @@ export default AboutUs = () => {
                             What we are?
                         </Text>
                         <Text style={{ color: 'white', fontFamily: 'Prompt-Regular', fontSize: 14 }}>
-                            SoftDesigners are the leaders in Lean Manufacturing & Industry 4.0 Solutions in India and we had done projects across different parts of the world.
+                            SoftDesigners are    the leaders in Lean Manufacturing & Industry 4.0 Solutions in India and we had done projects across different parts of the world.
                         </Text>
                     </LinearGradient>
                 </View>

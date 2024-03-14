@@ -3,9 +3,8 @@ import { Text, View, Modal, TouchableOpacity, Linking } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Avatar } from "react-native-paper";
 import * as Animatable from 'react-native-animatable';
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 
 const width = Dimensions.get('window').width;
@@ -65,7 +64,7 @@ export default SideMenu = () => {
                     </TouchableOpacity>
                     <View style={styles.footer}>
                         <View style={{ alignItems: 'center', marginTop: '10%', marginBottom: 50, gap: 20 }}>
-                            <View style={{ gap:  0 }}>
+                            <View style={{ gap: 0 }}>
                                 <Image source={require('../../assets/icons/menuLogo.png')} style={{ height: 50, width: 200, objectFit: 'contain' }} />
                                 <View style={{ flexDirection: 'row', bottom: 0, width: '100%', alignItems: 'center', gap: 5, justifyContent: 'center', opacity: 0.7 }}>
                                     <Text style={{ fontFamily: 'Poppins_Regular', fontSize: (width / 40), color: 'white' }}>Developed by</Text>
@@ -76,7 +75,7 @@ export default SideMenu = () => {
                         <TouchableOpacity onPress={() => {
                             Linking.openURL('https://www.privacypolicies.com/live/5a4ffcb1-ca15-4be1-bd6e-882f412f6967');
                         }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>Terms & Privacy</Text>
+                            <Text style={{ color: 'white', fontSize: 10 }}>Terms    &   Privacy</Text>
 
                         </TouchableOpacity>
                         <Text style={{ fontSize: 7, color: 'white', marginTop: 5 }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text>
