@@ -16,7 +16,7 @@ export default Homepage = () => {
     const downloadLink = "https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=";
     const [recentInspectionDataFromAPI, setRecentInspectionDataFromAPI] = useState([]);
     const recentInspectionData = require('../../assets/JSON/recentInspections.json');
-    const [dashBoardData,setDashBoardData]=useState([]);
+    const [dashBoardData, setDashBoardData] = useState([]);
     const [apiError, setAPIError] = useState(false);
     const [fontLoaded, setFontLoaded] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -115,27 +115,27 @@ export default Homepage = () => {
     }, []);
 
     const dashBoardApi = "https://androidapi220230605081325.azurewebsites.net/api/approval/GetViolationCnt?PlantName=SEIPL,BLR"
-	const dashBoardJsonDataToPassInApi = {
-    PlantName: 'SEIPL,BLR',
-	};
+    const dashBoardJsonDataToPassInApi = {
+        PlantName: 'SEIPL,BLR',
+    };
 
-	function dashBoardApiResultReport(dataGot, apiError) {
-		if (apiError) {
-			setIsLoading(false);
-			setAPIError(true);
-		} else {
-			if (dataGot) {
-				setDashBoardData(dataGot);
-				setIsLoading(false);
-			} else {
-				setIsLoading(false);
-			}
-		}
-	}
-	useEffect(() => {
-		APICall(dashBoardApi, dashBoardJsonDataToPassInApi, dashBoardApiResultReport, 'getReportForChart');
-	}, []);
-    console.log('DasHknnkc cns c sn',dashBoardData);
+    function dashBoardApiResultReport(dataGot, apiError) {
+        if (apiError) {
+            setIsLoading(false);
+            setAPIError(true);
+        } else {
+            if (dataGot) {
+                setDashBoardData(dataGot);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+            }
+        }
+    }
+    useEffect(() => {
+        APICall(dashBoardApi, dashBoardJsonDataToPassInApi, dashBoardApiResultReport, 'getReportForChart');
+    }, []);
+    console.log('DasHknnkc cns c sn', dashBoardData);
 
     return (
         <View style={styles.container}>
@@ -176,17 +176,18 @@ export default Homepage = () => {
                                 <Text style={{ color: 'white', fontSize: 12, opacity: 0.5, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
                             </View>
                             <View>
-                                <Image  source={{
-          uri:  'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=AutoLine.png',
-        }} style={{ width: 35, height: 35 }} />
+                                <Image source={{
+                                    uri: 'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=AutoLine.png',
+                                }} style={{ width: 35, height: 35 }} />
                             </View>
                         </LinearGradient>
                     </TouchableOpacity>
                     <ProgressGraph />
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingHorizontal: 10 }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingHorizontal: 10, marginTop: 30, marginBottom: 10 }}>
                         <Text style={{ color: 'white', fontFamily: 'Poppins', fontSize: 20 }}>Recent Violations</Text>
                         <Image source={require('../../assets/icons/rightArrow.png')} style={{ width: 40, height: 40, borderRadius: 10 }} />
                     </View>
+
                     {recentInspectionDataFromAPI.length ?
                         <FlatList
                             contentContainerStyle={styles.WorkPermitList}

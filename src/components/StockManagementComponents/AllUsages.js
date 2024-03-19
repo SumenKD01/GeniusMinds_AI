@@ -1,10 +1,13 @@
 import {
 	ActivityIndicator,
+	Dimensions,
 	FlatList,
 	Image,
 	RefreshControl,
+	StatusBar,
 	StyleSheet,
 	Text,
+	TextInput,
 	TouchableOpacity,
 	View,
 } from 'react-native';
@@ -16,7 +19,11 @@ import APICall from '../../utils/APICall';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../utils/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Animatable from 'react-native-animatable';
 
+const deviceWidth = Dimensions.get('window').width;
+const deviceHeight = Dimensions.get('window').height;
 
 export default AllUsages = () => {
 	const [usageFormModalView, setUsageFormModalView] = useState(false);
@@ -118,11 +125,51 @@ export default AllUsages = () => {
 	}, [refreshing, firstDataToDisplay, nextRecords]);
 
 	return (
-		<View>
+		<SafeAreaView style={{ paddingTop: -50, flex: 1 }}>
 			<LinearGradient colors={['#000C18', '#001E3E']} style={styles.UsageBody}>
+				<LinearGradient colors={['rgba(49, 81, 111, 0.5)', 'rgba(9, 42, 73, 0.5)']}
+					start={{ x: 0.0, y: 0.25 }}
+					end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
+					style={{ width: '100%', alignItems: 'center', position: 'absolute', top: 0 }}>
+					<View style={{ flexDirection: 'row', alignItems: "center", width: '100%', paddingHorizontal: 7, paddingTop: 15 }}>
+						<View style={{ flex: 8, backgroundColor: 'rgba(255, 255, 255, 0.5)', paddingHorizontal: 20, paddingVertical: 5, borderRadius: 50, flexDirection: "row", gap: 10, alignItems: "center" }}>
+							<Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/SearchWhite.png')} />
+							<TextInput
+								placeholder="Search camera serial number"
+								placeholderTextColor={'rgba(232, 232, 232, 1)'}
+							>
+							</TextInput>
+						</View>
+						<Image style={{ flex: 1, width: 30, height: 30 }} source={require('../../../assets/icons/filter.png')} />
+					</View>
+					<View style={{ flexDirection: 'row', gap: 10, marginTop: 10, marginBottom: 15 }}>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+							<Text style={{ color: '#FFFFFF' }}>Today</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+							<Text style={{ color: '#FFFFFF' }}>This Week</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+							<Text style={{ color: '#FFFFFF' }}>This Month</Text>
+						</TouchableOpacity>
+						<TouchableOpacity style={{ backgroundColor: 'yelrgba(255, 255, 255, 0.5)low', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+							<Text style={{ color: '#FFFFFF' }}>This Year</Text>
+						</TouchableOpacity>
+					</View>
+				</LinearGradient>
 				{isLoading ? (
 					<View style={styles.errorPage}>
-						<ActivityIndicator size='large' color={Colors.darkBlue} />
+						{console.log("I am at loader Section.")}
+						{/* <ActivityIndicator size='large' color={Colors.darkBlue} /> */}
+						<View style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(160, 217, 251, 0.5)', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
+							<View style={{ width: 125, height: 125, borderRadius: 100, overflow: 'hidden', borderWidth: 2, borderColor: 'rgba(254, 254, 254, 0.9)', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+								<Image
+									source={require('../../../assets/icons/loader.gif')}
+									style={{ width: 100, height: 150, objectFit: 'contain', right: 5, bottom: 10 }}
+								/>
+								<Animatable.Image animation={'slideInLeft'} duration={2000} direction="alternate" iterationCount={'infinite'} source={require('../../../assets/icons/SeaImage.png')} style={{ width: '200%', height: 250, position: 'absolute', zIndex: 0, bottom: 0, left: '-10%', opacity: 0.5 }} />
+							</View>
+						</View>
 					</View>
 				) : apiError ? (
 					<View style={styles.errorPage}>
@@ -133,7 +180,7 @@ export default AllUsages = () => {
 						<Text style={styles.errorPageText}>{'Internal Server Error!'}</Text>
 					</View>
 				) : data.length ? (
-					<View>
+					<View style={{ paddingHorizontal: 10, paddingTop: 120 }}>
 						<FlatList
 							data={data}
 							ref={flatListRef}
@@ -201,19 +248,22 @@ export default AllUsages = () => {
 					isVisible={usageFormModalView}
 					onClose={usageFormClose}
 				/>
+				<Image
+					source={require('../../../assets/icons/ReportBackImage.png')}
+					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute' }}
+				/>
 			</LinearGradient>
-		</View>
+			<StatusBar backgroundColor={'rgba(0, 0, 0, 1)'} barStyle={'light-content'} />
+		</SafeAreaView>
 	);
 };
 
 const styles = StyleSheet.create({
 	UsageBody: {
-		gap: 10,
-		paddingHorizontal: 10,
-		paddingTop: 10
+		gap: 10
 	},
 	UsageDisplayBody: {
-		paddingBottom: 380,
+		paddingBottom: deviceHeight - 300,
 		gap: 10
 	},
 	UsageButtons: {
@@ -266,8 +316,9 @@ const styles = StyleSheet.create({
 		top: -21,
 	},
 	errorIcon: {
-		height: 150,
-		width: 150,
+		height: 110,
+		width: 110,
+		marginBottom: 10
 	},
 	noMoreDataDisplay: {
 		color: Colors.gray,
@@ -291,15 +342,16 @@ const styles = StyleSheet.create({
 		width: 20,
 	},
 	errorPage: {
-		height: 600,
+		height: 700,
 		width: '100%',
 		alignItems: 'center',
-		justifyContent: 'center',
-		position: 'absolute',
+		justifyContent: 'center'
 	},
 	errorPageText: {
-		fontSize: 30,
+		fontSize: 20,
 		textAlign: 'center',
+		color: 'white',
+		fontFamily: 'Poppins_SemiBold'
 	},
 	nextPrevButton: {
 		width: 40,

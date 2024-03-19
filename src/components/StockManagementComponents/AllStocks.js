@@ -20,14 +20,6 @@ export default AllStocks = () => {
 
     return (
         <View>
-            
-            {/* <View style={styles.buttonContainer}>
-                <Heading textPassed={"Current Stock"} />
-                <TouchableOpacity style={styles.stockButtons} onPress={productFormToggle}>
-                    <Text style={styles.buttonText}>Add New Product</Text>
-                    <Image source={require('../assets/Icons/add.png')} style={styles.plusIcon} />
-                </TouchableOpacity>
-            </View> */}
             <View style={{ justifyContent: 'center' }}>
                 <FlatList
                     data={allStocksData}
