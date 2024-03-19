@@ -18,7 +18,6 @@ const ProgressGraph = () => {
     'https://androidapi220230605081325.azurewebsites.net/api/Violation/GetDailyViolation';
 
 
-
   const jsonDataToPassInApi = {
     PlantName: 'SEIPL,BLR',
     Year: '2024'
