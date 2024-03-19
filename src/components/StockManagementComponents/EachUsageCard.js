@@ -8,6 +8,64 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
     productName = productName.slice(0, 1).toUpperCase() + productName.slice(1,);
     providedTo = providedTo.toUpperCase();
     const [downloadProcessModal, setDownloadProcessModal] = useState(false);
+    console.log(reason);
+
+    let allViolations = reason.split(",");
+    console.log(allViolations);
+
+    const AllViolationIcons = () => {
+        return (
+            <View style={{ width: '100%' }}>
+                {allViolations.forEach((eachItem) => {
+                    let returningIcon;
+                    switch (eachItem) {
+                        case 'Helmet': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Helmet.png');
+                        }
+                            break;
+                        case 'Vest': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Vest.png');
+                        }
+                            break;
+                        case 'Gloves': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Gloves.png');
+                        }
+                            break;
+                        case 'Glasses': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Goggles.png');
+                        }
+                            break;
+                        case 'Postures': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Posture.png');
+                        }
+                            break;
+                        case 'Fall Detection': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/FallDetection.png');
+                        }
+                            break;
+                        case 'Fire Extinguisher': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/FireExtinguisher.png');
+                        }
+                            break;
+                        case 'Geofencing': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Geofencing.png');
+                        }
+                            break;
+                        case 'Shoes': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Shoes.png');
+                        }
+                            break;
+                        case 'Mask': {
+                            returningIcon = require('../../../assets/icons/ViolationIcons/Mask.png');
+                        }
+                    }
+                    console.log("returning Icon is ", returningIcon);
+                    return <Image source={returningIcon} style={{ width: 30, height: 30, objectFit: 'contain' }} />
+                })
+                }
+            </View>
+        )
+    }
 
     const pathImages = '../../../assets/icons/StockManagement/Icons/';
 
@@ -79,12 +137,18 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
             <TouchableOpacity style={{ zIndex: 2 }} onPress={toggleDownloadProcessModal}>
                 <View style={styles.firstRow}>
                     <View style={{ flex: 5 }}>
-                        <Text style={styles.cardHeading}>Camera Serial No. - {providedTo}</Text>
-                        <View style={{ justifyContent: 'center' }}>
+                        <View style={{flexDirection: 'row', gap: 5}}>
+                            <Image source={require('../../../assets/icons/camera-lens.png')} style={{ width: 20, height: 20 }} />
+                            <Text style={styles.cardHeading}>Camera Serial No. {providedTo}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row', alignItems: 'center', right: 5}}>
+                            <Image source={require('../../../assets/icons/calendar.png')} style={{ width: 30, height: 30 }} />
                             <Text style={{ color: 'white' }}>{makeDateReadable(timing)}</Text>
+                        </View>
+                        <View style={{flexDirection: 'row', gap: 5, marginBottom: -5}}>
+                            <Image source={require('../../../assets/icons/clock.png')} style={{ width: 20, height: 20 }} />
                             <Text style={{ color: 'white' }}>{makeTimeReadable(timing)}</Text>
                         </View>
-                        {/* <Text style={{ lineHeight: 20, color: 'white' }}>{productName}</Text> */}
                     </View>
                     <View style={{ flex: 1, height: '100%' }}>
                         <Animatable.View animation="bounceIn" duration={1000}>
@@ -95,15 +159,69 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                     </View>
                 </View>
                 {reason.length >= 10 &&
-                    <View style={{ borderTopWidth: 1, borderColor: 'white', borderStyle: 'dashed', padding: 10, paddingTop: 0, flexDirection: 'row' }}>
-                        <Text style={{ fontWeight: 'bold', marginTop: 10, color: 'white' }}>Violations - </Text>
-                        <Text style={{ marginTop: 10, color: 'white' }}> {reason}</Text>
+                    <View style={{ borderTopWidth: 1, borderColor: 'white', borderStyle: 'dashed', margin: 10, width: '95%', paddingTop: 5, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 5 }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Text style={{ fontFamily: 'Poppins_SemiBold', marginTop: 10, color: 'white' }}>Violations - </Text>
+                            <Text style={{ marginTop: 10, color: 'white' }}> {allViolations.length} </Text>
+                        </View>
+                        <View style={{ position: 'absolute, right: 0' }}>
+                            <View style={{ width: '100%', flexDirection: 'row', gap: -5 }}>
+                                {allViolations.map((eachItem) => {
+                                    let returningIcon;
+                                    switch (eachItem) {
+                                        case 'Helmet': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Helmet.png');
+                                        }
+                                            break;
+                                        case 'Vest': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Vest.png');
+                                        }
+                                            break;
+                                        case 'Gloves': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Gloves.png');
+                                        }
+                                            break;
+                                        case 'Glasses': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Goggles.png');
+                                        }
+                                            break;
+                                        case 'Postures': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Posture.png');
+                                        }
+                                            break;
+                                        case 'Fall Detection': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/FallDetection.png');
+                                        }
+                                            break;
+                                        case 'Fire Extinguisher': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/FireExtinguisher.png');
+                                        }
+                                            break;
+                                        case 'Geofencing': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Geofencing.png');
+                                        }
+                                            break;
+                                        case 'Shoes': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Shoes.png');
+                                        }
+                                            break;
+                                        case 'Mask': {
+                                            returningIcon = require('../../../assets/icons/ViolationIcons/Mask.png');
+                                        }
+                                    }
+                                    console.log("Returning Icon is ", returningIcon);
+                                    return <Image source={returningIcon} style={{ width: 30, height: 30 }} />
+                                })
+                                }
+                            </View>
+                        </View>
                     </View>
                 }
                 <Modal
                     visible={downloadProcessModal}
                     animationType="fade"
                     transparent={true}
+                    onRequestClose={() => setDownloadProcessModal(false)}
                 >
                     <Pressable style={styles.modalBackground} onPress={toggleDownloadProcessModal}>
                         <TouchableOpacity style={styles.modalContent} activeOpacity={1} >
@@ -211,7 +329,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1
     },
     signatureImage: {
-        height: 400,
+        height: 300,
         marginHorizontal: -20,
         objectFit: 'contain'
     }

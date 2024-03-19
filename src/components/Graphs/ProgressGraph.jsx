@@ -90,17 +90,17 @@ const ProgressGraph = () => {
   ];
 
   const dailyDataTest = [
-    { value: 160, date: '1 Mar 2024' },
-    { value: 180, date: '2 Mar 2024' },
-    { value: 190, date: '3 Mar 2024' },
-    { value: 180, date: '4 Mar 2024' },
-    { value: 140, date: '5 Mar 2024',    label: '05 Mar',
+    { value: 160, date: '1 Mar' },
+    { value: 180, date: '2 Mar' },
+    { value: 190, date: '3 Mar' },
+    { value: 180, date: '4 Mar' },
+    { value: 140, date: '5 Mar',    label: '05 Mar',
     labelTextStyle: { color: '#000', width: 60 }, },
-    { value: 145, date: '6 Mar 2024' },
-    { value: 160, date: '7 Mar 2024' },
-    { value: 200, date: '8 Mar 2024' },
+    { value: 145, date: '6 Mar' },
+    { value: 160, date: '7 Mar' },
+    { value: 200, date: '8 Mar' },
 
-    { value: 220, date: '9 Mar 2024' },
+    { value: 220, date: '9 Mar' },
     {
       value: 240,
       date: '10 Mar 2024',
@@ -108,45 +108,45 @@ const ProgressGraph = () => {
       label: '10 Mar',
       
     },
-    { value: 280, date: '11 Mar 2024' },
-    { value: 340, date: '13 Mar 2024' },
-    { value: 260, date: '12 Mar 2024' },
-    { value: 385, date: '14 Mar 2024' },
-    { value: 280, date: '15 Mar 2024',    label: '15 Mar',
+    { value: 280, date: '11 Mar' },
+    { value: 340, date: '13 Mar' },
+    { value: 260, date: '12 Mar' },
+    { value: 385, date: '14 Mar' },
+    { value: 280, date: '15 Mar',    label: '15 Mar',
     labelTextStyle: { color: '#000', width: 60 }, },
-    { value: 390, date: '16 Mar 2024' },
+    { value: 390, date: '16 Mar' },
 
-    { value: 370, date: '17 Mar 2024' },
-    { value: 285, date: '18 Mar 2024' },
-    { value: 295, date: '19 Mar 2024' },
+    { value: 370, date: '17 Mar' },
+    { value: 285, date: '18 Mar' },
+    { value: 295, date: '19 Mar' },
     {
       value: 300,
       date: '20 Mar 2024',
       label: '20 Mar',
       labelTextStyle: { color: '#000', width: 60 },
     },
-    { value: 280, date: '21 Mar 2024' },
-    { value: 295, date: '22 Mar 2024' },
-    { value: 260, date: '23 Mar 2024' },
-    { value: 255, date: '24 Mar 2024' },
+    { value: 280, date: '21 Mar' },
+    { value: 295, date: '22 Mar' },
+    { value: 260, date: '23 Mar' },
+    { value: 255, date: '24 Mar' },
 
-    { value: 190, date: '25 Mar 2024',    label: '25 Mar',
+    { value: 190, date: '25 Mar',    label: '25 Mar',
     labelTextStyle: { color: '#000', width: 60 }, },
-    { value: 220, date: '26 Mar 2024' },
-    { value: 205, date: '27 Mar 2024' },
-    { value: 230, date: '28Mar 2024' },
-    { value: 210, date: '29Marr 2024' },
+    { value: 220, date: '26 Mar' },
+    { value: 205, date: '27 Mar' },
+    { value: 230, date: '28 Mar' },
+    { value: 210, date: '29 Mar' },
     {
       value: 200,
-      date: '30 Mar 2024',
+      date: '30 Mar',
       label: '30 Mar',
       labelTextStyle: { color: '#000', width: 60 },
     },
-    { value: 240, date: '1 Apr 2024' },
-    { value: 250, date: '2 Apr 2024' },
-    { value: 280, date: '3 Apr 2024' },
-    { value: 250, date: '4 Apr 2024' },
-    { value: 210, date: '5 Apr 2024' },
+    { value: 240, date: '1 Apr' },
+    { value: 250, date: '2 Apr' },
+    { value: 280, date: '3 Apr' },
+    { value: 250, date: '4 Apr' },
+    { value: 210, date: '5 Apr' },
   ];
 
 
@@ -240,10 +240,7 @@ const ProgressGraph = () => {
           }}
         />
       </View>
-
     </View>
-
-
   )
 }
 
