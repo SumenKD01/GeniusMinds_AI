@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AllStocks from '../components/StockManagementComponents/AllStocks';
 import AllUsages from '../components/StockManagementComponents/AllUsages';
 import { Colors } from '../utils/Colors1';
 

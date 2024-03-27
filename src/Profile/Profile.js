@@ -44,8 +44,8 @@ export default Profile = () => {
                     <Text style={styles.profiledataheaders}>Name</Text>
                     <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
                         <Text style={styles.inputField}>{userInfo.fullName}</Text>
-                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2, borderRadius: 10 }}>
-                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 1, borderRadius: 10 }}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular', top: 1 }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -53,8 +53,8 @@ export default Profile = () => {
                     <Text style={styles.profiledataheaders}>Phone</Text>
                     <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
                         <Text style={styles.inputField}>{userInfo.phone}</Text>
-                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
-                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 1 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular', top: 1 }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -63,8 +63,8 @@ export default Profile = () => {
                     <Text style={styles.profiledataheaders}>Email</Text>
                     <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
                         <Text style={styles.inputField}>{userInfo.email}</Text>
-                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
-                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 1 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular', top: 1 }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -72,8 +72,8 @@ export default Profile = () => {
                     <Text style={styles.profiledataheaders}>Username</Text>
                     <View style={{ flexDirection: 'row', gap: 5, justifyContent: 'space-between', alignItems: 'center', marginBottom: 2 }} >
                         <Text style={styles.inputField}>{userInfo.empId}</Text>
-                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 2 , borderRadius: 10}}>
-                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular' }}>Edit</Text>
+                        <TouchableOpacity style={{ backgroundColor: '#2B4B8A', paddingHorizontal: 10, paddingTop: 1 , borderRadius: 10}}>
+                            <Text style={{ color: 'white', fontFamily: 'Poppins_Regular', top: 1 }}>Edit</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
