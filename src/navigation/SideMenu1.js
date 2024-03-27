@@ -17,6 +17,7 @@ export default SideMenu = () => {
     const [logoutConfirmationMessage, setLogoutConformationMessage] = useState(false);
     const [menuItemSideIcon1, setMenuItemSideIcon1] = useState(arrRight);
     const [menuItemSideIcon2, setMenuItemSideIcon2] = useState(arrRight);
+    
     const userInfo = useSelector((state) => state.user.userProfile);
 
     function toggleLogoutConfirmation() {

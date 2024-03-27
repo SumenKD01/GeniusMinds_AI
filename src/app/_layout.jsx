@@ -8,7 +8,6 @@ import { StatusBar } from 'expo-status-bar';
 
 import { useFonts, Inter_900Black } from 'expo-font';
 import { AmaticSC_400Regular, AmaticSC_700Bold, } from 'expo-font'
-import "../../global.css";
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen'
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
