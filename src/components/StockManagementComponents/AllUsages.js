@@ -3,6 +3,7 @@ import {
 	Dimensions,
 	FlatList,
 	Image,
+	Modal,
 	RefreshControl,
 	StatusBar,
 	StyleSheet,
@@ -13,35 +14,18 @@ import {
 } from 'react-native';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import EachUsageCard from './EachUsageCard';
-import UsageFormModal from './UsageFormModal';
 import { Colors } from '../../utils/Colors1';
 import APICall from '../../utils/APICall';
-import { useNavigation } from '@react-navigation/native';
 import CustomButton from '../../utils/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
+import ReportFilter from './ReportFilter';
 
-const deviceWidth = Dimensions.get('window').width;
 const deviceHeight = Dimensions.get('window').height;
 
 export default AllUsages = () => {
-	const [usageFormModalView, setUsageFormModalView] = useState(false);
-	const [data, setData] = useState([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [apiError, setAPIError] = useState(false);
-	const [refreshing, setRefreshing] = useState(false);
-	const [firstDataToDisplay, setfirstDataToDisplay] = useState('0');
-	const [nextRecords, setNextRecords] = useState('10');
-	const [totalRecords, setTotalRecords] = useState(0);
-	const flatListRef = useRef(null);
 	const pathImages = '../../../assets/icons/StockManagement/Icons/';
-	const navigation = useNavigation();
-
-	const scrollToTop = () => {
-		flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
-	};
-
 	const currentDate = new Date();
 	const todate = getDateForAPI(currentDate, 'to');
 	const fromdate = getDateForAPI(currentDate, 'from');
@@ -55,13 +39,32 @@ export default AllUsages = () => {
 		NextRecords: '1000',
 	};
 
-	//Refreshing
+	const [usageFormModalView, setUsageFormModalView] = useState(false);
+	const [data, setData] = useState([]);
+	const [isLoading, setIsLoading] = useState(true);
+	const [apiError, setAPIError] = useState(false);
+	const [refreshing, setRefreshing] = useState(false);
+	const [firstDataToDisplay, setfirstDataToDisplay] = useState('0');
+	const [nextRecords, setNextRecords] = useState('10');
+	const [totalRecords, setTotalRecords] = useState(0);
+	const [filterModalView, setFilterModalView] = useState(false);
+
+	const flatListRef = useRef(null);
+	
 	const onRefresh = useCallback(() => {
 		setRefreshing(true);
 		setTimeout(() => {
 			setRefreshing(false);
 		}, 2000);
 	}, [firstDataToDisplay]);
+
+	useEffect(() => {
+		APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
+	}, [refreshing, firstDataToDisplay, nextRecords]);
+
+	const scrollToTop = () => {
+		flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
+	};
 
 	//Result after Usage Report has been captured
 	function resultReport(dataGot, apiError) {
@@ -119,10 +122,10 @@ export default AllUsages = () => {
 			setNextRecords(Number(nextRecords) - 10 + '');
 		}
 	}
-
-	useEffect(() => {
-		APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
-	}, [refreshing, firstDataToDisplay, nextRecords]);
+	
+	function toggleFilterModal(){
+		setFilterModalView(filterModalView?false:true);
+	}
 
 	return (
 		<SafeAreaView style={{ paddingTop: -50, flex: 1 }}>
@@ -131,8 +134,8 @@ export default AllUsages = () => {
 					start={{ x: 0.0, y: 0.25 }}
 					end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
 					style={{ width: '100%', alignItems: 'center', position: 'absolute', top: 0 }}>
-					<View style={{ flexDirection: 'row', alignItems: "center", width: '100%', paddingHorizontal: 7, paddingTop: 15 }}>
-						<View style={{ flex: 8, backgroundColor: 'rgba(255, 255, 255, 0.5)', paddingHorizontal: 20, paddingVertical: 5, borderRadius: 50, flexDirection: "row", gap: 10, alignItems: "center" }}>
+					<View style={{ flexDirection: 'row', alignItems: "center", width: '100%', paddingHorizontal: 7, paddingTop: 15, gap: 10 }}>
+						<View style={{ flex: 17, backgroundColor: 'rgba(255, 255, 255, 0.5)', paddingHorizontal: 20, paddingVertical: 5, borderRadius: 50, flexDirection: "row", gap: 10, alignItems: "center" }}>
 							<Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/SearchWhite.png')} />
 							<TextInput
 								placeholder="Search camera serial number"
@@ -140,7 +143,9 @@ export default AllUsages = () => {
 							>
 							</TextInput>
 						</View>
-						<Image style={{ flex: 1, width: 30, height: 30 }} source={require('../../../assets/icons/filter.png')} />
+						<TouchableOpacity style={{ flex: 2}} onPress={toggleFilterModal}>
+							<Image style={{ width: 30, height: 30 }} source={require('../../../assets/icons/filter.png')} />
+						</TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', gap: 10, marginTop: 10, marginBottom: 15 }}>
 						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
@@ -159,8 +164,6 @@ export default AllUsages = () => {
 				</LinearGradient>
 				{isLoading ? (
 					<View style={styles.errorPage}>
-						{console.log("I am at loader Section.")}
-						{/* <ActivityIndicator size='large' color={Colors.darkBlue} /> */}
 						<View style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(160, 217, 251, 0.5)', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
 							<View style={{ width: 125, height: 125, borderRadius: 100, overflow: 'hidden', borderWidth: 2, borderColor: 'rgba(254, 254, 254, 0.9)', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
 								<Image
@@ -244,15 +247,12 @@ export default AllUsages = () => {
 						<Text style={styles.errorPageText}>{'No Data Available!'}</Text>
 					</View>
 				)}
-				<UsageFormModal
-					isVisible={usageFormModalView}
-					onClose={usageFormClose}
-				/>
 				<Image
 					source={require('../../../assets/icons/ReportBackImage.png')}
 					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute' }}
 				/>
 			</LinearGradient>
+			<ReportFilter onClose={toggleFilterModal} isVisible={filterModalView}/>
 			<StatusBar backgroundColor={'rgba(0, 0, 0, 1)'} barStyle={'light-content'} />
 		</SafeAreaView>
 	);

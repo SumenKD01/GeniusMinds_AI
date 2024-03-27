@@ -41,9 +41,9 @@ export default SideMenu = () => {
     return (
         <Animatable.View animation={'slideInUp'}>
             {console.log(menuItemSideIcon1, menuItemSideIcon2)}
-            <ScrollView>
+            <ScrollView> 
                 <LinearGradient colors={['#000C18', '#001E3E']}
-                    style={{ flex: 1, alignItems: 'center' }}>
+                    style={{ alignItems: 'center' }}>
                     <Image style={styles.polygon1} source={require('../../assets/icons/MenuIcons/Polygon1.png')} />
                     <Image style={styles.polygon2} source={require('../../assets/icons/MenuIcons/Polygon2.png')} />
                     <Image style={styles.polygon3} source={require('../../assets/icons/MenuIcons/Polygon3.png')} />
@@ -72,17 +72,13 @@ export default SideMenu = () => {
                             start={{ x: 0.0, y: 0.25 }}
                             end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
                             style={{ width: '90%', borderRadius: 50, padding: 8, flexDirection: "row", gap: 10, alignItems: 'center', justifyContent: "center", }}>
-                            <Image source={require('../../assets/icons/MenuIcons/Logout.png')} style={{ width: 30, height: 30 }} />
-                            <Text style={{ color: 'white', fontSize: 20 }}>Logout</Text>
+                            <Image source={require('../../assets/icons/MenuIcons/Logout.png')} style={{ width: 28, height: 28 }} />
+                            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'Poppins_Regular', top: 2.5 }}>Logout</Text>
                         </LinearGradient>
                     </TouchableOpacity>
                     <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Image source={require('../../assets/icons/MenuIcons/grundfos-logo.png')} style={{ objectFit: "contain", width: 285 }} />
                     </View>
-                    {/* <TouchableOpacity onPress={() => { Linking.openURL('https://www.privacypolicies.com/live/5a4ffcb1-ca15-4be1-bd6e-882f412f6967'); }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>Terms & Privacy</Text>
-                        </TouchableOpacity>
-                        <Text style={{ fontSize: 7, color: 'white', marginTop: 5 }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text> */}
                 </LinearGradient>
             </ScrollView>
             <Modal visible={logoutConfirmationMessage} transparent>
@@ -134,12 +130,12 @@ const styles = StyleSheet.create({
     },
     menuBtnText: {
         color: "white",
-        // color: '#DCF2FF',
+        fontFamily: 'Poppins_Regular',
         padding: 20,
-        fontSize: 20
+        fontSize: 18
     },
     menuBtnIcon: {
-        width: 40,
-        height: 40
+        width: 35,
+        height: 35
     }
 });

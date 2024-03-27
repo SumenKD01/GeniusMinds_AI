@@ -49,12 +49,10 @@ export default Homepage = () => {
     function resultReport(dataGot, apiError) {
         if (apiError) {
             setIsLoading(false);
-            // setAPIError(true);
             console.log("We have error guys!");
         } else {
             if (dataGot.length) {
                 dataGot = dataGot.reverse();
-                // setTotalRecords(dataGot.length);
                 console.log("From ApI", dataGot);
                 setRecentInspectionDataFromAPI(dataGot.slice(0, 20));
                 setIsLoading(false);
@@ -63,8 +61,6 @@ export default Homepage = () => {
             }
         }
     }
-
-    // console.log("Data from JSON", recentInspectionData);
 
     const showImage = (data) => {
         setShowImageView(true);
@@ -150,30 +146,30 @@ export default Homepage = () => {
                     <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center' }}>
                         <View style={{ flex: 5, gap: -10 }}>
                             <Image source={require('../../assets/icons/frame4.png')} style={{ position: 'absolute', width: '100%', height: 150, borderRadius: 20 }} />
-                            <Text style={{ color: '#0E6578', fontSize: 50, fontFamily: 'Poppins_SemiBold', paddingLeft: 10, top: 20 }}>{dashBoardData.dailyCnt}</Text>
+                            <Text style={{ color: '#0E6578', fontSize: 50, fontFamily: 'Poppins_SemiBold', paddingLeft: 10, top: 20 }}>{dashBoardData.dailyCnt ? dashBoardData.dailyCnt : 0}</Text>
                             <Text style={{ color: '#0A3944', fontSize: 15, fontFamily: 'Poppins_Regular', paddingLeft: 10, top: 20 }}>Today's Violations</Text>
                             <Image source={require('../../assets/icons/frame7.png')} style={{ position: 'absolute', height: 35, width: '100%', borderRadius: 20, right: -40, top: 10, objectFit: 'contain' }} />
                         </View>
                         <View style={{ flex: 6, gap: 16 }}>
                             <View style={{ gap: -10, paddingTop: 10 }}>
                                 <Image source={require('../../assets/icons/frame5.png')} style={{ position: 'absolute', flex: 1, height: 70, width: '100%', borderRadius: 20 }} />
-                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.monthCnt}</Text>
+                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.monthCnt ? dashBoardData.monthCnt : 0}</Text>
                                 <Text style={{ color: '#0A3944', fontSize: 12.5, fontFamily: 'Poppins_Regular', paddingLeft: 15 }}>This Month Violations</Text>
                                 <Image source={require('../../assets/icons/frame8.png')} style={{ position: 'absolute', height: 30, borderRadius: 20, width: '100%', right: -55, top: 5, objectFit: 'contain' }} />
                             </View>
                             <View style={{ gap: -10, paddingTop: 10 }}>
                                 <Image source={require('../../assets/icons/frame5.png')} style={{ position: 'absolute', flex: 1, height: 70, width: '100%', borderRadius: 20 }} />
-                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.dailyCnt}</Text>
+                                <Text style={{ color: '#0E6578', fontSize: 25, fontFamily: 'Poppins_SemiBold', paddingLeft: 15 }}>{dashBoardData.dailyCnt ? dashBoardData.dailyCnt : 0}</Text>
                                 <Text style={{ color: '#0A3944', fontSize: 12.5, fontFamily: 'Poppins_Regular', paddingLeft: 15 }}>Total Violations</Text>
                                 <Image source={require('../../assets/icons/frame9.png')} style={{ position: 'absolute', height: 30, width: '100%', borderRadius: 20, right: -55, top: 5, objectFit: 'contain' }} />
                             </View>
                         </View>
                     </View>
                     <TouchableOpacity onPress={() => router.push({ pathname: '/(tabs)/report' })} style={{ width: '100%', marginTop: 10 }} >
-                        <LinearGradient colors={['#30D2F6', 'rgb(52, 170, 113)']} start={{ x: 1, y: 1 }} end={{ x: 0, y: 0 }} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 12, paddingHorizontal: 20, borderRadius: 10, marginHorizontal: 10, marginVertical: 20 }}>
+                        <LinearGradient colors={['rgba(250,255,175,1)', 'rgba(244,209,96,1)']} start={{ x: 1, y: 1 }} end={{ x: 0, y: 0 }} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 12, paddingHorizontal: 20, borderRadius: 10, marginHorizontal: 10, marginVertical: 20 }}>
                             <View>
-                                <Text style={{ color: 'white', fontSize: 16, fontFamily: Fonts.SignikaNegative_SemiBold }}>Violation Report</Text>
-                                <Text style={{ color: 'white', fontSize: 12, opacity: 0.5, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
+                                <Text style={{ color: 'black', fontSize: 16, fontFamily: Fonts.SignikaNegative_SemiBold }}>Violation Report</Text>
+                                <Text style={{ color: 'black', fontSize: 12, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
                             </View>
                             <View>
                                 <Image source={{
