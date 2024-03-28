@@ -67,7 +67,7 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
         )
     }
 
-    const pathImages = '../../../assets/icons/StockManagement/Icons/';
+    const pathImages = '../../../assets/icons/';
 
     const makeDateReadable = (date) => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -93,30 +93,11 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
         setDownloadProcessModal(downloadProcessModal === true ? false : true);
     }
 
-    if (operation === 'Added') {
-        cardIcon = require(pathImages + 'added.png');
-    } else {
-        reason = reason.slice(0, 1).toUpperCase() + reason.slice(1,);
-        switch (reason) {
-            case 'Lost':
-                cardIcon = require(pathImages + 'lost.png');
-                break;
-            case 'Damaged':
-                cardIcon = require(pathImages + 'damaged.png');
-                break;
-            case 'InternalUsage':
-                reason = "Used"
-                cardIcon = require(pathImages + 'used.png');
-                break;
-            default:
-                cardIcon = require(pathImages + 'taken.png');
-                break;
-        }
-    }
 
     const addedStyle = {
         backgroundColor: Colors.greenTag,
         padding: 5,
+        
         borderRadius: 5,
         marginTop: 5,
         color: 'white',
