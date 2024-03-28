@@ -13,19 +13,19 @@ import {
 	View,
 } from 'react-native';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import EachUsageCard from './EachUsageCard';
-import { Colors } from '../../utils/Colors1';
-import APICall from '../../utils/APICall';
-import CustomButton from '../../utils/CustomButton';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
 import ReportFilter from './ReportFilter';
+import EachViolationCard from './EachViolationCard';
+import { Colors } from '../utils/Colors1';
+import APICall from '../utils/APICall';
+import CustomButton from '../utils/CustomButton';
 
 const deviceHeight = Dimensions.get('window').height;
 
 export default AllUsages = () => {
-	const pathImages = '../../../assets/icons/StockManagement/Icons/';
+	const pathImages = '../../assets/icons/StockManagement/Icons/';
 	const currentDate = new Date();
 	const todate = getDateForAPI(currentDate, 'to');
 	const fromdate = getDateForAPI(currentDate, 'from');
@@ -136,7 +136,7 @@ export default AllUsages = () => {
 					style={{ width: '100%', alignItems: 'center', position: 'absolute', top: 0 }}>
 					<View style={{ flexDirection: 'row', alignItems: "center", width: '100%', paddingHorizontal: 7, paddingTop: 15, gap: 10 }}>
 						<View style={{ flex: 17, backgroundColor: 'rgba(255, 255, 255, 0.5)', paddingHorizontal: 20, paddingVertical: 5, borderRadius: 50, flexDirection: "row", gap: 10, alignItems: "center" }}>
-							<Image style={{ width: 20, height: 20 }} source={require('../../../assets/icons/SearchWhite.png')} />
+							<Image style={{ width: 20, height: 20 }} source={require('../../assets/icons/SearchWhite.png')} />
 							<TextInput
 								placeholder="Search camera serial number"
 								placeholderTextColor={'rgba(232, 232, 232, 1)'}
@@ -144,7 +144,7 @@ export default AllUsages = () => {
 							</TextInput>
 						</View>
 						<TouchableOpacity style={{ flex: 2}} onPress={toggleFilterModal}>
-							<Image style={{ width: 30, height: 30 }} source={require('../../../assets/icons/filter.png')} />
+							<Image style={{ width: 30, height: 30 }} source={require('../../assets/icons/filter.png')} />
 						</TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', gap: 10, marginTop: 10, marginBottom: 15 }}>
@@ -167,10 +167,10 @@ export default AllUsages = () => {
 						<View style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(160, 217, 251, 0.5)', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
 							<View style={{ width: 125, height: 125, borderRadius: 100, overflow: 'hidden', borderWidth: 2, borderColor: 'rgba(254, 254, 254, 0.9)', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
 								<Image
-									source={require('../../../assets/icons/loader.gif')}
+									source={require('../../assets/icons/loader.gif')}
 									style={{ width: 100, height: 150, objectFit: 'contain', right: 5, bottom: 10 }}
 								/>
-								<Animatable.Image animation={'slideInLeft'} duration={2000} direction="alternate" iterationCount={'infinite'} source={require('../../../assets/icons/SeaImage.png')} style={{ width: '200%', height: 250, position: 'absolute', zIndex: 0, bottom: 0, left: '-10%', opacity: 0.5 }} />
+								<Animatable.Image animation={'slideInLeft'} duration={2000} direction="alternate" iterationCount={'infinite'} source={require('../../assets/icons/SeaImage.png')} style={{ width: '200%', height: 250, position: 'absolute', zIndex: 0, bottom: 0, left: '-10%', opacity: 0.5 }} />
 							</View>
 						</View>
 					</View>
@@ -189,7 +189,7 @@ export default AllUsages = () => {
 							ref={flatListRef}
 							contentContainerStyle={styles.UsageDisplayBody}
 							renderItem={({ item }) => (
-								<EachUsageCard
+								<EachViolationCard
 									productName={item.fileName}
 									timing={item.creation_Datetime}
 									reason={item.violations}
@@ -248,7 +248,7 @@ export default AllUsages = () => {
 					</View>
 				)}
 				<Image
-					source={require('../../../assets/icons/ReportBackImage.png')}
+					source={require('../../assets/icons/ReportBackImage.png')}
 					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute' }}
 				/>
 			</LinearGradient>

@@ -15,14 +15,14 @@ export default ReportFilter = ({ isVisible, onClose }) => {
                             <View style={{ gap: 5, flex: 1 }}>
                                 <Text style={{ fontSize: 14, fontFamily: 'Poppins_SemiBold', color: 'white', marginLeft: 10 }}>From</Text>
                                 <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: 'rgba(211, 211, 211, 0.3)', gap: 7, paddingHorizontal: 10, paddingVertical: 7, borderRadius: 10 }}>
-                                    <Image source={require('../../../assets/icons/schedule-red.png')} style={{ width: 20, height: 20, marginRight: 7 }} />
+                                    <Image source={require('../../assets/icons/schedule-red.png')} style={{ width: 20, height: 20, marginRight: 7 }} />
                                     <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white' }}>{fromDate}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ gap: 5, flex: 1 }}>
                                 <Text style={{ fontSize: 14, fontFamily: 'Poppins_SemiBold', color: 'white', marginLeft: 'auto', marginRight: 10 }}>To</Text>
                                 <TouchableOpacity style={{ flexDirection: 'row', backgroundColor: 'rgba(211, 211, 211, 0.3)', gap: 7, paddingHorizontal: 10, paddingVertical: 7, borderRadius: 10 }}>
-                                    <Image source={require('../../../assets/icons/schedule-green.png')} style={{ width: 20, height: 20, marginRight: 7 }} />
+                                    <Image source={require('../../assets/icons/schedule-green.png')} style={{ width: 20, height: 20, marginRight: 7 }} />
                                     <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white' }}>{fromDate}</Text>
                                 </TouchableOpacity>
                             </View>
@@ -31,15 +31,15 @@ export default ReportFilter = ({ isVisible, onClose }) => {
                             <Text style={{ fontSize: 14, fontFamily: 'Poppins_SemiBold', color: 'white', marginLeft: 10 }}>Sort by</Text>
                             <View style={{ backgroundColor: 'rgba(211, 211, 211, 0.3)', borderRadius: 10, padding: 10 }}>
                                 <TouchableOpacity style={{ flexDirection: 'row', gap: 10 }}>
-                                    <Image source={require('../../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
+                                    <Image source={require('../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
                                     <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white', bottom: 1 }}>Highest Violations</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{ flexDirection: 'row', gap: 10 }}>
-                                    <Image source={require('../../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
+                                    <Image source={require('../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
                                     <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white', bottom: 1 }}>Lowest Violations</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={{ flexDirection: 'row', gap: 10 }}>
-                                    <Image source={require('../../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
+                                    <Image source={require('../../assets/icons/radio-button.png')} style={{ width: 20, height: 20 }} />
                                     <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white', bottom: 1 }}>Most Recent</Text>
                                 </TouchableOpacity>
                             </View>
@@ -50,7 +50,7 @@ export default ReportFilter = ({ isVisible, onClose }) => {
                                 {
                                     typeOfViolations.map((eachItem) =>
                                         <TouchableOpacity style={{ flexDirection: 'row', gap: 5, marginRight: 15 }}>
-                                            <Image source={require('../../../assets/icons/UncheckedBox.png')} style={{ width: 20, height: 20 }} />
+                                            <Image source={require('../../assets/icons/UncheckedBox.png')} style={{ width: 20, height: 20 }} />
                                             <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white', bottom: 1 }}>{eachItem}</Text>
                                         </TouchableOpacity>
                                     )

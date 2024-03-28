@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import AllUsages from '../components/StockManagementComponents/AllUsages';
+import AllViolations from './AllViolations';
 import { Colors } from '../utils/Colors1';
 
-const StockManagement = ({ res }) => {
+const ViolationEntry = ({ res }) => {
   const [stockView, setStockView] = useState(true);
   const [usageView, setUsageView] = useState(false);
 
@@ -48,13 +48,13 @@ const StockManagement = ({ res }) => {
   return (
     <View style={styles.container}>
       <View>
-          <AllUsages  res={res}/>
+          <AllViolations  res={res}/>
       </View>
     </View>
   );
 }
 
-export default StockManagement;
+export default ViolationEntry;
 
 const styles = StyleSheet.create({
   container: {

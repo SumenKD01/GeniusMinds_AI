@@ -43,7 +43,7 @@ export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
                     console.log("Data Sent");
                 }
             } else {
-                console.log('ApiStatus', api.status);
+                // console.log('ApiStatus', api.status);
                 if (action === 'getReport') {
                     result(null, null);
                 } else {
@@ -52,7 +52,7 @@ export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
                 }
             }
         } catch (error) {
-            console.log('Error Got: ', error);
+            // console.log('Error Got: ', error);
             if (action === 'getReport') {
                 result(null, "error");
             } else {

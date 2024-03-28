@@ -7,13 +7,14 @@ import * as Animatable from 'react-native-animatable';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { Fonts } from '../utils/Fonts';
 import { Link, router } from "expo-router";
-import ProgressGraph from '../components/Graphs/ProgressGraph';
+import ProgressGraph from './ProgressGraph';
 
 const width = Dimensions.get('window').width;
 
 export default Homepage = () => {
     const apiGot = "https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR";
     const downloadLink = "https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=";
+    const extraImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png';
     const [recentInspectionDataFromAPI, setRecentInspectionDataFromAPI] = useState([]);
     const recentInspectionData = require('../../assets/JSON/recentInspections.json');
     const [dashBoardData, setDashBoardData] = useState([]);
@@ -53,7 +54,6 @@ export default Homepage = () => {
         } else {
             if (dataGot.length) {
                 dataGot = dataGot.reverse();
-                console.log("From ApI", dataGot);
                 setRecentInspectionDataFromAPI(dataGot.slice(0, 20));
                 setIsLoading(false);
             } else {
@@ -64,7 +64,6 @@ export default Homepage = () => {
 
     const showImage = (data) => {
         setShowImageView(true);
-        console.log("data Got", data.fileName);
         let imageFoundAtIndex = recentInspectionDataFromAPI.findIndex(
             (eachData, index) => (eachData.fileName === data.fileName)
         );
@@ -131,7 +130,6 @@ export default Homepage = () => {
     useEffect(() => {
         APICall(dashBoardApi, dashBoardJsonDataToPassInApi, dashBoardApiResultReport, 'getReportForChart');
     }, []);
-    console.log('DasHknnkc cns c sn', dashBoardData);
 
     return (
         <View style={styles.container}>
@@ -172,18 +170,18 @@ export default Homepage = () => {
                                 <Text style={{ color: 'black', fontSize: 12, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
                             </View>
                             <View>
-                                <Image source={{
-                                    uri: 'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=AutoLine.png',
-                                }} style={{ width: 35, height: 35 }} />
+                                <Image source={require('./../../assets/icons/Report-button.png')} style={{ width: 35, height: 35 }} />
                             </View>
                         </LinearGradient>
                     </TouchableOpacity>
                     <ProgressGraph />
+                    <View>
+
+                    </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingHorizontal: 10, marginTop: 30, marginBottom: 10 }}>
                         <Text style={{ color: 'white', fontFamily: 'Poppins', fontSize: 20 }}>Recent Violations</Text>
                         <Image source={require('../../assets/icons/rightArrow.png')} style={{ width: 40, height: 40, borderRadius: 10 }} />
                     </View>
-
                     {recentInspectionDataFromAPI.length ?
                         <FlatList
                             contentContainerStyle={styles.WorkPermitList}
@@ -193,8 +191,8 @@ export default Homepage = () => {
                                 return <TouchableOpacity onPress={() => showImage(item.item)}>
                                     <Image source={{
                                         uri: downloadLink + item.item.fileName
-                                    }} style={{ width: 125, height: 200, borderRadius: 10 }} />
-                                    <Text style={{ color: 'white', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '100%', backgroundColor: 'rgba(52, 52, 52, 0.8)', textAlign: 'center', borderBottomLeftRadius: 10, borderBottomRightRadius: 10 }}>{item.item.cam_Serialno}</Text>
+                                    }} style={{ width: 300, height: 200, borderBottomRightRadius: 10,borderBottomLeftRadius: 10, borderColor: 'rgba(0,230,255,1)', borderWidth: 5 }} />
+                                    <Text style={{ color: 'black', position: 'absolute', bottom: 45, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '90%', backgroundColor: 'rgba(0,230,255,1)', borderTopLeftRadius: 10, borderTopRightRadius: 10, alignSelf: 'center', textAlign: 'center' }}>{item.item.cam_Serialno}</Text>
                                 </TouchableOpacity>
                             }
                             }
@@ -202,11 +200,10 @@ export default Homepage = () => {
                         <Text>This is the Recent Inspection Data.</Text>
                     }
                     <Modal style={{ flex: 1, width: '100%' }} visible={showImageView} onRequestClose={() => setShowImageView(false)}>
-                        {console.log("In Modal", recentInspectionDataFromAPI, imageIndex)}
+                        {/* {console.log("In Modal", recentInspectionDataFromAPI, imageIndex)} */}
                         {recentInspectionDataFromAPI[imageIndex] ?
-                            <View>
-                                {console.log("Image Viewer - Image Selected")}
-                                <Image source={{ uri: (recentInspectionDataFromAPI[imageIndex].fileName) ? (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName) : 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png' }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute' }} />
+                            <View style={{backgroundColor: 'black'}}>
+                                <Image source={{ uri: (recentInspectionDataFromAPI[imageIndex].fileName) ? (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName) : extraImage }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute', objectFit: 'contain', bottom: 70 }} />
                                 <View style={{ position: 'absolute', padding: 15, bottom: 0, backgroundColor: 'rgba(52, 52, 52, 0.5)', width: '100%' }}>
                                     <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].cam_Serialno}</Text>
                                     <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].fileName}</Text>
@@ -222,8 +219,8 @@ export default Homepage = () => {
                                             </TouchableOpacity>
                                         }
                                     </TouchableOpacity>
-                                    <TouchableOpacity style={{ width: '50%', height: '100%', justifyContent: 'center', alignItems: 'flex-end' }} onPress={() => { imageIndex < (recentInspectionData.length - 1) ? setImageIndex(imageIndex + 1) : console.log('no element') }}>
-                                        {imageIndex < (recentInspectionData.length - 1) &&
+                                    <TouchableOpacity style={{ width: '50%', height: '100%', justifyContent: 'center', alignItems: 'flex-end' }} onPress={() => { imageIndex < (recentInspectionData.length - 2) ? setImageIndex(imageIndex + 1) : console.log('no element') }}>
+                                        {imageIndex < (recentInspectionData.length - 2) &&
                                             <TouchableOpacity onPress={() => { setImageIndex(imageIndex + 1) }} style={{ padding: 10, bottom: 75 }}>
                                                 <Image source={require('../../assets/icons/NextPage.png')} style={{ width: 50, height: 50 }} />
                                             </TouchableOpacity>
@@ -277,8 +274,9 @@ const styles = StyleSheet.create({
         objectFit: 'contain'
     },
     WorkPermitList: {
-        gap: 7,
+        gap: 10,
         height: 240,
-        paddingLeft: 10
+        paddingLeft: 10,
+        paddingRight: 20
     },
 });
