@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, View, Pressable, TouchableHighlight } from "react-native";
 import * as Animatable from 'react-native-animatable';
-import { Colors } from "../../utils/Colors1";
+import { Colors } from "../utils/Colors1";
 
-export default EachUsageCard = ({ productName, quantity, reason, timing, operation, providedTo, downloadSignLink, others }) => {
+export default EachViolationCard = ({ productName, quantity, reason, timing, operation, providedTo, downloadSignLink, others }) => {
     let cardIcon;
     productName = productName.slice(0, 1).toUpperCase() + productName.slice(1,);
     providedTo = providedTo.toUpperCase();
@@ -20,43 +20,43 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                     let returningIcon;
                     switch (eachItem) {
                         case 'Helmet': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Helmet.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Helmet.png');
                         }
                             break;
                         case 'Vest': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Vest.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Vest.png');
                         }
                             break;
                         case 'Gloves': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Gloves.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Gloves.png');
                         }
                             break;
                         case 'Glasses': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Goggles.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Goggles.png');
                         }
                             break;
                         case 'Postures': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Posture.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Posture.png');
                         }
                             break;
                         case 'Fall Detection': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/FallDetection.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/FallDetection.png');
                         }
                             break;
                         case 'Fire Extinguisher': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/FireExtinguisher.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/FireExtinguisher.png');
                         }
                             break;
                         case 'Geofencing': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Geofencing.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Geofencing.png');
                         }
                             break;
                         case 'Shoes': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Shoes.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Shoes.png');
                         }
                             break;
                         case 'Mask': {
-                            returningIcon = require('../../../assets/icons/ViolationIcons/Mask.png');
+                            returningIcon = require('../../assets/icons/ViolationIcons/Mask.png');
                         }
                     }
                     console.log("returning Icon is ", returningIcon);
@@ -67,7 +67,7 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
         )
     }
 
-    const pathImages = '../../../assets/icons/';
+    const pathImages = '../../assets/icons/StockManagement/Icons/';
 
     const makeDateReadable = (date) => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -93,48 +93,28 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
         setDownloadProcessModal(downloadProcessModal === true ? false : true);
     }
 
-
-    const addedStyle = {
-        backgroundColor: Colors.greenTag,
-        padding: 5,
-        
-        borderRadius: 5,
-        marginTop: 5,
-        color: 'white',
-        fontSize: 12
-    }
-
-    const takenStyle = {
-        backgroundColor: Colors.redTag,
-        padding: 5,
-        borderRadius: 5,
-        marginTop: 5,
-        color: Colors.white,
-        fontSize: 12
-    }
-
     return (
         <Animatable.View style={styles.card} animation="slideInLeft">
             <TouchableOpacity style={{ zIndex: 2 }} onPress={toggleDownloadProcessModal}>
                 <View style={styles.firstRow}>
                     <View style={{ flex: 5 }}>
                         <View style={{flexDirection: 'row', gap: 5}}>
-                            <Image source={require('../../../assets/icons/camera-lens.png')} style={{ width: 20, height: 20 }} />
+                            <Image source={require('../../assets/icons/camera-lens.png')} style={{ width: 20, height: 20 }} />
                             <Text style={styles.cardHeading}>Camera Serial No. {providedTo}</Text>
                         </View>
                         <View style={{flexDirection: 'row', alignItems: 'center', right: 5}}>
-                            <Image source={require('../../../assets/icons/calendar.png')} style={{ width: 30, height: 30 }} />
+                            <Image source={require('../../assets/icons/calendar.png')} style={{ width: 30, height: 30 }} />
                             <Text style={{ color: 'white' }}>{makeDateReadable(timing)}</Text>
                         </View>
                         <View style={{flexDirection: 'row', gap: 5, marginBottom: -5}}>
-                            <Image source={require('../../../assets/icons/clock.png')} style={{ width: 20, height: 20 }} />
+                            <Image source={require('../../assets/icons/clock.png')} style={{ width: 20, height: 20 }} />
                             <Text style={{ color: 'white' }}>{makeTimeReadable(timing)}</Text>
                         </View>
                     </View>
                     <View style={{ flex: 1, height: '100%' }}>
                         <Animatable.View animation="bounceIn" duration={1000}>
                             <TouchableOpacity style={styles.previewButton} onPress={toggleDownloadProcessModal} >
-                                <Image source={require('../../../assets/icons/externalLink.png')} style={styles.paperIcon} />
+                                <Image source={require('../../assets/icons/externalLink.png')} style={styles.paperIcon} />
                             </TouchableOpacity>
                         </Animatable.View>
                     </View>
@@ -151,43 +131,43 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                                     let returningIcon;
                                     switch (eachItem) {
                                         case 'Helmet': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Helmet.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Helmet.png');
                                         }
                                             break;
                                         case 'Vest': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Vest.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Vest.png');
                                         }
                                             break;
                                         case 'Gloves': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Gloves.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Gloves.png');
                                         }
                                             break;
                                         case 'Glasses': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Goggles.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Goggles.png');
                                         }
                                             break;
                                         case 'Postures': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Posture.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Posture.png');
                                         }
                                             break;
                                         case 'Fall Detection': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/FallDetection.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/FallDetection.png');
                                         }
                                             break;
                                         case 'Fire Extinguisher': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/FireExtinguisher.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/FireExtinguisher.png');
                                         }
                                             break;
                                         case 'Geofencing': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Geofencing.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Geofencing.png');
                                         }
                                             break;
                                         case 'Shoes': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Shoes.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Shoes.png');
                                         }
                                             break;
                                         case 'Mask': {
-                                            returningIcon = require('../../../assets/icons/ViolationIcons/Mask.png');
+                                            returningIcon = require('../../assets/icons/ViolationIcons/Mask.png');
                                         }
                                     }
                                     console.log("Returning Icon is ", returningIcon);
@@ -222,7 +202,7 @@ export default EachUsageCard = ({ productName, quantity, reason, timing, operati
                     </Pressable>
                 </Modal>
             </TouchableOpacity>
-            <Image source={require('../../../assets/icons/report-card.png')} style={{ position: 'absolute', height: '100%', zIndex: -1, width: '100%' }} />
+            <Image source={require('../../assets/icons/report-card.png')} style={{ position: 'absolute', height: '100%', zIndex: -1, width: '100%' }} />
         </Animatable.View>
     );
 }

@@ -1,7 +1,6 @@
 export default {
     backGroundColor:'#CFEBFF',
     primary: '#facd94',
-
     black: '#000000',
     white: '#FFFFFF',
     yellow: '#EED552',
@@ -12,7 +11,6 @@ export default {
     pink: '#ff4c98',
     gold: '#f8c907',
     gray: '#444',
-
     menu1: '#f9a3b3',
     menu2: '#81c3eb',
     menu3: '#facd94',

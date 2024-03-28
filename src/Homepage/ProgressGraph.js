@@ -155,7 +155,7 @@ const ProgressGraph = () => {
       <View style={styles.container}>
         <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violations</Text>
         <BarChart
-          width={282}
+          width={250}
           barWidth={25}
           noOfSections={10}
           stackData={data}
@@ -168,8 +168,8 @@ const ProgressGraph = () => {
           areaChart
           data={dataDaily}
           rotateLabel
-          width={300}
-          height={270}
+          width={250}
+          height={260}
           spacing={10}
           color="#00ff83ff"
           thickness={2}
@@ -231,11 +231,11 @@ export default ProgressGraph
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'rgba(0,230,255,0.7)',
-    borderRadius: 5,
+    borderRadius: 20,
     paddingVertical: 10,
     paddingBottom: 40,
     paddingLeft: 5,
-    paddingRight: 30,
-    width: 330
+    overflow: 'hidden',
+    width: 335
   }
 })
