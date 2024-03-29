@@ -1,12 +1,15 @@
-import { Text, View, Image, StyleSheet, Dimensions, ScrollView } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, ScrollView, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
+import { Link, useNavigation, useRouter } from "expo-router";
+
 
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 export default AboutUs = () => {
+    const router = useRouter();
     const [fontsLoaded] = useFonts({
         'Righteous-Regular': require('../../assets/fonts/Righteous/Righteous-Regular.ttf'),
         'Prompt-Regular': require('../../assets/fonts/Prompt/Prompt-Regular.ttf')
@@ -15,7 +18,16 @@ export default AboutUs = () => {
         <ScrollView>
             <LinearGradient colors={['#000C18', '#001E3E']}
                 style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 24, marginTop: 50, marginBottom: 20 }}>About Us</Text>
+                <View style={{ flexDirection: 'row', gap: 5, top:40, alignSelf: 'flex-start', marginLeft: 20 }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            router.back()
+                        }}
+                    >
+                        <Image source={require('../../assets/icons/goBack.png')} style={{ width: 35, height: 35 }} />
+                    </TouchableOpacity>
+                </View>
+                <Text style={{ color: 'white', fontSize: 30, marginTop: 0, marginBottom: 20, fontFamily: 'SignikaNegative-Bold' }}>About Us</Text>
                 <View style={{ marginTop: 80 }}>
                     <LinearGradient colors={['rgba(184, 184, 184, 0.2)', 'rgba(38, 38, 38, 0.3)']}
                         start={{ x: 0.0, y: 0.25 }}

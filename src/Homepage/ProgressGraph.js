@@ -171,7 +171,7 @@ const ProgressGraph = () => {
           width={250}
           height={260}
           spacing={10}
-          color="#00ff83ff"
+          color="#F4D160"
           thickness={2}
           hideDataPoints
           startFillColor="rgba(20,95,81,0.3)"

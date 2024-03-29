@@ -25,7 +25,7 @@ import CustomButton from '../utils/CustomButton';
 const deviceHeight = Dimensions.get('window').height;
 
 export default AllUsages = () => {
-	const pathImages = '../../assets/icons/StockManagement/Icons/';
+	const pathImages = '../../assets/icons/';
 	const currentDate = new Date();
 	const todate = getDateForAPI(currentDate, 'to');
 	const fromdate = getDateForAPI(currentDate, 'from');
@@ -177,7 +177,7 @@ export default AllUsages = () => {
 				) : apiError ? (
 					<View style={styles.errorPage}>
 						<Image
-							source={require(pathImages + '../concentrate.png')}
+							source={require(pathImages + 'concentrate.png')}
 							style={styles.errorIcon}
 						/>
 						<Text style={styles.errorPageText}>{'Internal Server Error!'}</Text>
@@ -241,7 +241,7 @@ export default AllUsages = () => {
 				) : (
 					<View style={styles.errorPage}>
 						<Image
-							source={require(pathImages + '../no-data.png')}
+							source={require(pathImages + 'no-data.png')}
 							style={styles.errorIcon}
 						/>
 						<Text style={styles.errorPageText}>{'No Data Available!'}</Text>

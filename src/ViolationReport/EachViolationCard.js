@@ -67,7 +67,7 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
         )
     }
 
-    const pathImages = '../../assets/icons/StockManagement/Icons/';
+    const pathImages = '../../assets/icons/';
 
     const makeDateReadable = (date) => {
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];

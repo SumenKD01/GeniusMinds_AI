@@ -1,15 +1,14 @@
-import { Dimensions, Image, ScrollView, StyleSheet } from "react-native";
-import { Text, View, Modal, TouchableOpacity, Linking } from "react-native";
+import { Dimensions, Image, ScrollView, StyleSheet, Text, View, Modal, TouchableOpacity, Linking } from "react-native";
+import { } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { Avatar } from "react-native-paper";
 import * as Animatable from 'react-native-animatable';
-import { Link, router } from "expo-router";
+import { router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 
-const width = Dimensions.get('window').width;
-const height = Dimensions.get('window').height;
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 export default SideMenu = () => {
     const navigation = useNavigation();
@@ -18,6 +17,7 @@ export default SideMenu = () => {
     const [logoutConfirmationMessage, setLogoutConformationMessage] = useState(false);
     const [menuItemSideIcon1, setMenuItemSideIcon1] = useState(arrRight);
     const [menuItemSideIcon2, setMenuItemSideIcon2] = useState(arrRight);
+    
     const userInfo = useSelector((state) => state.user.userProfile);
 
     function toggleLogoutConfirmation() {
@@ -41,45 +41,43 @@ export default SideMenu = () => {
     return (
         <Animatable.View animation={'slideInUp'}>
             {console.log(menuItemSideIcon1, menuItemSideIcon2)}
-            <ScrollView style={styles.container}>
+            <ScrollView> 
                 <LinearGradient colors={['#000C18', '#001E3E']}
-                    style={styles.container}>
-                    {userInfo.plantName.includes('Grundfos') &&
-                        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
-                            <Image source={{ uri: 'https://coltarapumpsandseals.com.au/wp-content/uploads/2017/12/grundfos-logo.png' }} style={{ height: 50, width: 200 }} />
-                        </View>
-                    }
-                    {userInfo.plantName.includes('Soft Designers1') &&
-                        <View style={{ alignItems: 'center', justifyContent: 'center', paddingTop: 10 }}>
-                            <Image source={{ uri: 'https://www.softdesigners.co.in/wp-content/uploads/2022/05/Softdesigners-logo.png' }} style={{ height: 80, width: 240, objectFit: 'contain' }} />
-                        </View>
-                    }
-                    <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/AboutUsPage' })}>
-                        <Text style={styles.menuButtonText}>About Us</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuButtons} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })}>
-                        <Text style={styles.menuButtonText}>Contact Us</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.menuButtons} onPress={toggleLogoutConfirmation}>
-                        <Text style={styles.menuButtonText}>Logout</Text>
-                    </TouchableOpacity>
-                    <View style={styles.footer}>
-                        <View style={{ alignItems: 'center', marginTop: '10%', marginBottom: 50, gap: 20 }}>
-                            <View style={{ gap:  0 }}>
-                                <Image source={require('../../assets/icons/menuLogo.png')} style={{ height: 50, width: 200, objectFit: 'contain' }} />
-                                <View style={{ flexDirection: 'row', bottom: 0, width: '100%', alignItems: 'center', gap: 5, justifyContent: 'center', opacity: 0.7 }}>
-                                    <Text style={{ fontFamily: 'Poppins_Regular', fontSize: (width / 40), color: 'white' }}>Developed by</Text>
-                                    <Image source={require('../../assets/icons/SoftDesigners.png')} style={{ height: 15, width: 70, objectFit: 'contain' }} />
-                                </View>
-                            </View>
-                        </View>
-                        <TouchableOpacity onPress={() => {
-                            Linking.openURL('https://www.privacypolicies.com/live/5a4ffcb1-ca15-4be1-bd6e-882f412f6967');
-                        }}>
-                            <Text style={{ color: 'white', fontSize: 10 }}>Terms & Privacy</Text>
+                    style={{ alignItems: 'center' }}>
+                    <Image style={styles.polygon1} source={require('../../assets/icons/MenuIcons/Polygon1.png')} />
+                    <Image style={styles.polygon2} source={require('../../assets/icons/MenuIcons/Polygon2.png')} />
+                    <Image style={styles.polygon3} source={require('../../assets/icons/MenuIcons/Polygon3.png')} />
 
+                    <View style={{ flex: 3, width: '90%', marginBottom: 30, marginTop: 50 }}>
+                        <TouchableOpacity style={styles.menuBtn} onPress={() => router.push({ pathname: '/home' })}>
+                            <Image source={require('../../assets/icons/MenuIcons/Home.png')} style={styles.menuBtnIcon} />
+                            <Text style={styles.menuBtnText}>Home</Text>
                         </TouchableOpacity>
-                        <Text style={{ fontSize: 7, color: 'white', marginTop: 5 }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text>
+                        {/* pathname: '/(tabs)/report' */}
+                        <TouchableOpacity style={styles.menuBtn} onPress={() => router.push({ pathname: '/report' })} >
+                            <Image source={require('../../assets/icons/MenuIcons/Report.png')} style={styles.menuBtnIcon} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })} />
+                            <Text style={styles.menuBtnText}>Reports</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuBtn} onPress={() => router.push({ pathname: '/MoreInfoPage/AboutUsPage' })}>
+                            <Image source={require('../../assets/icons/MenuIcons/About.png')} style={styles.menuBtnIcon} />
+                            <Text style={styles.menuBtnText}>About Us</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: 'row', alignItems: "center" }} onPress={() => router.push({ pathname: '/MoreInfoPage/ContactUs' })}>
+                            <Image source={require('../../assets/icons/MenuIcons/Contact.png')} style={styles.menuBtnIcon} />
+                            <Text style={styles.menuBtnText}>Contact Us</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={{ flex: 3, width: '90%', alignItems: "center" }} onPress={toggleLogoutConfirmation}>
+                        <LinearGradient colors={['rgba(22, 71, 124, 1)', 'rgba(46, 91, 125, 1)']}
+                            start={{ x: 0.0, y: 0.25 }}
+                            end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
+                            style={{ width: '90%', borderRadius: 50, padding: 8, flexDirection: "row", gap: 10, alignItems: 'center', justifyContent: "center", }}>
+                            <Image source={require('../../assets/icons/MenuIcons/Logout.png')} style={{ width: 28, height: 28 }} />
+                            <Text style={{ color: 'white', fontSize: 20, fontFamily: 'Poppins_Regular', top: 2.5 }}>Logout</Text>
+                        </LinearGradient>
+                    </TouchableOpacity>
+                    <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
+                        <Image source={require('../../assets/icons/MenuIcons/grundfos-logo.png')} style={{ objectFit: "contain", width: 285 }} />
                     </View>
                 </LinearGradient>
             </ScrollView>
@@ -98,70 +96,46 @@ export default SideMenu = () => {
                     </TouchableOpacity>
                 </TouchableOpacity>
             </Modal>
-        </Animatable.View>
+        </Animatable.View >
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        height: height,
-        backgroundColor: '#CFEBFF',
+    polygon1: {
+        position: "absolute",
+        width: deviceWidth * 0.8,
+        left: deviceWidth * 0,
+        top: -deviceHeight * 0.4,
+        objectFit: 'contain'
     },
-    userInfoSection: {
-        backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        borderRadius: 10,
-        margin: 10,
+    polygon2: {
+        position: "absolute",
+        objectFit: "contain",
+        width: deviceWidth * 0.6,
+        right: -deviceWidth * 0.2,
+        top: deviceHeight * 0.2
     },
-    title: {
-        fontSize: 16,
-        fontFamily: 'Poppins_SemiBold',
-        color: 'white'
+    polygon3: {
+        position: "absolute",
+        objectFit: "contain",
+        width: deviceWidth * 0.6,
+        left: -deviceWidth * 0.21,
+        top: deviceHeight * 0.5
     },
-    caption: {
-        fontSize: 10,
-        fontFamily: 'Poppins_Regular',
-        color: 'white'
-    },
-    mainButtons: {
-        padding: 5,
-        heigth: 60,
-        backgroundColor: '#003571',
-        paddingHorizontal: 10,
-        borderRadius: 5
-    },
-    mainButtonText: {
-        color: 'white',
-        fontFamily: 'Poppins',
-        fontSize: 14
-    },
-    menuButtons: {
-        backgroundColor: 'rgba(141, 194, 255, 0.30)',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+    menuBtn: {
         flexDirection: 'row',
-        height: 50,
-        borderBottomWidth: 0.2,
-        borderTopWidth: 0.2
+        borderBottomWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.2)',
+        alignItems: "center"
     },
-    menuButtonText: {
-        color: 'white',
-        fontSize: 16,
-        fontFamily: 'Poppins_SemiBold',
-        left: 25
-    },
-    subMenuButtons: {
-        justifyContent: 'center',
-        height: 40
-    },
-    subMenuButtonText: {
-        fontSize: 14,
+    menuBtnText: {
+        color: "white",
         fontFamily: 'Poppins_Regular',
-        left: 40
+        padding: 20,
+        fontSize: 18
     },
-    footer: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 30,
-        paddingBottom: 50
+    menuBtnIcon: {
+        width: 35,
+        height: 35
     }
 });
