@@ -1,6 +1,7 @@
 export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
     (async () => {
         try {
+            console.log("API function", apiGot, jsonDataToPassInApi);
             let api = await fetch(
                 apiGot,
                 {
@@ -12,12 +13,13 @@ export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
                     body: JSON.stringify(jsonDataToPassInApi),
                 }
             );
+            console.log("Result", api, "API function", apiGot, jsonDataToPassInApi);
             if (api.ok) {
                 if (action === 'getReport') {
                     const resp = await api.json();
                     const ans = resp['members'];
                     result(ans, null);
-                } else  if (action === 'getReportForChart') {
+                } else if (action === 'getReportForChart') {
                     const resp = await api.json();
                     const ans = resp;
                     result(ans, null);

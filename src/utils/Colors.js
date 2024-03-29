@@ -16,7 +16,6 @@ export default {
     menu3: '#facd94',
     dark: '#010101',
     light: '#ccc',
-
     redHeaderButton: "#CE5A67",
     darkBlue: "#00293A",
     lightBlue: "#0C445C",

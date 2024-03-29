@@ -2,7 +2,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, Modal, Text, TouchableOpacity, View } from "react-native";
 
 export default ReportFilter = ({ isVisible, onClose }) => {
-    console.log("I came here", isVisible, onClose);
     const fromDate = '15 Oct 2024';
     const typeOfViolations = ['Mask', 'Goggles', 'Fire Extinguisher', 'Vest', 'Fall Detection', 'Geofencing', 'Shoes', 'Helmet', 'Gloves', 'Posture'];
     return (
