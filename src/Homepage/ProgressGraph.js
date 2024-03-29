@@ -152,6 +152,7 @@ const ProgressGraph = () => {
 
   return (
     <View style={{ gap: 20, paddingHorizontal: 10 }}>
+      <Text style={{color: '#F4D160', fontFamily: 'Poppins_SemiBold', textAlign: 'center', fontSize: 20, marginBottom: -10, marginTop: -15}}> Statistics Insight </Text>
       <View style={styles.container}>
         <Text style={{ alignSelf: 'center', marginVertical: 20, fontFamily: 'Poppins_SemiBold' }}>Monthly Violations</Text>
         <BarChart

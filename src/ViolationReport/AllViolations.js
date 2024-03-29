@@ -24,23 +24,22 @@ import CustomButton from '../utils/CustomButton';
 
 const deviceHeight = Dimensions.get('window').height;
 
-export default AllUsages = () => {
+export default AllViolations = () => {
 	const pathImages = '../../assets/icons/StockManagement/Icons/';
 	const currentDate = new Date();
-	const todate = getDateForAPI(currentDate, 'to');
-	const fromdate = getDateForAPI(currentDate, 'from');
-	const apiGot =
-		'https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR';
+	const [todate, setToDate] = useState(getDateForAPI(currentDate, 'to'));
+	const [fromdate, setFromDate] = useState(getDateForAPI(currentDate, 'from'));
+	const apiGot = 'https://androidapi220230605081325.azurewebsites.net/api/approval/GetviolationByDate?PlantName=SEIPL,BLR&Fromdate=' + fromdate + '&todate=' + todate;
+	console.log(apiGot);
+	// const apiGot =
+	// 	'https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR';
 	const jsonDataToPassInApi = {
-		PlantName: 'SEIPL,BLR',
-		FromDate: fromdate,
-		ToDate: todate,
-		OffsetRecords: '0',
-		NextRecords: '1000',
+		PlantName: 'SEIPL,BLR'
 	};
 
 	const [usageFormModalView, setUsageFormModalView] = useState(false);
 	const [data, setData] = useState([]);
+	const [apiData, setApiData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [apiError, setAPIError] = useState(false);
 	const [refreshing, setRefreshing] = useState(false);
@@ -50,7 +49,7 @@ export default AllUsages = () => {
 	const [filterModalView, setFilterModalView] = useState(false);
 
 	const flatListRef = useRef(null);
-	
+
 	const onRefresh = useCallback(() => {
 		setRefreshing(true);
 		setTimeout(() => {
@@ -60,7 +59,7 @@ export default AllUsages = () => {
 
 	useEffect(() => {
 		APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
-	}, [refreshing, firstDataToDisplay, nextRecords]);
+	}, [refreshing, todate, fromdate]);
 
 	const scrollToTop = () => {
 		flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
@@ -76,6 +75,7 @@ export default AllUsages = () => {
 				dataGot = dataGot.reverse();
 				setTotalRecords(dataGot.length);
 				setData(dataGot.slice(firstDataToDisplay, nextRecords));
+				setApiData(dataGot);
 				setIsLoading(false);
 			} else {
 				setIsLoading(false);
@@ -122,13 +122,50 @@ export default AllUsages = () => {
 			setNextRecords(Number(nextRecords) - 10 + '');
 		}
 	}
-	
-	function toggleFilterModal(){
-		setFilterModalView(filterModalView?false:true);
+
+	function toggleFilterModal() {
+		setFilterModalView(filterModalView ? false : true);
+	}
+
+	function searchFromAvailableReport(text) {
+		if (text === "") {
+			setData(apiData);
+		}
+		let filteredReport = apiData.filter((eachItem) => (eachItem.cam_Serialno.includes(text)));
+		setData(filteredReport);
+	}
+
+	function changeToFromDate(option) {
+		switch (option) {
+			case 'today':
+				console.log("Today", fromdate, todate);
+				setFromDate(todate);
+				break;
+			case 'week':
+				console.log("Week");
+				break;
+			case 'month':
+				console.log("Month");
+				break;
+			case 'year':
+				console.log("Year");
+
+		}
+		// APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
+	}
+
+	function getStartOfWeek() {
+		const now = new Date();
+		const dayOfWeek = now.getDay();
+		const startOfWeek = new Date(now);
+		const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+		startOfWeek.setDate(now.getDate() + diff);
+		startOfWeek.setHours(0, 0, 0, 0);
+		return startOfWeek;
 	}
 
 	return (
-		<SafeAreaView style={{ paddingTop: -50, flex: 1 }}>
+		<View style={{ paddingTop: -50, flex: 1 }}>
 			<LinearGradient colors={['#000C18', '#001E3E']} style={styles.UsageBody}>
 				<LinearGradient colors={['rgba(49, 81, 111, 0.5)', 'rgba(9, 42, 73, 0.5)']}
 					start={{ x: 0.0, y: 0.25 }}
@@ -140,35 +177,38 @@ export default AllUsages = () => {
 							<TextInput
 								placeholder="Search camera serial number"
 								placeholderTextColor={'rgba(232, 232, 232, 1)'}
+								onChangeText={searchFromAvailableReport}
+								style={{ color: 'white' }}
 							>
 							</TextInput>
 						</View>
-						<TouchableOpacity style={{ flex: 2}} onPress={toggleFilterModal}>
+						<TouchableOpacity style={{ flex: 2 }} onPress={toggleFilterModal}>
 							<Image style={{ width: 30, height: 30 }} source={require('../../assets/icons/filter.png')} />
 						</TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', gap: 10, marginTop: 10, marginBottom: 15 }}>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('today')}>
 							<Text style={{ color: '#FFFFFF' }}>Today</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('week')}>
 							<Text style={{ color: '#FFFFFF' }}>This Week</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('month')}>
 							<Text style={{ color: '#FFFFFF' }}>This Month</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'yelrgba(255, 255, 255, 0.5)low', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }}>
+						<TouchableOpacity style={{ backgroundColor: 'yelrgba(255, 255, 255, 0.5)low', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('year')}>
 							<Text style={{ color: '#FFFFFF' }}>This Year</Text>
 						</TouchableOpacity>
 					</View>
 				</LinearGradient>
 				{isLoading ? (
 					<View style={styles.errorPage}>
+						{console.log("Today", fromdate, todate)}
 						<View style={{ width: 150, height: 150, borderRadius: 100, borderWidth: 10, borderColor: 'rgba(160, 217, 251, 0.5)', justifyContent: 'center', alignItems: 'center', padding: 10 }}>
 							<View style={{ width: 125, height: 125, borderRadius: 100, overflow: 'hidden', borderWidth: 2, borderColor: 'rgba(254, 254, 254, 0.9)', justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
 								<Image
 									source={require('../../assets/icons/loader.gif')}
-									style={{ width: 100, height: 150, objectFit: 'contain', right: 5, bottom: 10 }}
+									style={{ width: 100, height: 150, objectFit: 'contain', right: 5, bottom: 10, transform: [{ rotateY: '180deg' }] }}
 								/>
 								<Animatable.Image animation={'slideInLeft'} duration={2000} direction="alternate" iterationCount={'infinite'} source={require('../../assets/icons/SeaImage.png')} style={{ width: '200%', height: 250, position: 'absolute', zIndex: 0, bottom: 0, left: '-10%', opacity: 0.5 }} />
 							</View>
@@ -252,9 +292,9 @@ export default AllUsages = () => {
 					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute' }}
 				/>
 			</LinearGradient>
-			<ReportFilter onClose={toggleFilterModal} isVisible={filterModalView}/>
+			<ReportFilter onClose={toggleFilterModal} isVisible={filterModalView} />
 			<StatusBar backgroundColor={'rgba(0, 0, 0, 1)'} barStyle={'light-content'} />
-		</SafeAreaView>
+		</View>
 	);
 };
 

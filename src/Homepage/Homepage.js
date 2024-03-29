@@ -141,7 +141,7 @@ export default Homepage = () => {
             >
                 <ScrollView contentContainerStyle={styles.HomeContent}>
                     <Animatable.Image animation={'slideInDown'} direction="alternate" duration={10000} iterationCount={1} source={require('../../assets/icons/ellipseBack.png')} style={{ right: -150, top: '20%', width: 400, height: 400, position: 'absolute', objectFit: 'contain' }} />
-                    <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center' }}>
+                    <View style={{ flexDirection: 'row', paddingHorizontal: 10, gap: 10, justifyContent: 'center', marginBottom: 50 }}>
                         <View style={{ flex: 5, gap: -10 }}>
                             <Image source={require('../../assets/icons/frame4.png')} style={{ position: 'absolute', width: '100%', height: 150, borderRadius: 20 }} />
                             <Text style={{ color: '#0E6578', fontSize: 50, fontFamily: 'Poppins_SemiBold', paddingLeft: 10, top: 20 }}>{dashBoardData.dailyCnt ? dashBoardData.dailyCnt : 0}</Text>
@@ -163,24 +163,10 @@ export default Homepage = () => {
                             </View>
                         </View>
                     </View>
-                    <TouchableOpacity onPress={() => router.push({ pathname: '/(tabs)/report' })} style={{ width: '100%', marginTop: 10 }} >
-                        <LinearGradient colors={['rgba(250,255,175,1)', 'rgba(244,209,96,1)']} start={{ x: 1, y: 1 }} end={{ x: 0, y: 0 }} style={{ flexDirection: 'row', justifyContent: 'space-between', padding: 12, paddingHorizontal: 20, borderRadius: 10, marginHorizontal: 10, marginVertical: 20 }}>
-                            <View>
-                                <Text style={{ color: 'black', fontSize: 16, fontFamily: Fonts.SignikaNegative_SemiBold }}>Violation Report</Text>
-                                <Text style={{ color: 'black', fontSize: 12, fontFamily: Fonts.SignikaNegative_Regular }}>List of all Violations</Text>
-                            </View>
-                            <View>
-                                <Image source={require('./../../assets/icons/Report-button.png')} style={{ width: 35, height: 35 }} />
-                            </View>
-                        </LinearGradient>
-                    </TouchableOpacity>
                     <ProgressGraph />
-                    <View>
-
-                    </View>
                     <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '100%', paddingHorizontal: 10, marginTop: 30, marginBottom: 10 }}>
-                        <Text style={{ color: 'white', fontFamily: 'Poppins', fontSize: 20 }}>Recent Violations</Text>
-                        <Image source={require('../../assets/icons/rightArrow.png')} style={{ width: 40, height: 40, borderRadius: 10 }} />
+                        <Text style={{ color: 'rgba(244,209,96,1)', fontFamily: 'Poppins', fontSize: 20 }}>Recent Violations</Text>
+                        <Image source={require('../../assets/icons/right-arrow-yellow.png')} style={{ width: 40, height: 40, borderRadius: 10 }} />
                     </View>
                     {recentInspectionDataFromAPI.length ?
                         <FlatList
@@ -191,8 +177,8 @@ export default Homepage = () => {
                                 return <TouchableOpacity onPress={() => showImage(item.item)}>
                                     <Image source={{
                                         uri: downloadLink + item.item.fileName
-                                    }} style={{ width: 300, height: 200, borderBottomRightRadius: 10,borderBottomLeftRadius: 10, borderColor: 'rgba(0,230,255,1)', borderWidth: 5 }} />
-                                    <Text style={{ color: 'black', position: 'absolute', bottom: 45, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '90%', backgroundColor: 'rgba(0,230,255,1)', borderTopLeftRadius: 10, borderTopRightRadius: 10, alignSelf: 'center', textAlign: 'center' }}>{item.item.cam_Serialno}</Text>
+                                    }} style={{ width: 300, height: 200, borderWidth: 0.4, borderColor:'#F4D160', borderRadius: 10  }} />
+                                    <Text style={{ color: 'black', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '90%', backgroundColor: '#F4D160',alignSelf: 'center', textAlign: 'center' , borderTopLeftRadius: 10, borderTopRightRadius: 10}}>{item.item.cam_Serialno}</Text>
                                 </TouchableOpacity>
                             }
                             }
@@ -200,7 +186,6 @@ export default Homepage = () => {
                         <Text>This is the Recent Inspection Data.</Text>
                     }
                     <Modal style={{ flex: 1, width: '100%' }} visible={showImageView} onRequestClose={() => setShowImageView(false)}>
-                        {/* {console.log("In Modal", recentInspectionDataFromAPI, imageIndex)} */}
                         {recentInspectionDataFromAPI[imageIndex] ?
                             <View style={{backgroundColor: 'black'}}>
                                 <Image source={{ uri: (recentInspectionDataFromAPI[imageIndex].fileName) ? (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName) : extraImage }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute', objectFit: 'contain', bottom: 70 }} />
@@ -274,7 +259,7 @@ const styles = StyleSheet.create({
         objectFit: 'contain'
     },
     WorkPermitList: {
-        gap: 10,
+        gap: 20,
         height: 240,
         paddingLeft: 10,
         paddingRight: 20

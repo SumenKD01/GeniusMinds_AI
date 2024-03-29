@@ -13,60 +13,6 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
     let allViolations = reason.split(",");
     console.log(allViolations);
 
-    const AllViolationIcons = () => {
-        return (
-            <View style={{ width: '100%' }}>
-                {allViolations.forEach((eachItem) => {
-                    let returningIcon;
-                    switch (eachItem) {
-                        case 'Helmet': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Helmet.png');
-                        }
-                            break;
-                        case 'Vest': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Vest.png');
-                        }
-                            break;
-                        case 'Gloves': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Gloves.png');
-                        }
-                            break;
-                        case 'Glasses': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Goggles.png');
-                        }
-                            break;
-                        case 'Postures': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Posture.png');
-                        }
-                            break;
-                        case 'Fall Detection': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/FallDetection.png');
-                        }
-                            break;
-                        case 'Fire Extinguisher': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/FireExtinguisher.png');
-                        }
-                            break;
-                        case 'Geofencing': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Geofencing.png');
-                        }
-                            break;
-                        case 'Shoes': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Shoes.png');
-                        }
-                            break;
-                        case 'Mask': {
-                            returningIcon = require('../../assets/icons/ViolationIcons/Mask.png');
-                        }
-                    }
-                    console.log("returning Icon is ", returningIcon);
-                    return <Image source={returningIcon} style={{ width: 30, height: 30, objectFit: 'contain' }} />
-                })
-                }
-            </View>
-        )
-    }
-
     const pathImages = '../../assets/icons/StockManagement/Icons/';
 
     const makeDateReadable = (date) => {
