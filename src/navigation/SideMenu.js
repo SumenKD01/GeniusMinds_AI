@@ -79,7 +79,7 @@ export default SideMenu = () => {
                             <Text style={{ color: 'white', fontSize: 10 }}>Terms & Privacy</Text>
 
                         </TouchableOpacity>
-                        <Text style={{ fontSize: 7, color: 'white', marginTop: 5 }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text>
+                        <Text style={{ fontSize: 7, color: 'white', marginTop: 5  }}>Genius Minds 2023 from ©www.softdesigners.co.in</Text>
                     </View>
                 </LinearGradient>
             </ScrollView>

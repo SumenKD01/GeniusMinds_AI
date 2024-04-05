@@ -1,16 +1,11 @@
 import { Text, View, Image, StyleSheet, Dimensions, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { useFonts } from "expo-font";
 
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 
 export default AboutUs = () => {
-    const [fontsLoaded] = useFonts({
-        'Righteous-Regular': require('../../assets/fonts/Righteous/Righteous-Regular.ttf'),
-        'Prompt-Regular': require('../../assets/fonts/Prompt/Prompt-Regular.ttf')
-    });
     return (
         <ScrollView>
             <LinearGradient colors={['#000C18', '#001E3E']}

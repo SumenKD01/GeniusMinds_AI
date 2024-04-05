@@ -2,9 +2,10 @@ import { useState } from "react";
 import { Image, Modal, StyleSheet, Text, TouchableOpacity, View, Pressable, TouchableHighlight } from "react-native";
 import * as Animatable from 'react-native-animatable';
 import { Colors } from "../utils/Colors1";
+import { router } from "expo-router";
 
 export default EachViolationCard = ({ productName, quantity, reason, timing, operation, providedTo, downloadSignLink, others }) => {
-    let cardIcon;
+    const downloadLink = 'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=';
     productName = productName.slice(0, 1).toUpperCase() + productName.slice(1,);
     providedTo = providedTo.toUpperCase();
     const [downloadProcessModal, setDownloadProcessModal] = useState(false);
@@ -44,15 +45,15 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
             <TouchableOpacity style={{ zIndex: 2 }} onPress={toggleDownloadProcessModal}>
                 <View style={styles.firstRow}>
                     <View style={{ flex: 5 }}>
-                        <View style={{flexDirection: 'row', gap: 5}}>
+                        <View style={{ flexDirection: 'row', gap: 5 }}>
                             <Image source={require('../../assets/icons/camera-lens.png')} style={{ width: 20, height: 20 }} />
                             <Text style={styles.cardHeading}>Camera Serial No. {providedTo}</Text>
                         </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center', right: 5}}>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', right: 5 }}>
                             <Image source={require('../../assets/icons/calendar.png')} style={{ width: 30, height: 30 }} />
                             <Text style={{ color: 'white' }}>{makeDateReadable(timing)}</Text>
                         </View>
-                        <View style={{flexDirection: 'row', gap: 5, marginBottom: -5}}>
+                        <View style={{ flexDirection: 'row', gap: 5, marginBottom: -5 }}>
                             <Image source={require('../../assets/icons/clock.png')} style={{ width: 20, height: 20 }} />
                             <Text style={{ color: 'white' }}>{makeTimeReadable(timing)}</Text>
                         </View>
@@ -73,7 +74,7 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                         </View>
                         <View style={{ position: 'absolute, right: 0' }}>
                             <View style={{ width: '100%', flexDirection: 'row', gap: -5 }}>
-                                {allViolations.map((eachItem) => {
+                                {allViolations.map((eachItem, index) => {
                                     let returningIcon;
                                     switch (eachItem) {
                                         case 'Helmet': {
@@ -117,7 +118,7 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                                         }
                                     }
                                     console.log("Returning Icon is ", returningIcon);
-                                    return <Image source={returningIcon} style={{ width: 30, height: 30 }} />
+                                    return <Image key={index + 1} source={returningIcon} style={{ width: 30, height: 30 }} />
                                 })
                                 }
                             </View>
@@ -136,14 +137,16 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                             <View>
                                 {productName &&
                                     <Image source={{
-                                        uri:
-                                            'https://androidapi220211216164156.azurewebsites.net/api/Approval/DownloadFile?filename=' + productName
+                                        uri: downloadLink + productName
                                     }} style={styles.signatureImage} />
                                 }
                             </View>
                             <TouchableHighlight onPress={toggleDownloadProcessModal} style={styles.closeCrossbutton} underlayColor={Colors.redHeaderButton}  >
                                 <Image source={require(pathImages + 'cross.png')} style={styles.closeIconStyle} />
                             </TouchableHighlight>
+                            <TouchableOpacity style={{ position: 'absolute', right: 10, backgroundColor: 'rgba(252,252,252,0.5)', padding: 5, borderRadius: 10, bottom: '10%', zIndex: 2 }} onPress={() => router.push({ pathname: '/MoreInfoPage/ZoomIn', params: { imageLink: downloadLink + productName } })} >
+                                    <Image source={require('../../assets/icons/zoom.png')} style={{ width: 30, height: 30 }} />
+                                </TouchableOpacity>
                         </TouchableOpacity>
                     </Pressable>
                 </Modal>

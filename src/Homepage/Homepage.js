@@ -8,6 +8,7 @@ import MaskedView from '@react-native-masked-view/masked-view';
 import { Fonts } from '../utils/Fonts';
 import { Link, router } from "expo-router";
 import ProgressGraph from './ProgressGraph';
+import ZoomableImage from '../ZoomInZoomOut/ZoomableImage';
 
 const width = Dimensions.get('window').width;
 
@@ -174,11 +175,11 @@ export default Homepage = () => {
                             data={recentInspectionDataFromAPI}
                             horizontal
                             renderItem={(item, index = count) => {
-                                return <TouchableOpacity onPress={() => showImage(item.item)}>
+                                return <TouchableOpacity onPress={() => showImage(item.item)} key={index + 1}>
                                     <Image source={{
                                         uri: downloadLink + item.item.fileName
-                                    }} style={{ width: 300, height: 200, borderWidth: 0.4, borderColor:'#F4D160', borderRadius: 10  }} />
-                                    <Text style={{ color: 'black', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '90%', backgroundColor: '#F4D160',alignSelf: 'center', textAlign: 'center' , borderTopLeftRadius: 10, borderTopRightRadius: 10}}>{item.item.cam_Serialno}</Text>
+                                    }} style={{ width: 300, height: 200, borderWidth: 0.4, borderColor: '#F4D160', borderRadius: 10 }} />
+                                    <Text style={{ color: 'black', position: 'absolute', bottom: 40, fontSize: 12, fontFamily: Fonts.SignikaNegative_Medium, width: '90%', backgroundColor: '#F4D160', alignSelf: 'center', textAlign: 'center', borderTopLeftRadius: 10, borderTopRightRadius: 10 }}>{item.item.cam_Serialno}</Text>
                                 </TouchableOpacity>
                             }
                             }
@@ -187,7 +188,8 @@ export default Homepage = () => {
                     }
                     <Modal style={{ flex: 1, width: '100%' }} visible={showImageView} onRequestClose={() => setShowImageView(false)}>
                         {recentInspectionDataFromAPI[imageIndex] ?
-                            <View style={{backgroundColor: 'black'}}>
+                            <View style={{ backgroundColor: 'black' }}>
+                                {/* <ZoomableImage source={{ uri: (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName)}} /> */}
                                 <Image source={{ uri: (recentInspectionDataFromAPI[imageIndex].fileName) ? (downloadLink + recentInspectionDataFromAPI[imageIndex].fileName) : extraImage }} style={{ width: '100%', height: '100%', zIndex: 0, position: 'absolute', objectFit: 'contain', bottom: 70 }} />
                                 <View style={{ position: 'absolute', padding: 15, bottom: 0, backgroundColor: 'rgba(52, 52, 52, 0.5)', width: '100%' }}>
                                     <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].cam_Serialno}</Text>
@@ -196,6 +198,9 @@ export default Homepage = () => {
                                     <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex].serial_no}</Text>
                                     <Text style={{ fontFamily: Fonts.SignikaNegative_Medium, color: 'white' }}>{recentInspectionDataFromAPI[imageIndex]["creation_Datetime"]}</Text>
                                 </View>
+                                <TouchableOpacity style={{ position: 'absolute', right: 10, backgroundColor: 'rgba(252,252,252,0.5)', padding: 5, borderRadius: 10, bottom: '20%', zIndex: 2 }} onPress={() => router.push({ pathname: '/MoreInfoPage/ZoomIn', params: { imageLink: downloadLink + recentInspectionDataFromAPI[imageIndex].fileName } })} >
+                                    <Image source={require('../../assets/icons/zoom.png')} style={{ width: 30, height: 30 }} />
+                                </TouchableOpacity>
                                 <View style={{ flexDirection: 'row' }}>
                                     <TouchableOpacity style={{ width: '50%', height: 800, flex: 1, justifyContent: 'center', alignItems: 'flex-start' }} onPress={() => { imageIndex > 0 ? setImageIndex(imageIndex - 1) : console.log('no element') }}>
                                         {imageIndex > 0 &&

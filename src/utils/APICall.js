@@ -13,7 +13,7 @@ export default APICall = (apiGot, jsonDataToPassInApi, result, action) => {
                     body: JSON.stringify(jsonDataToPassInApi),
                 }
             );
-            console.log("Result", api, "API function", apiGot, jsonDataToPassInApi);
+            // console.log("Result", api, "API function", apiGot, jsonDataToPassInApi);
             if (api.ok) {
                 if (action === 'getReport') {
                     const resp = await api.json();
