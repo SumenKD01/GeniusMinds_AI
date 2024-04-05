@@ -25,7 +25,7 @@ import CustomButton from '../utils/CustomButton';
 const deviceHeight = Dimensions.get('window').height;
 
 export default AllViolations = () => {
-	const pathImages = '../../assets/icons/StockManagement/Icons/';
+	const pathImages = '../../assets/icons/';
 	const currentDate = new Date();
 	const [todate, setToDate] = useState(getDateForAPI(currentDate, 'to'));
 	const [fromdate, setFromDate] = useState(getDateForAPI(currentDate, 'from'));

@@ -8,7 +8,7 @@
     "icon": "./assets/icons/LogoIcon/GMIcon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/icons/LogoIcon/splashscreen.png",
+      "image": "./assets/icons/LogoIcon/splashscreenGM.png",
       "resizeMode": "contain",
       "backgroundColor": "#000"
     },
