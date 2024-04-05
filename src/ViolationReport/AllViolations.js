@@ -43,8 +43,8 @@ export default AllViolations = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [apiError, setAPIError] = useState(false);
 	const [refreshing, setRefreshing] = useState(false);
-	const [firstDataToDisplay, setfirstDataToDisplay] = useState('0');
-	const [nextRecords, setNextRecords] = useState('10');
+	const [firstDataToDisplay, setfirstDataToDisplay] = useState(0);
+	const [nextRecords, setNextRecords] = useState(10);
 	const [totalRecords, setTotalRecords] = useState(0);
 	const [filterModalView, setFilterModalView] = useState(false);
 
@@ -94,32 +94,25 @@ export default AllViolations = () => {
 		return `${year}-${month}-${day}`;
 	}
 
-	//Usage Form Opening
-	function usageFormOpen() {
-		setUsageFormModalView(true);
-	}
-
-	function usageFormClose() {
-		setUsageFormModalView(false);
-	}
-
 	function proceedToNextPage() {
-		setfirstDataToDisplay(Number(firstDataToDisplay) + 10 + '');
-		setNextRecords(Number(nextRecords) + 10 + '');
+		setData(apiData.slice(firstDataToDisplay + 10, nextRecords + 10));
+		setfirstDataToDisplay(firstDataToDisplay + 10);
+		setNextRecords(nextRecords + 10);
 		scrollToTop();
 	}
 
 	function proceedToFirstPage() {
+		setData(apiData.slice(0, 10));
+		setfirstDataToDisplay(0);
+		setNextRecords(10);
 		scrollToTop();
-		setfirstDataToDisplay('0');
-		setNextRecords('10');
 	}
 
 	function proceedToPreviousPage() {
 		if (firstDataToDisplay >= 10) {
-			scrollToTop();
-			setfirstDataToDisplay(Number(firstDataToDisplay) - 10 + '');
-			setNextRecords(Number(nextRecords) - 10 + '');
+			setData(apiData.slice(firstDataToDisplay - 10, nextRecords - 10));
+			setfirstDataToDisplay(firstDataToDisplay - 10);
+			setNextRecords(nextRecords - 10);
 		}
 	}
 
@@ -228,8 +221,9 @@ export default AllViolations = () => {
 							data={data}
 							ref={flatListRef}
 							contentContainerStyle={styles.UsageDisplayBody}
-							renderItem={({ item }) => (
+							renderItem={({ item }, index) => (
 								<EachViolationCard
+									key={index + 1}
 									productName={item.fileName}
 									timing={item.creation_Datetime}
 									reason={item.violations}
@@ -244,34 +238,34 @@ export default AllViolations = () => {
 									style={{
 										flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: 10,
 										padding: 10,
-										width: '100', zIndex: 2,
+										width: '100%', zIndex: 100, position: 'absolute'
 									}}
 								>
-									{firstDataToDisplay !== '0' && (
+									{firstDataToDisplay !== 0 && (
 										<CustomButton
 											textPassed={'Previous'}
 											functionPassed={proceedToPreviousPage}
-											colorPassed={Colors.white}
-											textColor={Colors.black}
-											borderColor={Colors.black}
+											colorPassed={'rgba(252,252,252,0.5)'}
+											textColor={Colors.white}
+											borderColor={Colors.white}
 										/>
 									)}
-									{firstDataToDisplay !== '0' && (
+									{firstDataToDisplay !== 0 && (
 										<CustomButton
 											textPassed={'First Page'}
 											functionPassed={proceedToFirstPage}
-											colorPassed={Colors.white}
-											textColor={Colors.black}
-											borderColor={Colors.black}
+											colorPassed={'rgba(252,252,252,0.5)'}
+											textColor={Colors.white}
+											borderColor={Colors.white}
 										/>
 									)}
 									{Number(firstDataToDisplay) + 10 < totalRecords && (
 										<CustomButton
 											textPassed={'Next'}
 											functionPassed={proceedToNextPage}
-											colorPassed={Colors.white}
-											textColor={Colors.black}
-											borderColor={Colors.black}
+											colorPassed={'rgba(252,252,252,0.5)'}
+											textColor={Colors.white}
+											borderColor={Colors.white}
 										/>
 									)}
 								</View>
@@ -283,24 +277,24 @@ export default AllViolations = () => {
 						<Image
 							source={require(pathImages + 'no-data.png')}
 							style={styles.errorIcon}
-						/>
+						/>8	
 						<Text style={styles.errorPageText}>{'No Data Available!'}</Text>
 					</View>
 				)}
 				<Image
 					source={require('../../assets/icons/ReportBackImage.png')}
-					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute' }}
+					style={{ width: '100%', bottom: 0, height: 220, position: 'absolute', zIndex: 0 }}
 				/>
 			</LinearGradient>
 			<ReportFilter onClose={toggleFilterModal} isVisible={filterModalView} />
-			<StatusBar backgroundColor={'rgba(0, 0, 0, 1)'} barStyle={'light-content'} />
+			<StatusBar backgroundColor={'rgba(50, 80, 130, 1)'} barStyle={'light-content'} />
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	UsageBody: {
-		gap: 10
+		gap: 10    
 	},
 	UsageDisplayBody: {
 		paddingBottom: deviceHeight - 300,

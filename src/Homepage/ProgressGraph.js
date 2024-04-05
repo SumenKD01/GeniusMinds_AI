@@ -59,7 +59,7 @@ const ProgressGraph = () => {
       let newDataMap = Object.keys(dataGot).map((eachItem) => {
         return {
           value: dataGot[eachItem],
-          date: `${eachItem} ${months[currentDate.getMonth()]}`
+          date: `${eachItem} ${months[currentDate.getMonth()-1]}`
 
         }
       });

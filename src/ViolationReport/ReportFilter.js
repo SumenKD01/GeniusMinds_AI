@@ -47,8 +47,8 @@ export default ReportFilter = ({ isVisible, onClose }) => {
                             <Text style={{ fontSize: 14, fontFamily: 'Poppins_SemiBold', color: 'white', marginLeft: 10 }}>Select Violation Types</Text>
                             <View style={{ backgroundColor: 'rgba(211, 211, 211, 0.3)', borderRadius: 10, padding: 10, height: '100%', flexWrap: 'wrap', gap: 5, justifyContent: 'center' }}>
                                 {
-                                    typeOfViolations.map((eachItem) =>
-                                        <TouchableOpacity style={{ flexDirection: 'row', gap: 5, marginRight: 15 }}>
+                                    typeOfViolations.map((eachItem, index) =>
+                                        <TouchableOpacity style={{ flexDirection: 'row', gap: 5, marginRight: 15 }} key={index+1}>
                                             <Image source={require('../../assets/icons/UncheckedBox.png')} style={{ width: 20, height: 20 }} />
                                             <Text style={{ fontSize: 16, fontFamily: 'Poppins_Regular', color: 'white', bottom: 1 }}>{eachItem}</Text>
                                         </TouchableOpacity>
