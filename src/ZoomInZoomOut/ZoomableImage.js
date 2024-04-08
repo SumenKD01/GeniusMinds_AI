@@ -34,6 +34,18 @@ export default ZoomableImage = () => {
       savedScale.value = scale.value;
     });
 
+  const doubleTap = Gesture.Tap()
+    .maxDuration(250)
+    .numberOfTaps(2)
+    .onStart(() => {
+      console.log('Double tap!', scale.value);
+      if(scale.value >= 3){
+        scale.value = savedScale.value / 3;
+      } else {
+        scale.value = savedScale.value * 3;
+      }
+    });
+
   const panGesture = Gesture.Pan()
     .onStart(() => {
       // Save the current position when the pan gesture starts
@@ -69,11 +81,13 @@ export default ZoomableImage = () => {
 
   return (
     <View style={{ backgroundColor: 'black', flex: 1, justifyContent: 'center' }}>
-      <GestureDetector gesture={gesture === 'pinch' ? pinchGesture : panGesture}>
+      <GestureDetector gesture={panGesture}>
         <Animated.View style={animatedStyle1} >
-          <Animated.View style={animatedStyle2} >
-            <Image source={{ uri: imageLink }} style={{ width: 400, height: 400, resizeMode: 'contain' }} />
-          </Animated.View>
+          <GestureDetector gesture={Gesture.Exclusive(doubleTap)}>
+            <Animated.View style={animatedStyle2} >
+              <Image source={{ uri: imageLink }} style={{ width: 400, height: 400, resizeMode: 'contain' }} />
+            </Animated.View>
+          </GestureDetector>
         </Animated.View>
       </GestureDetector >
       <TouchableOpacity style={{ position: 'absolute', right: 10, backgroundColor: 'rgba(252,252,252,0.5)', padding: 5, borderRadius: 10, bottom: '10%', zIndex: 2 }} onPress={toggleGesture}>

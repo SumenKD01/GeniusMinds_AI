@@ -9,10 +9,8 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
     productName = productName.slice(0, 1).toUpperCase() + productName.slice(1,);
     providedTo = providedTo.toUpperCase();
     const [downloadProcessModal, setDownloadProcessModal] = useState(false);
-    console.log(reason);
 
     let allViolations = reason.split(",");
-    console.log(allViolations);
 
     const pathImages = '../../assets/icons/StockManagement/Icons/';
 
@@ -96,7 +94,7 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                                         case 'Postures': {
                                             returningIcon = require('../../assets/icons/ViolationIcons/Posture.png');
                                         }
-                                            break;
+                                            break;  
                                         case 'Fall Detection': {
                                             returningIcon = require('../../assets/icons/ViolationIcons/FallDetection.png');
                                         }
@@ -117,7 +115,6 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                                             returningIcon = require('../../assets/icons/ViolationIcons/Mask.png');
                                         }
                                     }
-                                    console.log("Returning Icon is ", returningIcon);
                                     return <Image key={index + 1} source={returningIcon} style={{ width: 30, height: 30 }} />
                                 })
                                 }
