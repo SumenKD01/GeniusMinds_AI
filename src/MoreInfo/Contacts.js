@@ -1,5 +1,6 @@
-import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
+import { Text, View, Image, StyleSheet, Dimensions, TouchableOpacity, Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import { useFonts } from "expo-font";
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -7,6 +8,10 @@ const deviceWidth = Dimensions.get('window').width;
 const pathName = '../../assets/icons/';
 
 export default Contacts = () => {
+    const [fontsLoaded] = useFonts({
+        'Righteous-Regular': require('../../assets/fonts/Righteous/Righteous-Regular.ttf'),
+        'Prompt-Regular': require('../../assets/fonts/Prompt/Prompt-Regular.ttf'),
+    });
     return (
         <LinearGradient colors={['#000C18', '#001E3E']}
             style={{ flex: 1, alignItems: 'center' }}>
@@ -27,8 +32,8 @@ export default Contacts = () => {
                         <Image style={styles.cardIcon} source={require('../../assets/icons/callicon.png')} />
                     </View>
 
-                    <View style={{ flex: 4 }} >
-                        <Text style={styles.textCard}>Call us</Text>
+                    <View style={{ flex: 4, gap: 4 }} >
+                        <Text style={styles.textCardTitle}>Call us</Text>
                         <Text style={styles.textCard}>+919667128978</Text>
                     </View>
 
@@ -41,8 +46,8 @@ export default Contacts = () => {
                     <View style={{ flex: 1 }}>
                         <Image style={styles.cardIcon} source={require('../../assets/icons/mailIcon.png')} />
                     </View>
-                    <View style={{ flex: 4 }}>
-                        <Text style={styles.textCard}>Mail us</Text>
+                    <View style={{ flex: 4, gap: 4 }}>
+                        <Text style={styles.textCardTitle}>Mail us</Text>
                         <Text style={styles.textCard}>enquiry@softdesigners.com</Text>
                     </View>
                 </LinearGradient>
@@ -53,14 +58,14 @@ export default Contacts = () => {
                     <View style={{ flex: 1, justifyContent: 'center' }}>
                         <Image style={styles.cardIcon} source={require('../../assets/icons/locationIcon.png')} />
                     </View>
-                    <View style={{ flex: 4 }}>
-                        <Text style={styles.textCard}>Address</Text>
+                    <View style={{ flex: 4, gap: 4 }}>
+                        <Text style={styles.textCardTitle}>Address</Text>
                         <Text style={styles.textCard}>No.234/146, Thalaghattapura, Kanakapura main road, Bangalore, Karnataka, India 560109</Text>
                     </View>
                 </LinearGradient>
             </View>
             <View style={{ marginTop: 50 }}>
-                <Text style={{ fontFamily: 'Poppins_Regular', left: 45, padding: 10, color: 'white' }}>Follow us on:</Text>
+                <Text style={{ fontFamily: 'Righteous-Regular', left: 45, padding: 10, color: 'white' }}>Follow us on:</Text>
                 <View style={styles.icons}>
                     <TouchableOpacity
                         onPress={() => {
@@ -133,8 +138,13 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: 'rgba( 187, 187, 187 , 0.5)'
     },
+    textCardTitle: {
+        color: 'white',
+        fontFamily: 'Righteous-Regular'
+    },
     textCard: {
-        color: 'white'
+        color: 'white',
+        fontFamily: 'Prompt-Regular'
     },
     linearGradient: {
         flexDirection: 'row',

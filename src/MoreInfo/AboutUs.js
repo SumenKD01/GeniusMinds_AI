@@ -15,18 +15,18 @@ export default AboutUs = () => {
         <ScrollView>
             <LinearGradient colors={['#000C18', '#001E3E']}
                 style={{ flex: 1, alignItems: 'center' }}>
-                <Text style={{ color: 'white', fontSize: 24, marginTop: 50, marginBottom: 20 }}>About Us</Text>
+                <Text style={{ color: 'white', fontSize: 24, fontFamily: 'Righteous-Regular', marginTop: 50, marginBottom: 20 }}>About Us</Text>
                 <View style={{ marginTop: 80 }}>
                     <LinearGradient colors={['rgba(184, 184, 184, 0.2)', 'rgba(38, 38, 38, 0.3)']}
                         start={{ x: 0.0, y: 0.25 }}
                         end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
                         style={styles.aboutBox1}>
                         <Image style={{ width: 140, height: 140, marginBottom: 10, top: -70, position: "absolute" }} source={require('../../assets/icons/about1img.png')} />
-                        <Text style={{ color: '#E1E79A', fontFamily: 'Righteous-Regular', fontSize: 20, marginBottom: 10, marginTop: 80 }}>
+                        <Text style={styles.aboutTextTitle}>
                             What we are?
                         </Text>
-                        <Text style={{ color: 'white', fontFamily: 'Prompt-Regular', fontSize: 14 }}>
-                            SoftDesigners are    the leaders in Lean Manufacturing & Industry 4.0 Solutions in India and we had done projects across different parts of the world.
+                        <Text style={styles.aboutText}>
+                            SoftDesigners are the leaders in Lean Manufacturing & Industry 4.0 Solutions in India and we had done projects across different parts of the world.
                         </Text>
                     </LinearGradient>
                 </View>
@@ -36,16 +36,11 @@ export default AboutUs = () => {
                         end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
                         style={styles.aboutBox2}>
                         <Image style={{ width: 140, height: 140, marginBottom: 10, top: -70, position: "absolute" }} source={require('../../assets/icons/about2img.png')} />
-                        <Text style={{ color: '#E1E79A', fontFamily: 'Righteous-Regular', fontSize: 20, marginBottom: 10, marginTop: 80 }}>
+                        <Text style={styles.aboutTextTitle}>
                             Why Soft Designer?
                         </Text>
-                        <Text style={{ color: 'white', fontFamily: 'Prompt-Regular', fontSize: 14 }}>
-                            <Text style={{ marginBottom: 20 }}>
-                                We offer end-to-end Turn Key solutions to Manufacturing companies to improve their manufacturing productivity in real time.
-                            </Text>
-                            <Text>
-                                We specialize in Lean manufacturing solutions, IOT (internet of things), AI (Artificial intelligence), Industry 4.0 and employees health and safety solutions.
-                            </Text>
+                        <Text style={styles.aboutText}>
+                            We offer end-to-end Turn Key solutions to Manufacturing companies to improve their manufacturing productivity in real time. We specialize in Lean manufacturing solutions, IOT (internet of things), AI (Artificial intelligence), Industry 4.0 and employees health and safety solutions.
                         </Text>
                     </LinearGradient>
                 </View>
@@ -76,5 +71,17 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(67, 166, 125, 0.9)',
         borderRadius: 10,
         marginBottom: 10,
+    },
+    aboutTextTitle: {
+        color: '#E1E79A',
+        fontFamily: 'Righteous-Regular',
+        fontSize: 20,
+        marginBottom: 10,
+        marginTop: 80
+    },
+    aboutText: {
+        color: 'white',
+        fontFamily: 'Prompt-Regular',
+        fontSize: 14,
     }
 });
