@@ -4,4 +4,4 @@ import Contacts from '../../MoreInfo/Contacts'
 
 export default function ContactUs() {
   return <Contacts/>
-}
+}   

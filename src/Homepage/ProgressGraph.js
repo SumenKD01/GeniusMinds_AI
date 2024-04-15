@@ -26,7 +26,7 @@ const ProgressGraph = () => {
   const jsonDataToPassInDaily = {
     "PlantName": "SEIPL,BLR",
     "Year": "2024",
-    "Month": currentDate.getMonth() + 1 + ""
+    "Month": currentDate.getMonth()  + ""
   };
 
   function resultReportMonthly(dataGot, apiError) {
@@ -59,7 +59,7 @@ const ProgressGraph = () => {
       let newDataMap = Object.keys(dataGot).map((eachItem) => {
         return {
           value: dataGot[eachItem],
-          date: `${eachItem} ${months[currentDate.getMonth()-1]}`
+          date: `${eachItem} ${months[currentDate.getMonth()]}`
 
         }
       });
@@ -169,19 +169,19 @@ const ProgressGraph = () => {
           areaChart
           data={dataDaily}
           rotateLabel
-          width={250}
+          width={280}
           height={260}
-          spacing={10}
+          spacing={9}
           color="#F4D160"
           thickness={2}
           hideDataPoints
-          startFillColor="rgba(20,95,81,0.3)"
+          startFillColor="#F4D160"
           endFillColor="rgba(20,85,81,0.01)"
-          startOpacity={0.9}
+          startOpacity={1}
           endOpacity={0.2}
           initialSpacing={0}
           noOfSections={6}
-          maxValue={10}
+          maxValue={14}
           yAxisColor="#000"
           yAxisThickness={2}
           rulesType="solid"

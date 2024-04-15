@@ -36,11 +36,9 @@ export default ZoomableImage = () => {
 
   const panGesture = Gesture.Pan()
     .onStart(() => {
-      // Save the current position when the pan gesture starts
       currentPosition = position.value;
     })
     .onUpdate((e) => {
-      // Update the position based on the translation
       position.value = currentPosition + e.translationX;
     });
 
