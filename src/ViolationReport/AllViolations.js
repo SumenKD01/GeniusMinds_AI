@@ -14,7 +14,6 @@ import {
 } from 'react-native';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Animatable from 'react-native-animatable';
 import ReportFilter from './ReportFilter';
 import EachViolationCard from './EachViolationCard';
@@ -31,13 +30,11 @@ export default AllViolations = () => {
 	const [fromdate, setFromDate] = useState(getDateForAPI(currentDate, 'from'));
 	const apiGot = 'https://androidapi220230605081325.azurewebsites.net/api/approval/GetviolationByDate?PlantName=SEIPL,BLR&Fromdate=' + fromdate + '&todate=' + todate;
 	console.log(apiGot);
-	// const apiGot =
-	// 	'https://androidapi220230605081325.azurewebsites.net/api/approval/Getviolation?PlantName=SEIPL,BLR';
+
 	const jsonDataToPassInApi = {
 		PlantName: 'SEIPL,BLR'
 	};
 
-	const [usageFormModalView, setUsageFormModalView] = useState(false);
 	const [data, setData] = useState([]);
 	const [apiData, setApiData] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -47,6 +44,12 @@ export default AllViolations = () => {
 	const [nextRecords, setNextRecords] = useState(10);
 	const [totalRecords, setTotalRecords] = useState(0);
 	const [filterModalView, setFilterModalView] = useState(false);
+
+	const [todayfilterButton, setTodayFilterButton] = useState(false);
+	const [weekfilterButton, setWeekFilterButton] = useState(false);
+	const [monthfilterButton, setMonthFilterButton] = useState(false);
+	const [yearfilterButton, setYearFilterButton] = useState(false);
+	const [filterButtonSelected, setFilterButtonSelected] = useState('');
 
 	const flatListRef = useRef(null);
 
@@ -65,19 +68,22 @@ export default AllViolations = () => {
 		flatListRef.current.scrollToOffset({ animated: true, offset: 0 });
 	};
 
-	//Result after Usage Report has been captured
 	function resultReport(dataGot, apiError) {
 		if (apiError) {
+			console.log("Error is there");
 			setIsLoading(false);
 			setAPIError(true);
 		} else {
 			if (dataGot.length) {
+				console.log("Error is not there");
 				dataGot = dataGot.reverse();
 				setTotalRecords(dataGot.length);
 				setData(dataGot.slice(firstDataToDisplay, nextRecords));
 				setApiData(dataGot);
 				setIsLoading(false);
-			} else {
+			} else {  
+				setData([]);
+				setApiData([]);
 				setIsLoading(false);
 			}
 		}
@@ -128,33 +134,68 @@ export default AllViolations = () => {
 		setData(filteredReport);
 	}
 
+	const selectedFilterButtonStyle = {
+		backgroundColor: '#D9D9D9',
+		borderRadius: 50,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		justifyContent: "center"
+	}
+
 	function changeToFromDate(option) {
+		setIsLoading(true);
+		if (option === filterButtonSelected) {
+			setFromDate(getDateForAPI(currentDate, 'from'));
+			setTodayFilterButton(false);
+			setWeekFilterButton(false);
+			setMonthFilterButton(false);
+			setYearFilterButton(false);
+			return;
+		}
 		switch (option) {
 			case 'today':
 				console.log("Today", fromdate, todate);
 				setFromDate(todate);
+				setTodayFilterButton(true);
+				setWeekFilterButton(false);
+				setMonthFilterButton(false);
+				setYearFilterButton(false);
+				setFilterButtonSelected(option);
 				break;
 			case 'week':
+				var curr = new Date();
+				day = curr.getDay();
+				firstday = new Date(curr.getTime() - 60 * 60 * 24 * day * 1000);
+				setFromDate(getDateForAPI(firstday));
+				setTodayFilterButton(false);
+				setWeekFilterButton(true);
+				setMonthFilterButton(false);
+				setYearFilterButton(false);
+				setFilterButtonSelected(option);
 				console.log("Week");
 				break;
 			case 'month':
+				var curr = new Date();
+				firstday = new Date(curr.getFullYear(), curr.getMonth(), 1);
+				setFromDate(getDateForAPI(firstday));
+				setTodayFilterButton(false);
+				setWeekFilterButton(false);
+				setMonthFilterButton(true);
+				setYearFilterButton(false);
+				setFilterButtonSelected(option);
 				console.log("Month");
 				break;
 			case 'year':
+				var curr = new Date();
+				firstday = new Date(curr.getFullYear(), 0, 1);
+				setFromDate(getDateForAPI(firstday));
+				setTodayFilterButton(false);
+				setWeekFilterButton(false);
+				setMonthFilterButton(false);
+				setYearFilterButton(true);
+				setFilterButtonSelected(option);
 				console.log("Year");
-
 		}
-		// APICall(apiGot, jsonDataToPassInApi, resultReport, 'getReport');
-	}
-
-	function getStartOfWeek() {
-		const now = new Date();
-		const dayOfWeek = now.getDay();
-		const startOfWeek = new Date(now);
-		const diff = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-		startOfWeek.setDate(now.getDate() + diff);
-		startOfWeek.setHours(0, 0, 0, 0);
-		return startOfWeek;
 	}
 
 	return (
@@ -162,8 +203,9 @@ export default AllViolations = () => {
 			<LinearGradient colors={['#000C18', '#001E3E']} style={styles.UsageBody}>
 				<LinearGradient colors={['rgba(49, 81, 111, 0.5)', 'rgba(9, 42, 73, 0.5)']}
 					start={{ x: 0.0, y: 0.25 }}
-					end={{ x: 0.5, y: 1.0 }} locations={[0.5, 1]}
-					style={{ width: '100%', alignItems: 'center', position: 'absolute', top: 0 }}>
+					end={{ x: 0.5, y: 1.0 }}
+					locations={[0.5, 1]}
+					style={{ width: '100%', alignItems: 'center', position: 'absolute', top: 0, zIndex: 4 }}>
 					<View style={{ flexDirection: 'row', alignItems: "center", width: '100%', paddingHorizontal: 7, paddingTop: 15, gap: 10 }}>
 						<View style={{ flex: 17, backgroundColor: 'rgba(255, 255, 255, 0.5)', paddingHorizontal: 20, paddingVertical: 5, borderRadius: 50, flexDirection: "row", gap: 10, alignItems: "center" }}>
 							<Image style={{ width: 20, height: 20 }} source={require('../../assets/icons/SearchWhite.png')} />
@@ -180,17 +222,17 @@ export default AllViolations = () => {
 						</TouchableOpacity>
 					</View>
 					<View style={{ flexDirection: 'row', gap: 10, marginTop: 10, marginBottom: 15 }}>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('today')}>
-							<Text style={{ color: '#FFFFFF' }}>Today</Text>
+						<TouchableOpacity style={todayfilterButton ? selectedFilterButtonStyle : styles.filterButton} onPress={() => changeToFromDate('today')}>
+							<Text style={{ color: todayfilterButton ?'black':'#FFFFFF'  }}>Today</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('week')}>
-							<Text style={{ color: '#FFFFFF' }}>This Week</Text>
+						<TouchableOpacity style={weekfilterButton ? selectedFilterButtonStyle : styles.filterButton} onPress={() => changeToFromDate('week')}>
+							<Text style={{ color: weekfilterButton ?'black':'#FFFFFF'  }}>This Week</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('month')}>
-							<Text style={{ color: '#FFFFFF' }}>This Month</Text>
+						<TouchableOpacity style={monthfilterButton ? selectedFilterButtonStyle : styles.filterButton} onPress={() => changeToFromDate('month')}>
+							<Text style={{ color: monthfilterButton ?'black':'#FFFFFF'  }}>This Month</Text>
 						</TouchableOpacity>
-						<TouchableOpacity style={{ backgroundColor: 'yelrgba(255, 255, 255, 0.5)low', borderRadius: 50, paddingHorizontal: 10, paddingVertical: 5, justifyContent: "center" }} onPress={() => changeToFromDate('year')}>
-							<Text style={{ color: '#FFFFFF' }}>This Year</Text>
+						<TouchableOpacity style={yearfilterButton ? selectedFilterButtonStyle : styles.filterButton} onPress={() => changeToFromDate('year')}>
+							<Text style={{ color: yearfilterButton ?'black':'#FFFFFF'  }}>This Year</Text>
 						</TouchableOpacity>
 					</View>
 				</LinearGradient>
@@ -216,7 +258,7 @@ export default AllViolations = () => {
 						<Text style={styles.errorPageText}>{'Internal Server Error!'}</Text>
 					</View>
 				) : data.length ? (
-					<View style={{ paddingHorizontal: 10, paddingTop: 120 }}>
+					<View style={{ paddingHorizontal: 10, paddingTop: 120, zIndex: 1 }}>
 						<FlatList
 							data={data}
 							ref={flatListRef}
@@ -277,7 +319,7 @@ export default AllViolations = () => {
 						<Image
 							source={require(pathImages + '../no-data.png')}
 							style={styles.errorIcon}
-						/>8	
+						/>
 						<Text style={styles.errorPageText}>{'No Data Available!'}</Text>
 					</View>
 				)}
@@ -294,7 +336,7 @@ export default AllViolations = () => {
 
 const styles = StyleSheet.create({
 	UsageBody: {
-		gap: 10    
+		gap: 10
 	},
 	UsageDisplayBody: {
 		paddingBottom: deviceHeight - 300,
@@ -391,4 +433,11 @@ const styles = StyleSheet.create({
 		width: 40,
 		height: 40,
 	},
+	filterButton: {
+		backgroundColor: 'rgba(255, 255, 255, 0.5)',
+		borderRadius: 50,
+		paddingHorizontal: 10,
+		paddingVertical: 5,
+		justifyContent: "center"
+	}
 });

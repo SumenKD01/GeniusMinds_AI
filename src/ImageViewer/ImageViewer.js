@@ -1,30 +1,35 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Modal } from 'react-native';
-import ImageViewer from 'react-native-image-zoom-viewer';
+import * as React from 'react';
+import { useLocalSearchParams } from 'expo-router';
 
-export default ImageViewer = () => {
-    const images = [{ url: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/sample_img.png', },];
-    const [isModelVisible, setIsModalVisible] = useState(true);
+import { StyleSheet, View, Image } from 'react-native';
+import { ReactNativeZoomableView } from '@openspacelabs/react-native-zoomable-view';
 
-    function ShowModalFunction() {
-        setIsModalVisible(false);
-    }
+export default function ImageViewer() {
+    const params = useLocalSearchParams();
+    const { imageLink } = params;
 
     return (
-        <View style={styles.MainContainer}>
-            <Modal
-                visible={this.state.isModelVisible}
-                transparent={false}
-                onRequestClose={() => this.ShowModalFunction()}>
-                <ImageViewer imageUrls={images} />
-            </Modal>
+        <View style={styles.container}>
+            <View style={{ flexShrink: 1, height: "100%", width: "100%", backgroundColor: 'black' }}>
+                <ReactNativeZoomableView
+                    maxZoom={30}
+                    contentWidth={300}
+                    contentHeight={150}
+                >
+                    <Image
+                        style={{ width: '100%', height: '100%', resizeMode: 'contain' }}
+                        source={{ uri: imageLink }}
+                    />
+                </ReactNativeZoomableView>
+            </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    MainContainer: {
+    container: {
         flex: 1,
         alignItems: 'center',
-    },
+        justifyContent: 'center'
+    }
 });

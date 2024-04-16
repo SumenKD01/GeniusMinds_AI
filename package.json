@@ -13,6 +13,8 @@
     "@expo/config": "^8.1.1",
     "@expo/metro-config": "^0.10.0",
     "@expo/vector-icons": "^14.0.0",
+    "@openspacelabs/react-native-zoomable-view": "^2.1.6",
+    "@react-native-community/datetimepicker": "7.6.1",
     "@react-native-masked-view/masked-view": "0.3.0",
     "@shopify/react-native-skia": "0.1.221",
     "eas-build-post-install": "tailwindcss -i ./global.css -o ./node_modules/.cache/nativewind/global.css.native.css",
