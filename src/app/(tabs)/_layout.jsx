@@ -24,6 +24,7 @@ export default function AppLayout() {
         width: '100%'
       }
     })} >
+
       <Tabs.Screen
         name="home"
         options={{
@@ -72,6 +73,9 @@ export default function AppLayout() {
         }}
 
       />
+
+
+      
     </Tabs>
   );
 }
