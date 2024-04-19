@@ -1,37 +1,37 @@
 import React, { useState } from 'react';
-import { View, Button } from 'react-native';
+import { View, Button, Text, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import dayjs from 'dayjs';
 
-const DatePicker = ({ isVisible, onClose }) => {
+export default DatePicker = () => {
+  const [showPicker, setShowPicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
-    const [date, setDate] = useState(dayjs());
+  const handleDateChange = (event, date) => {
+    if (date !== undefined) {
+      setSelectedDate(date);
+    }
+    setShowPicker(false);
+  };
 
-    const openDatePicker = () => {
-        onClose();
-    };
-
-    const onCancel = () => {
-        onClose();
-    };
-
-    const onConfirm = (selectedDate) => {
-        setDate(selectedDate);
-        onClose();
-    };
-
-    return (
-        <View>
-            <Button title="Open Date Picker" onPress={openDatePicker} />
-            {isVisible && (
-                <DateTimePicker
-                    value={date.toDate()}
-                    mode="date" 
-                    onChange={(event, selectedDate) => onConfirm(selectedDate)}
-                />
-            )}
-        </View>
-    );
+  return (
+    <View style={styles.container}>
+      <Button title="Open Date Picker" onPress={() => setShowPicker(true)} />
+      {showPicker && (
+        <DateTimePicker
+          value={selectedDate}
+          mode="date"
+          onChange={handleDateChange}
+        />
+      )}
+      <Text>Selected Date: {selectedDate.toDateString()}</Text>
+    </View>
+  );
 };
 
-export default DatePicker;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

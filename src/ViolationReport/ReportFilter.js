@@ -16,7 +16,7 @@ export default ReportFilter = ({ isVisible, onClose }) => {
         <Modal visible={isVisible} transparent style={{ flex: 1 }}>
             <TouchableOpacity onPress={onClose} style={{ backgroundColor: 'rgba(52, 52, 52, 0.3)' }}>
                 <TouchableOpacity activeOpacity={1}>
-                    <LinearGradient colors={['rgba(140, 170, 212, 1)', 'rgba(24, 47, 77, 1)']} style={{ height: '100%', top: '23%', borderTopLeftRadius: 30, borderTopRightRadius: 30, padding: 20, alignItems: 'center' }}>
+                    <LinearGradient colors={['rgba(140, 170, 212, 1)', 'rgba(24, 47, 77, 1)']} style={{ height: '100%', top: '0%', borderTopLeftRadius: 30, borderTopRightRadius: 30, padding: 20, alignItems: 'center' }}>
                         <Text style={{ fontFamily: "Poppins_SemiBold", fontSize: 20, color: 'white' }}>Filter</Text>
                         <View style={{ flexDirection: 'row', gap: 20 }}>
                             <View style={{ gap: 5, flex: 1 }}>
