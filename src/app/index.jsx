@@ -9,7 +9,7 @@ import { store } from '../redux/store';
 
 
 export default function Root() {
-  return (
+  return (  
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Login />
     </GestureHandlerRootView>

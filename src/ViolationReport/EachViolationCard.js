@@ -9,10 +9,8 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
     productName = productName.slice(0, 1).toUpperCase() + productName.slice(1,);
     providedTo = providedTo.toUpperCase();
     const [downloadProcessModal, setDownloadProcessModal] = useState(false);
-    console.log(reason);
 
     let allViolations = reason.split(",");
-    console.log(allViolations);
 
     const pathImages = '../../assets/icons/';
 
@@ -117,7 +115,6 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                                             returningIcon = require('../../assets/icons/ViolationIcons/Mask.png');
                                         }
                                     }
-                                    console.log("Returning Icon is ", returningIcon);
                                     return <Image key={index + 1} source={returningIcon} style={{ width: 30, height: 30 }} />
                                 })
                                 }
@@ -134,19 +131,16 @@ export default EachViolationCard = ({ productName, quantity, reason, timing, ope
                     <Pressable style={styles.modalBackground} onPress={toggleDownloadProcessModal}>
                         <TouchableOpacity style={styles.modalContent} activeOpacity={1} >
                             <Text style={{ fontWeight: 'bold', fontSize: 16, backgroundColor: Colors.darkBlue, padding: 9, margin: -20, color: Colors.white }}>Image Preview </Text>
-                            <View>
+                            <TouchableOpacity onPress={() => router.push({ pathname: '/MoreInfoPage/ZoomableImage', params: { imageLink: downloadLink + productName } })}>
                                 {productName &&
                                     <Image source={{
                                         uri: downloadLink + productName
                                     }} style={styles.signatureImage} />
                                 }
-                            </View>
+                            </TouchableOpacity>
                             <TouchableHighlight onPress={toggleDownloadProcessModal} style={styles.closeCrossbutton} underlayColor={Colors.redHeaderButton}  >
                                 <Image source={require(pathImages + 'cross.png')} style={styles.closeIconStyle} />
                             </TouchableHighlight>
-                            <TouchableOpacity style={{ position: 'absolute', right: 10, backgroundColor: 'rgba(252,252,252,0.5)', padding: 5, borderRadius: 10, bottom: '10%', zIndex: 2 }} onPress={() => router.push({ pathname: '/MoreInfoPage/ZoomIn', params: { imageLink: downloadLink + productName } })} >
-                                    <Image source={require('../../assets/icons/zoom.png')} style={{ width: 30, height: 30 }} />
-                                </TouchableOpacity>
                         </TouchableOpacity>
                     </Pressable>
                 </Modal>
